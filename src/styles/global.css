@@ -255,7 +255,6 @@ body {
   .chip {
     display: inline-flex;
     align-items: center;
-    border-radius: var(--radius-pill);
     padding: 9px 18px;
     font-size: 0.875rem;
     cursor: pointer;

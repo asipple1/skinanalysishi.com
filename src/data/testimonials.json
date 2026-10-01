@@ -1,23 +1,23 @@
 [
   {
-    "id": "kalena-m",
-    "text": "Allison talked me out of a treatment I thought I wanted and explained why something else would work better for my skin. That’s when I knew I’d found the right place.",
-    "name": "Kalena M.",
-    "detail": "Client since 2022 · Ewa Beach",
-    "placeholder": true
+    "id": "amanda-mcdonald",
+    "text": "I had an amazing experience. I got Dermaplaning and a Diamond Glow treatment! Allison was extremely knowledgeable, professional, kind and made the experience one to remember. 10 out of 10 recommend.",
+    "name": "Amanda McDonald",
+    "detail": "Dermaplaning + DiamondGlow®",
+    "placeholder": false
   },
   {
-    "id": "jenna-t",
-    "text": "Sarah explained every step before we started. My skin looks like my skin, just healthier. Nobody can tell I’ve had anything done.",
-    "name": "Jenna T.",
-    "detail": "Dysport® + SkinPen® · Aiea",
-    "placeholder": true
+    "id": "victoria-gonzales",
+    "text": "The personal care Allison and Sara provide is unmatched! Thanks to their professional and expert knowledge and personal tailoring to my needs, my skin has never looked better.",
+    "name": "Victoria Gonzales",
+    "detail": "Skin Analysis client",
+    "placeholder": false
   },
   {
-    "id": "maile-k",
-    "text": "I came in for my acne and left with a routine I actually understand. A year later, I barely think about breakouts.",
-    "name": "Maile K.",
-    "detail": "DiamondGlow® + skincare · Ewa Beach",
-    "placeholder": true
+    "id": "erin-roberts",
+    "text": "Skin Analysis is my go-to for all things face related! I am always thrilled with my Dysport results, nurse Ally is phenomenal, and the facility is clean and comfortable. Highly recommend!",
+    "name": "Erin Roberts",
+    "detail": "Dysport®",
+    "placeholder": false
   }
 ]

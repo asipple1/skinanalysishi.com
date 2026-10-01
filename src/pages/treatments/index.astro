@@ -14,7 +14,7 @@ const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order -
 
 <BaseLayout
   title="Treatments, chosen for your skin | Skin Analysis, Ewa Beach + Aiea"
-  description="Evidence-based medical spa treatments in Ewa Beach and Aiea, Oʻahu. DiamondGlow, SkinPen microneedling, Dysport, chemical peels, dermaplaning and laser hair removal."
+  description="Evidence-based medical spa treatments in Ewa Beach and Aiea, Oʻahu. DiamondGlow, SkinPen microneedling, Dysport, chemical peels and dermaplaning."
   currentNav="Treatments"
 >
   <!-- Intro -->
@@ -41,14 +41,14 @@ const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order -
   >
     <div class="max-w-site mx-auto flex flex-nowrap gap-2 overflow-x-auto" style="scrollbar-width:none">
       <button
-        class="concern-chip active-chip border border-charcoal bg-charcoal text-ivory rounded-pill px-4.5 py-2.25 text-sm cursor-pointer whitespace-nowrap shrink-0 transition-all duration-250 font-sans"
+        class="concern-chip active-chip border border-charcoal bg-charcoal text-ivory px-4.5 py-2.25 text-sm cursor-pointer whitespace-nowrap shrink-0 transition-all duration-250 font-sans"
         data-concern="all"
       >
         All
       </button>
       {concerns.map((c) => (
         <button
-          class="concern-chip border border-taupe-line-2 bg-transparent text-charcoal rounded-pill px-4.5 py-2.25 text-sm cursor-pointer whitespace-nowrap shrink-0 transition-all duration-250 font-sans"
+          class="concern-chip border border-taupe-line-2 bg-transparent text-charcoal px-4.5 py-2.25 text-sm cursor-pointer whitespace-nowrap shrink-0 transition-all duration-250 font-sans"
           data-concern={c.id}
         >
           {c.data.title}

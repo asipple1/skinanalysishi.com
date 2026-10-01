@@ -16,6 +16,8 @@ const treatments = (await getCollection('treatments'))
   .filter((t) => t.data.featured)
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
+const allTreatments = await getCollection('treatments');
+
 const concerns = (await getCollection('concerns'))
   .filter((c) => c.id !== 'unwanted-hair')
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
@@ -31,7 +33,7 @@ const concernData = concerns.map((c) => ({
   body: c.data.intro,
   image: c.data.image,
   treatments: c.data.treatments.slice(0, 3).map((slug: string) => {
-    const t = treatments.find((x) => x.id === slug);
+    const t = allTreatments.find((x) => x.id === slug);
     return t?.data.shortName ?? slug;
   }),
   treatmentSlugs: c.data.treatments.slice(0, 3),
@@ -64,7 +66,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
 
 <BaseLayout
   title="Medical Spa on Oʻahu | Skin Analysis, Ewa Beach + Aiea"
-  description="Nurse-owned medical spa in Ewa Beach and Aiea, Oʻahu. Personalized, evidence-based skin treatments including DiamondGlow, SkinPen microneedling, Dysport, chemical peels and laser hair removal."
+  description="Nurse-owned medical spa in Ewa Beach and Aiea, Oʻahu. Personalized, evidence-based skin treatments including DiamondGlow, SkinPen microneedling, Dysport, chemical peels and dermaplaning."
 >
   <!-- 1. Hero -->
   <section id="top" aria-labelledby="hero-h" class="relative overflow-hidden">
@@ -291,7 +293,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
             <p class="text-[15px] leading-[1.6] text-ink-2 m-0">
               Sarah sees skin health as part of overall health. She provides injectables, microneedling, chemical peels, and dermaplaning.
             </p>
-            <a href="/#about" class="text-sm font-medium flex gap-2 text-charcoal no-underline transition-colors duration-[250ms] hover:text-clay">
+            <a href="/providers/sarah-lockwood-sepulveda/" class="text-sm font-medium flex gap-2 text-charcoal no-underline transition-colors duration-250 hover:text-clay">
               Read Sarah's profile <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -303,7 +305,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
             <p class="text-[15px] leading-[1.6] text-ink-2 m-0">
               Allison listens first. She builds plans around each person's goals, lifestyle, and comfort level, and keeps learning so her approach stays current.
             </p>
-            <a href="/#about" class="text-sm font-medium flex gap-2 text-charcoal no-underline transition-colors duration-[250ms] hover:text-clay">
+            <a href="/providers/allison-sipple/" class="text-sm font-medium flex gap-2 text-charcoal no-underline transition-colors duration-250 hover:text-clay">
               Read Allison's profile <span aria-hidden="true">→</span>
             </a>
           </div>

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Btn from '../../components/Btn.astro';
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { getAssetImage } from '../../lib/images';
+import providersTeam from '../../assets/providers-team.jpg';
+
+export async function getStaticPaths() {
+  const providers = await getCollection('providers');
+  return providers.map((p) => ({ params: { slug: p.id }, props: { provider: p } }));
+}
+
+const { provider: p } = Astro.props;
+const d = p.data;
+---
+
+<BaseLayout
+  title={`${d.name}, ${d.credentials} | Skin Analysis`}
+  description={d.summary}
+  currentNav="About"
+>
+  <div class="max-w-site mx-auto px-gutter py-section-sm">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 mb-10">
+      <a href="/" class="text-ink-3 no-underline">Home</a>
+      <span>/</span>
+      <a href="/#about" class="text-ink-3 no-underline">About</a>
+      <span>/</span>
+      <span>{d.name}</span>
+    </nav>
+
+    <!-- Profile -->
+    <div class="grid gap-[clamp(48px,7vw,100px)] items-start" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr))">
+
+      <!-- Photo -->
+      <div class="overflow-hidden">
+        <Picture
+          src={providersTeam}
+          alt={d.name}
+          class="w-full h-full object-cover"
+          loading="eager"
+          width={800}
+          height={1000}
+          formats={['avif', 'webp']}
+        />
+      </div>
+
+      <!-- Bio -->
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-3">
+          <span class="eyebrow">{d.role}</span>
+          <h1 class="font-serif font-light text-[clamp(38px,4.8vw,68px)] leading-none tracking-[-0.02em] m-0">
+            {d.name}<span class="text-[0.5em] text-ink-3 ml-3 align-middle">{d.credentials}</span>
+          </h1>
+        </div>
+
+        <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
+          {d.summary}
+        </p>
+
+        <div class="prose-content border-t border-taupe-line pt-8 text-[17px] leading-[1.7] text-ink-2">
+          <slot />
+        </div>
+
+        <div class="flex gap-3 flex-wrap border-t border-taupe-line pt-8">
+          <Btn href="/contact/">Book an Appointment</Btn>
+          <Btn href="/#about" variant="outline">Meet the Team</Btn>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

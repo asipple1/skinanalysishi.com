@@ -35,7 +35,7 @@ faqs:
     a: "When done by a trained provider, it is very safe. Rare risks include infection, scarring, or changes in pigment."
 beforeAfter:
   []
-related: ["chemical-peels", "diamondglow", "laser-hair-removal"]
+related: ["chemical-peels", "diamondglow-facial", "dermaplaning"]
 providerNote:
   provider: "Sarah Lockwood-Sepulveda, FNP-BC"
   quote: "Dermaplaning is simple, but technique matters. It should leave your skin smooth, never irritated."
