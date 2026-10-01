@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import skincarebrands from '../../data/skincare-brands.json';
+---
+
+<BaseLayout
+  title="Professional Skincare Shop | Skin Analysis — Oʻahu"
+  description="Professional skincare brands curated by the providers at Skin Analysis. Skinbetter Science, ZO Skin Health, Plated, and Colorescience."
+  currentNav="Skincare"
+>
+  <div class="max-w-site mx-auto px-gutter py-section-sm">
+    <div data-reveal class="flex flex-col gap-5 max-w-190 mb-[clamp(56px,7vw,96px)]">
+      <h1 class="font-serif font-light text-display leading-[0.98] tracking-tight m-0">
+        What you do between appointments <em class="text-clay">matters</em> too.
+      </h1>
+      <p class="text-body-lg leading-[1.6] text-ink-2 m-0">
+        In-office treatments work best when your daily routine supports them. We carry a small set of professional lines we use ourselves.
+      </p>
+    </div>
+
+    <div class="grid gap-[clamp(24px,2.4vw,36px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))">
+      {skincarebrands.map((brand) => (
+        <article class="flex flex-col gap-4 border-t border-taupe-line pt-5">
+          <div class="aspect-4/5 rounded-sm bg-sand flex items-center justify-center">
+            <span class="font-serif text-[22px] text-warm-muted text-center p-5">{brand.name}</span>
+          </div>
+          <h2 class="font-serif font-normal text-[26px] m-0">{brand.name}</h2>
+          <p class="text-[15px] text-ink-3 m-0">{brand.note}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-[clamp(64px,8vw,100px)] p-[clamp(48px,6vw,80px)] bg-sage text-[#F3F0E8] rounded-sm flex flex-col items-center text-center gap-5">
+      <p class="font-serif font-light text-[clamp(28px,3.6vw,50px)] leading-[1.2] m-0">
+        Not sure which products your skin needs?
+      </p>
+      <p class="text-[17px] text-sage-text m-0 max-w-120">
+        We'll tell you exactly what to use — and what to skip — at your consultation.
+      </p>
+      <a
+        href="/contact/"
+        class="bg-[#F3F0E8] text-charcoal px-7 py-4 rounded-pill text-[15px] font-medium no-underline transition-[background] duration-250 hover:bg-white"
+      >
+        Book a Consultation
+      </a>
+    </div>
+  </div>
+</BaseLayout>

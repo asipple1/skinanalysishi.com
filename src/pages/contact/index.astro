@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Btn from '../../components/Btn.astro';
+import ContactForm from '../../components/islands/ContactForm';
+import { getCollection } from 'astro:content';
+
+const treatments = (await getCollection('treatments'))
+  .filter((t) => t.id !== 'consultation')
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const locations = await getCollection('locations');
+
+const preselect = Astro.url.searchParams.get('t') ?? undefined;
+
+const treatmentOptions = treatments.map((t) => ({ id: t.id, label: t.data.title }));
+
+const steps = [
+  { num: '01', heading: 'We reach out', body: "We'll contact you within one business day by your preferred method to confirm your appointment time." },
+  { num: '02', heading: 'Your consultation', body: 'We look at your skin, listen to your goals, and walk you through the options — with no pressure to book anything that day.' },
+  { num: '03', heading: 'Your plan', body: "If you'd like to move forward, we'll put together a treatment plan with clear pricing and realistic expectations." },
+];
+---
+
+<BaseLayout
+  title="Contact + Book | Skin Analysis — Ewa Beach + Aiea, Oʻahu"
+  description="Book a complimentary consultation or an appointment at Skin Analysis Medical Spa. Two locations on Oʻahu: Ewa Beach and Aiea."
+  currentNav="Locations"
+>
+  <!-- Hero contact section -->
+  <section class="max-w-site mx-auto px-gutter py-section-sm grid gap-[clamp(48px,7vw,100px)] items-start" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+
+    <!-- Left: Info -->
+    <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-5">
+        <h1 class="font-serif font-light text-display leading-[0.98] tracking-tight m-0 text-balance">
+          Let's talk about your <em class="text-clay">skin.</em>
+        </h1>
+        <p class="text-body-lg leading-[1.6] text-ink-2 m-0 max-w-130">
+          You don't need to know which treatment you need. Start with a complimentary consultation — we'll look at your skin and talk through what makes sense.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4 border-t border-taupe-line pt-7">
+        <p class="text-[15px] text-ink-3 m-0">Prefer to call?</p>
+        <div class="flex flex-col gap-2">
+          <a
+            href="tel:+18082138383"
+            class="font-serif text-4xl font-light text-charcoal no-underline transition-colors duration-250 leading-[1.1] hover:text-clay"
+          >808.213.8383</a>
+          <a
+            href="tel:+18089791098"
+            class="text-[17px] text-ink-3 no-underline transition-colors duration-250 hover:text-clay"
+          >808.979.1098</a>
+          <a
+            href="mailto:skinanalysishi@gmail.com"
+            class="text-[15px] text-ink-3 no-underline transition-colors duration-250 hover:text-clay"
+          >skinanalysishi@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <ContactForm
+      client:visible
+      treatments={treatmentOptions}
+      preselect={preselect}
+    />
+  </section>
+
+  <!-- What happens next -->
+  <section class="border-t border-taupe-line-3">
+    <div class="max-w-site mx-auto px-gutter py-section">
+      <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 mb-12">
+        What happens next
+      </h2>
+      <ol class="list-none m-0 p-0 grid grid-auto-sm gap-[clamp(28px,3vw,48px)]">
+        {steps.map((s) => (
+          <li class="flex flex-col gap-3.5 border-t border-taupe-line pt-5">
+            <span class="text-xs tracking-widest text-ink-3">{s.num}</span>
+            <h3 class="font-serif font-normal text-[28px] m-0">{s.heading}</h3>
+            <p class="text-[15px] leading-[1.6] text-ink-2 m-0">{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Locations -->
+  <section id="locations" aria-labelledby="locs-h" class="bg-sand">
+    <div class="max-w-site mx-auto px-gutter py-section">
+      <h2 id="locs-h" class="font-serif font-light text-h2-xl leading-[1.02] tracking-[-0.02em] m-0 mb-[clamp(40px,5vw,64px)]">
+        Two studios on Oʻahu.
+      </h2>
+      <div class="grid grid-2col-loc gap-[clamp(32px,4vw,56px)]">
+        {locations.map((l) => (
+          <article class="flex flex-col gap-6">
+            <div class="aspect-3/2 rounded-sm overflow-hidden bg-taupe-line-2 flex items-center justify-content-center">
+              <span class="font-serif text-[22px] text-warm-muted">{l.data.name}</span>
+            </div>
+            <div class="flex justify-between items-baseline gap-3 flex-wrap">
+              <h3 class="font-serif font-normal text-[clamp(30px,3vw,42px)] m-0 tracking-[-0.015em]">{l.data.name}</h3>
+              <span class="text-[13px] text-sage">{l.data.tag}</span>
+            </div>
+            <dl class="dl-grid text-[15px] leading-normal border-t border-taupe-line pt-5 m-0">
+              <dt class="text-ink-3">Address</dt>
+              <dd class="m-0">{l.data.streetAddress}<br />{l.data.locality}, {l.data.region}</dd>
+              <dt class="text-ink-3">Appointments</dt>
+              <dd class="m-0">{l.data.appointments}</dd>
+              <dt class="text-ink-3">Phone</dt>
+              <dd class="m-0">
+                <a href={`tel:${l.data.tel}`} class="loc-phone-link">{l.data.phone}</a>
+              </dd>
+              <dt class="text-ink-3">Parking</dt>
+              <dd class="m-0">Free parking available</dd>
+            </dl>
+            <div class="flex gap-3 flex-wrap">
+              <Btn href="/contact/" size="sm">Book in {l.data.name}</Btn>
+              <Btn href={l.data.mapUrl} target="_blank" rel="noopener" variant="outline" size="sm">Get Directions</Btn>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .loc-phone-link {
+    color: #2A2826;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .loc-phone-link:hover { color: #A8583D; }
+</style>

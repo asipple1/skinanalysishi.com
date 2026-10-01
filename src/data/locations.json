@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ewa-beach",
+    "name": "Ewa Beach",
+    "tag": "Main location",
+    "streetAddress": "91-3475 Nana Hope",
+    "locality": "Ewa Beach",
+    "region": "HI",
+    "country": "US",
+    "phone": "808.213.8383",
+    "tel": "+18082138383",
+    "mapUrl": "https://maps.google.com/?q=91-3475+Nana+Hope+Ewa+Beach+HI",
+    "appointments": "By appointment only",
+    "main": true
+  },
+  {
+    "id": "aiea",
+    "name": "Aiea",
+    "tag": "Moanalua Rd. · Suite 310",
+    "streetAddress": "99-209 Moanalua Rd. #310",
+    "locality": "Aiea",
+    "region": "HI",
+    "country": "US",
+    "phone": "808.979.1098",
+    "tel": "+18089791098",
+    "mapUrl": "https://maps.google.com/?q=99-209+Moanalua+Rd+310+Aiea+HI",
+    "appointments": "By appointment only",
+    "main": false
+  }
+]

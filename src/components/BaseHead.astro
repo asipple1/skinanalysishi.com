@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  pubDate?: Date;
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/assets/og-default.jpg',
+  type = 'website',
+  pubDate,
+  noIndex = false,
+} = Astro.props;
+
+const siteUrl = 'https://www.skinanalysishi.com';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- OG / Twitter -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(ogImage, siteUrl).href} />
+<meta property="og:site_name" content="Skin Analysis Medical Spa" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
+
+{type === 'article' && pubDate && (
+  <meta property="article:published_time" content={pubDate.toISOString()} />
+)}
+
+<!-- Fonts: preload Newsreader used in hero -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />

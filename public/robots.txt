@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /shop/cart
+
+Sitemap: https://www.skinanalysishi.com/sitemap-index.xml

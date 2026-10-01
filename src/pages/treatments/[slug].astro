@@ -1,0 +1,347 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Btn from '../../components/Btn.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const treatments = await getCollection('treatments');
+  return treatments.map((t) => ({ params: { slug: t.id }, props: { treatment: t } }));
+}
+
+const { treatment: t } = Astro.props;
+const d = t.data;
+
+const allTreatments = await getCollection('treatments');
+const relatedTreatments = d.related
+  .map((slug: string) => allTreatments.find((x) => x.id === slug))
+  .filter(Boolean);
+
+const concerns = await getCollection('concerns');
+const treatmentConcerns = d.concerns.map((slug: string) => concerns.find((c) => c.id === slug)).filter(Boolean);
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalProcedure',
+    name: d.title,
+    description: d.summary,
+    provider: { '@id': 'https://www.skinanalysishi.com/#org' },
+    areaServed: 'Oʻahu',
+    offers: d.pricing.map((p: { label: string; value: string }) => ({
+      '@type': 'Offer',
+      name: p.label,
+      price: p.value,
+      priceCurrency: 'USD',
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: d.faqs.map((faq: { q: string; a: string }) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skinanalysishi.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Treatments', item: 'https://www.skinanalysishi.com/treatments/' },
+      { '@type': 'ListItem', position: 3, name: d.title },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={d.seoTitle}
+  description={d.metaDescription}
+  currentNav="Treatments"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="max-w-site mx-auto px-gutter pt-[clamp(32px,4vw,56px)] pb-[clamp(64px,8vw,110px)] grid gap-[clamp(36px,5vw,80px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
+    <div class="flex flex-col gap-6.5">
+      <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 flex-wrap">
+        <a href="/" class="text-ink-3 no-underline">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/treatments/" class="text-ink-3 no-underline">Treatments</a>
+        <span aria-hidden="true">/</span>
+        <span>{d.title}</span>
+      </nav>
+      <span class="text-xs tracking-[0.22em] uppercase text-sage">{d.category} on Oʻahu</span>
+      <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0 text-balance">
+        {d.title}
+      </h1>
+      <p class="text-body-lg leading-[1.6] text-ink-2 m-0 max-w-135 text-pretty">
+        {d.summary}
+      </p>
+      <dl class="m-0 grid gap-[18px_24px] border-t border-taupe-line pt-5.5 max-w-140" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+        <div class="flex flex-col gap-1">
+          <dt class="text-xs text-ink-3">Treatment time</dt>
+          <dd class="m-0 text-[15px]">{d.time}</dd>
+        </div>
+        <div class="flex flex-col gap-1">
+          <dt class="text-xs text-ink-3">Downtime</dt>
+          <dd class="m-0 text-[15px]">{d.downtime}</dd>
+        </div>
+        <div class="flex flex-col gap-1">
+          <dt class="text-xs text-ink-3">Results appear</dt>
+          <dd class="m-0 text-[15px]">{d.resultsAppear}</dd>
+        </div>
+        <div class="flex flex-col gap-1">
+          <dt class="text-xs text-ink-3">Typical plan</dt>
+          <dd class="m-0 text-[15px]">{d.typicalPlan}</dd>
+        </div>
+        <div class="flex flex-col gap-1">
+          <dt class="text-xs text-ink-3">Pricing</dt>
+          <dd class="m-0 text-[15px]">{d.priceFrom}</dd>
+        </div>
+      </dl>
+      <div class="flex gap-3 flex-wrap">
+        <Btn href="/contact/">Book {d.shortName}</Btn>
+        <Btn href="#faq" variant="outline">Read FAQs</Btn>
+      </div>
+    </div>
+    <div class="aspect-4/5 rounded-[220px_220px_4px_4px] overflow-hidden bg-sand">
+      {d.heroImage ? (
+        <img
+          src={d.heroImage}
+          alt={d.title}
+          class="w-full h-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+          width="600"
+          height="750"
+        />
+      ) : (
+        <img
+          src="/assets/consultation-hero.png"
+          alt={d.title}
+          class="w-full h-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+          width="600"
+          height="750"
+        />
+      )}
+    </div>
+  </section>
+
+  <!-- Who it's for + concerns -->
+  <section class="bg-sand">
+    <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)] grid grid-auto-lg gap-[clamp(40px,6vw,100px)]">
+      <div class="flex flex-col gap-5">
+        <span class="text-xs tracking-[0.22em] uppercase text-sage">Who it's for</span>
+        <p class="font-serif font-light text-[clamp(26px,2.6vw,36px)] leading-tight m-0 text-pretty">
+          {d.whoFor}
+        </p>
+      </div>
+      {treatmentConcerns.length > 0 && (
+        <div class="flex flex-col gap-5">
+          <span class="text-xs tracking-[0.22em] uppercase text-sage">Skin concerns treated</span>
+          <div class="flex flex-wrap gap-2.5">
+            {treatmentConcerns.map((c) => c && (
+              <Btn href={`/skin-concerns/${c.id}/`} variant="ghost" size="sm">{c.data.title}</Btn>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)] grid grid-auto-xl gap-[clamp(40px,6vw,100px)] items-center">
+    <div class="aspect-5/4 rounded-sm overflow-hidden bg-sand">
+      <img
+        src={d.secondaryImage || d.heroImage || '/assets/consultation-hero.png'}
+        alt={`How ${d.title} works`}
+        class="w-full h-full object-cover"
+        loading="lazy"
+        width="800"
+        height="640"
+      />
+    </div>
+    <div class="flex flex-col gap-5.5">
+      <span class="text-xs tracking-[0.22em] uppercase text-sage">How it works</span>
+      <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
+        The science, <em>plainly.</em>
+      </h2>
+      <p class="text-[17px] leading-[1.7] text-ink-2 m-0 text-pretty">{d.howItWorks}</p>
+    </div>
+  </section>
+
+  <!-- What to expect -->
+  <section class="border-t border-taupe-line-3">
+    <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
+      <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 mb-[clamp(36px,4vw,56px)]">
+        What to expect
+      </h2>
+      <ol class="list-none m-0 p-0 grid grid-auto-sm gap-[clamp(28px,3vw,48px)]">
+        {d.expect.map((e: { step: string; text: string }) => (
+          <li class="flex flex-col gap-3.5 border-t border-charcoal pt-5">
+            <span class="text-xs tracking-widest text-ink-3">{e.step}</span>
+            <h3 class="font-serif font-normal text-[30px] m-0">{e.step}</h3>
+            <p class="text-base leading-[1.65] text-ink-2 m-0">{e.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Before + After -->
+  {d.beforeAfter.length > 0 && (
+    <section class="bg-sand">
+      <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
+        <div class="flex justify-between items-end gap-6 flex-wrap mb-10">
+          <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
+            Before + after
+          </h2>
+          <p class="text-sm leading-[1.6] text-ink-3 max-w-100 m-0">
+            Individual results vary. Some images are provided by the device or product manufacturer.
+          </p>
+        </div>
+        <div class="grid gap-[clamp(24px,2.4vw,36px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))">
+          {d.beforeAfter.map((b: { image: string; caption: string }) => (
+            <figure class="m-0 flex flex-col gap-3">
+              <div class="aspect-4/3 rounded-sm overflow-hidden bg-ivory">
+                <img
+                  src={b.image}
+                  alt={b.caption}
+                  class="w-full h-full object-contain"
+                  loading="lazy"
+                  width="680"
+                  height="510"
+                />
+              </div>
+              <figcaption class="font-serif text-[19px]">{b.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Pricing + Provider note -->
+  <section class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)] grid grid-auto-lg gap-[clamp(48px,6vw,100px)]">
+    <div class="flex flex-col gap-5.5">
+      <span class="text-xs tracking-[0.22em] uppercase text-sage">Pricing</span>
+      <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
+        Clear pricing, before you commit.
+      </h2>
+      <dl class="m-0 border-t border-taupe-line">
+        {d.pricing.map((p: { label: string; value: string }) => (
+          <div class="flex justify-between gap-5 py-4.5 border-b border-taupe-line text-base">
+            <dt>{p.label}</dt>
+            <dd class="m-0 font-medium text-right">{p.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="text-sm leading-[1.6] text-ink-3 m-0">
+        Your plan and exact pricing are confirmed at your consultation. We're a cashless business and accept all major cards.
+      </p>
+    </div>
+    <figure class="m-0 flex flex-col gap-7 bg-sage text-[#F3F0E8] p-[clamp(32px,4vw,56px)] rounded-sm self-start">
+      <span class="text-xs tracking-[0.22em] uppercase text-sage-light">From your provider</span>
+      <blockquote class="m-0 font-serif font-light text-[clamp(26px,2.6vw,36px)] leading-tight">
+        &ldquo;{d.providerNote.quote}&rdquo;
+      </blockquote>
+      <figcaption class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-pill overflow-hidden shrink-0 bg-[#6A7E6B]">
+          <img
+            src="/assets/providers-team.jpg"
+            alt={d.providerNote.provider}
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <span class="text-[15px]">{d.providerNote.provider}</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-taupe-line-3">
+    <div class="max-w-250 mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
+      <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 mb-10">
+        Questions we hear often
+      </h2>
+      <div class="border-t border-taupe-line">
+        {d.faqs.map((faq: { q: string; a: string }, i: number) => (
+          <details
+            class="border-b border-taupe-line"
+            open={i === 0}
+          >
+            <summary class="py-6 flex justify-between items-center gap-6 cursor-pointer list-none font-serif text-[clamp(21px,2vw,26px)] font-normal text-charcoal">
+              <span>{faq.q}</span>
+              <span aria-hidden="true" class="font-sans text-[22px] font-light shrink-0 transition-[transform] duration-300 faq-icon">+</span>
+            </summary>
+            <p class="text-base leading-[1.7] text-ink-2 m-0 pb-6.5 pr-12 max-w-190">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related treatments -->
+  {relatedTreatments.length > 0 && (
+    <section class="bg-sand">
+      <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
+        <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 mb-10">
+          Often paired with
+        </h2>
+        <div class="grid grid-auto-sm gap-[clamp(24px,2.4vw,36px)]">
+          {relatedTreatments.map((r) => r && (
+            <article class="flex flex-col gap-4">
+              <a href={`/treatments/${r.id}/`} aria-label={r.data.title} class="block aspect-4/3 overflow-hidden rounded-sm bg-ivory no-underline img-zoom">
+                <div class="zoom-inner w-full h-full">
+                  <img
+                    src={r.data.heroImage || '/assets/consultation-hero.png'}
+                    alt={r.data.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    width="560"
+                    height="420"
+                  />
+                </div>
+              </a>
+              <h3 class="font-serif font-normal text-[26px] m-0">
+                <a href={`/treatments/${r.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-clay">
+                  {r.data.title}
+                </a>
+              </h3>
+              <p class="text-[15px] leading-[1.6] text-ink-2 m-0">{r.data.benefit}</p>
+              <div class="flex justify-between text-[13px] text-ink-3 border-t border-taupe-line pt-3">
+                <span>{r.data.time}</span><span>{r.data.priceFrom}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Closing CTA -->
+  <section class="max-w-250 mx-auto px-gutter py-[clamp(100px,12vw,180px)] text-center flex flex-col items-center gap-6.5">
+    <h2 class="font-serif font-light text-[clamp(42px,6vw,86px)] leading-[0.98] tracking-[-0.03em] m-0">
+      Ready when you are.
+    </h2>
+    <p class="text-lg leading-[1.6] text-ink-2 m-0 max-w-130">
+      Book {d.shortName} directly, or start with a complimentary consultation if you'd like to talk it through first.
+    </p>
+    <div class="flex gap-3 flex-wrap justify-center">
+      <Btn href="/contact/">Book an Appointment</Btn>
+      <Btn href="/contact/" variant="outline">Free Consultation</Btn>
+    </div>
+  </section>
+
+  <style>
+    details[open] .faq-icon { transform: rotate(45deg); }
+    details summary::-webkit-details-marker { display: none; }
+    details summary:hover { color: #A8583D; }
+  </style>
+</BaseLayout>

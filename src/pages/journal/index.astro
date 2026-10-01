@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Btn from '../../components/Btn.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = (await getCollection('journal'))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const [featured, ...rest] = allArticles;
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<BaseLayout
+  title="Journal — Notes on skin, plainly explained | Skin Analysis"
+  description="Skin health articles from the providers at Skin Analysis Medical Spa. Evidence-based guides on treatments, skincare, and what to expect."
+  currentNav="Journal"
+>
+  <!-- Intro -->
+  <div class="max-w-site mx-auto px-gutter pt-[clamp(40px,6vw,80px)] pb-[clamp(40px,5vw,64px)]">
+    <h1 data-reveal class="font-serif font-light text-display leading-[0.98] tracking-tight m-0 text-balance">
+      Notes on skin, <em class="text-clay">plainly</em> explained.
+    </h1>
+  </div>
+
+  <!-- Featured article -->
+  {featured && (
+    <div class="max-w-site mx-auto px-gutter pb-section">
+      <article class="grid gap-[clamp(32px,5vw,80px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
+        <a href={`/journal/${featured.id}/`} class="block aspect-3/2 overflow-hidden rounded-sm no-underline img-zoom">
+          <div class="zoom-inner w-full h-full">
+            <img
+              src={featured.data.heroImage}
+              alt={featured.data.title}
+              class="w-full h-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+              width="900"
+              height="600"
+            />
+          </div>
+        </a>
+        <div class="flex flex-col gap-5">
+          <span class="text-xs tracking-[0.22em] uppercase text-sage">{featured.data.category}</span>
+          <h2 class="font-serif font-light text-h2-md leading-[1.05] tracking-[-0.02em] m-0">
+            <a href={`/journal/${featured.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-clay">
+              {featured.data.title}
+            </a>
+          </h2>
+          <p class="text-[17px] leading-[1.65] text-ink-2 m-0">{featured.data.description}</p>
+          <div class="flex gap-4 flex-wrap text-sm text-ink-3 items-center">
+            <span>{featured.data.author}</span>
+            <span>·</span>
+            <time datetime={featured.data.pubDate.toISOString()}>{formatDate(featured.data.pubDate)}</time>
+            <span>·</span>
+            <span>{featured.data.readingTime}</span>
+          </div>
+          <a
+            href={`/journal/${featured.id}/`}
+            class="text-[15px] font-medium flex gap-2 items-center text-charcoal no-underline transition-colors duration-250 hover:text-clay"
+          >
+            Read article <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    </div>
+  )}
+
+  <!-- Article grid -->
+  <div class="bg-sand">
+    <div class="max-w-site mx-auto px-gutter py-section">
+      <h2 class="text-xs tracking-[0.22em] uppercase text-sage font-normal m-0 mb-10">
+        More articles
+      </h2>
+      <div class="grid gap-[clamp(32px,3vw,48px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))">
+        {rest.map((article) => (
+          <article data-reveal class="flex flex-col gap-4">
+            <a href={`/journal/${article.id}/`} class="block aspect-4/3 overflow-hidden rounded-sm no-underline img-zoom">
+              <div class="zoom-inner w-full h-full">
+                <img
+                  src={article.data.heroImage}
+                  alt={article.data.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  width="640"
+                  height="480"
+                />
+              </div>
+            </a>
+            <span class="text-xs tracking-[0.22em] uppercase text-sage">{article.data.category}</span>
+            <h3 class="font-serif font-normal text-[clamp(22px,2.2vw,28px)] leading-[1.15] m-0">
+              <a href={`/journal/${article.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-clay">
+                {article.data.title}
+              </a>
+            </h3>
+            <p class="text-[15px] leading-[1.6] text-ink-2 m-0">{article.data.description}</p>
+            <div class="text-[13px] text-ink-3">{article.data.readingTime}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing CTA -->
+  <div class="max-w-250 mx-auto px-gutter py-section-lg text-center flex flex-col items-center gap-6">
+    <h2 class="font-serif font-light text-[clamp(40px,5.2vw,76px)] leading-none tracking-tight m-0">
+      Have a question about your skin?
+    </h2>
+    <p class="text-[17px] leading-[1.65] text-ink-2 m-0 max-w-120">
+      The journal is general education, not a substitute for a consultation. Reach out and we'll talk through what you're noticing.
+    </p>
+    <Btn href="/contact/">Book a Consultation</Btn>
+  </div>
+</BaseLayout>

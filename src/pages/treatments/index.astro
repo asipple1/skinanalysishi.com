@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Btn from '../../components/Btn.astro';
+import { getCollection } from 'astro:content';
+
+const treatments = (await getCollection('treatments'))
+  .filter((t) => t.id !== 'consultation')
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Treatments, chosen for your skin | Skin Analysis — Ewa Beach + Aiea"
+  description="Evidence-based medical spa treatments in Ewa Beach and Aiea, Oʻahu. DiamondGlow, SkinPen microneedling, Dysport, chemical peels, dermaplaning and laser hair removal."
+  currentNav="Treatments"
+>
+  <!-- Intro -->
+  <div class="max-w-site mx-auto px-gutter pt-[clamp(40px,6vw,80px)] pb-[clamp(28px,3vw,40px)]">
+    <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 mb-6">
+      <a href="/" class="text-ink-3 no-underline">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>Treatments</span>
+    </nav>
+    <div data-reveal class="flex flex-col gap-5 max-w-190">
+      <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0">
+        Treatments, chosen for <em class="text-clay">your</em> skin.
+      </h1>
+      <p class="text-body-lg leading-[1.6] text-ink-2 m-0">
+        Every treatment we offer is something we recommend confidently. Our consultations help match the right one to your skin.
+      </p>
+    </div>
+  </div>
+
+  <!-- Concern filter chips (static, JS-enhanced) -->
+  <div
+    id="concern-chips"
+    class="sticky top-28 z-30 bg-ivory/96 backdrop-blur-md border-b border-taupe-line-3 px-gutter py-3.5"
+  >
+    <div class="max-w-site mx-auto flex flex-nowrap gap-2 overflow-x-auto" style="scrollbar-width:none">
+      <button
+        class="concern-chip active-chip border border-charcoal bg-charcoal text-ivory rounded-pill px-4.5 py-2.25 text-sm cursor-pointer whitespace-nowrap shrink-0 transition-all duration-250 font-sans"
+        data-concern="all"
+      >
+        All
+      </button>
+      {concerns.map((c) => (
+        <button
+          class="concern-chip border border-taupe-line-2 bg-transparent text-charcoal rounded-pill px-4.5 py-2.25 text-sm cursor-pointer whitespace-nowrap shrink-0 transition-all duration-250 font-sans"
+          data-concern={c.id}
+        >
+          {c.data.title}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Treatment rows -->
+  <div id="treatments-list" class="max-w-site mx-auto px-gutter py-[clamp(48px,6vw,88px)]">
+    {treatments.map((t) => (
+      <article
+        data-concerns={JSON.stringify(t.data.concerns)}
+        class="grid gap-[clamp(32px,5vw,80px)] items-center py-[clamp(48px,6vw,80px)] border-t border-taupe-line-3"
+        style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))"
+        data-reveal
+      >
+        <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-5/4 overflow-hidden rounded-sm no-underline img-zoom">
+          <div class="zoom-inner w-full h-full">
+            <img
+              src={t.data.heroImage || '/assets/consultation-hero.png'}
+              alt={t.data.title}
+              class="w-full h-full object-cover"
+              loading="lazy"
+              width="800"
+              height="640"
+            />
+          </div>
+        </a>
+        <div class="flex flex-col gap-6">
+          <span class="text-xs tracking-[0.22em] uppercase text-sage">{t.data.category}</span>
+          <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
+            {t.data.title}
+          </h2>
+          <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">{t.data.summary}</p>
+          <dl class="m-0 grid gap-4 border-t border-taupe-line pt-5" style="grid-template-columns:repeat(3,1fr)">
+            <div class="flex flex-col gap-1">
+              <dt class="text-xs text-ink-3">Time</dt>
+              <dd class="m-0 text-[15px]">{t.data.time}</dd>
+            </div>
+            <div class="flex flex-col gap-1">
+              <dt class="text-xs text-ink-3">Downtime</dt>
+              <dd class="m-0 text-[15px]">{t.data.downtime}</dd>
+            </div>
+            <div class="flex flex-col gap-1">
+              <dt class="text-xs text-ink-3">Pricing</dt>
+              <dd class="m-0 text-[15px]">{t.data.priceFrom}</dd>
+            </div>
+          </dl>
+          <div class="flex gap-3 flex-wrap">
+            <Btn href={`/treatments/${t.id}/`} size="sm">Explore Treatment</Btn>
+            <Btn href="/contact/" variant="outline" size="sm">Book</Btn>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Closing CTA -->
+  <div class="bg-sage text-[#F3F0E8]">
+    <div class="max-w-site mx-auto px-gutter py-section flex flex-col items-center text-center gap-6">
+      <h2 class="font-serif font-light text-h2-xl leading-[1.02] m-0">
+        Not sure which one is right?
+      </h2>
+      <p class="text-[17px] leading-[1.65] text-sage-text m-0 max-w-120">
+        Start with a complimentary consultation. We'll look at your skin and walk you through the options together.
+      </p>
+      <a
+        href="/contact/"
+        class="bg-[#F3F0E8] text-charcoal px-7.5 py-4 rounded-pill text-[15px] font-medium transition-[background] duration-250 no-underline hover:bg-white"
+      >
+        Book a Free Consultation
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const chips = document.querySelectorAll<HTMLButtonElement>('.concern-chip');
+    const rows = document.querySelectorAll<HTMLElement>('#treatments-list article');
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const concern = chip.dataset.concern!;
+        chips.forEach((c) => {
+          const active = c === chip;
+          c.style.background = active ? '#2A2826' : 'transparent';
+          c.style.color = active ? '#F8F5EF' : '#2A2826';
+          c.style.borderColor = active ? '#2A2826' : '#CFC4B3';
+        });
+        rows.forEach((row) => {
+          if (concern === 'all') {
+            row.style.display = '';
+          } else {
+            const concerns: string[] = JSON.parse(row.dataset.concerns || '[]');
+            row.style.display = concerns.includes(concern) ? '' : 'none';
+          }
+        });
+      });
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,115 @@
+---
+import MobileNav from './islands/MobileNav';
+import Btn from './Btn.astro';
+
+interface Props {
+  currentNav?: string;
+}
+const { currentNav } = Astro.props;
+
+const navItems = [
+  { label: 'Treatments', href: '/treatments/' },
+  { label: 'Skin Concerns', href: '/#concerns' },
+  { label: 'About', href: '/#about' },
+  { label: 'Skincare', href: '/shop/' },
+  { label: 'Journal', href: '/journal/' },
+  { label: 'Locations', href: '/contact/#locations' },
+];
+---
+
+<div id="site-header-wrapper" class="sticky top-0 z-50 block">
+  <!-- Announcement bar -->
+  <div
+    id="announcement-bar"
+    class="bg-charcoal text-sand text-[13px] tracking-[0.04em] px-6 py-[10px] flex justify-center gap-7 flex-wrap text-center overflow-hidden transition-[max-height,padding,opacity] duration-300"
+    style="max-height:60px;opacity:1"
+  >
+    <span>Ewa Beach + Aiea, Oʻahu</span>
+    <span class="text-sage-mid">Complimentary consultations available</span>
+  </div>
+
+  <!-- Nav -->
+  <header
+    id="site-nav"
+    class="bg-ivory/[0.94] backdrop-blur-md border-b border-b-transparent transition-[border-color] duration-300"
+  >
+    <div class="max-w-site px-gutter py-[18px] flex items-center justify-between gap-6">
+      <!-- Wordmark -->
+      <a href="/" aria-label="Skin Analysis home" class="flex flex-col leading-none text-charcoal no-underline shrink-0">
+        <span class="font-serif text-[26px] font-normal tracking-[-0.01em]">Skin Analysis</span>
+        <span class="text-[10px] tracking-[0.24em] uppercase text-ink-3 mt-[5px]">Medical Spa · Oʻahu</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav aria-label="Primary" class="desktop-nav flex gap-[30px] text-[15px]">
+        {navItems.map(({ label, href }) => (
+          <Btn
+            href={href}
+            variant="nav"
+            active={label === currentNav}
+            aria-current={label === currentNav ? 'page' : undefined}
+          >
+            {label}
+          </Btn>
+        ))}
+      </nav>
+
+      <!-- Right side -->
+      <div class="flex items-center gap-3 shrink-0">
+        <a
+          href="/contact/"
+          class="book-btn bg-charcoal text-ivory px-[22px] py-3 text-sm font-medium whitespace-nowrap no-underline transition-[background] duration-[250ms] hover:bg-clay"
+        >
+          Book an Appointment
+        </a>
+        <!-- Mobile menu toggle (island) -->
+        <div class="mobile-menu-btn">
+          <MobileNav client:media="(max-width: 959px)" navItems={navItems} />
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<script>
+  const bar = document.getElementById('announcement-bar') as HTMLElement | null;
+  const nav = document.getElementById('site-nav') as HTMLElement | null;
+
+  let collapsed = false;
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+
+    if (bar) {
+      const shouldCollapse = y > 40;
+      if (shouldCollapse !== collapsed) {
+        collapsed = shouldCollapse;
+        if (shouldCollapse) {
+          bar.style.maxHeight = '0';
+          bar.style.paddingTop = '0';
+          bar.style.paddingBottom = '0';
+          bar.style.opacity = '0';
+        } else {
+          bar.style.maxHeight = '60px';
+          bar.style.paddingTop = '10px';
+          bar.style.paddingBottom = '10px';
+          bar.style.opacity = '1';
+        }
+      }
+    }
+
+    if (nav) nav.style.borderBottomColor = y > 8 ? '#E6DED2' : 'transparent';
+  }, { passive: true });
+</script>
+
+<style>
+  .mobile-menu-btn { display: none; }
+
+  @media (max-width: 959px) {
+    .desktop-nav { display: none !important; }
+    .mobile-menu-btn { display: block; }
+  }
+  @media (max-width: 599px) {
+    .book-btn { display: none; }
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Btn from '../../components/Btn.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const concerns = await getCollection('concerns');
+  return concerns.map((c) => ({ params: { slug: c.id }, props: { concern: c } }));
+}
+
+const { concern: c } = Astro.props;
+const d = c.data;
+
+const allTreatments = await getCollection('treatments');
+const treatments = d.treatments
+  .map((slug: string) => allTreatments.find((t) => t.id === slug))
+  .filter(Boolean);
+---
+
+<BaseLayout
+  title={d.seoTitle}
+  description={d.metaDescription}
+>
+  <div class="max-w-site mx-auto px-gutter py-section-sm">
+    <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 mb-6">
+      <a href="/" class="text-ink-3 no-underline">Home</a>
+      <span>/</span>
+      <a href="/#concerns" class="text-ink-3 no-underline">Skin Concerns</a>
+      <span>/</span>
+      <span>{d.title}</span>
+    </nav>
+    <div class="flex flex-col gap-6 max-w-190 mb-[clamp(56px,7vw,96px)]">
+      <span class="text-xs tracking-[0.22em] uppercase text-sage">Skin Concern</span>
+      <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0">{d.title}</h1>
+      <p class="text-body-lg leading-[1.6] text-ink-2 m-0">{d.intro}</p>
+    </div>
+
+    {treatments.length > 0 && (
+      <div>
+        <h2 class="font-serif font-light text-h2-md leading-[1.05] m-0 mb-10">
+          Treatments that may help
+        </h2>
+        <div class="grid grid-auto-sm gap-[clamp(24px,2.4vw,36px)]">
+          {treatments.map((t) => t && (
+            <article class="flex flex-col gap-4">
+              <a href={`/treatments/${t.id}/`} class="block aspect-5/4 overflow-hidden rounded-sm no-underline img-zoom">
+                <div class="zoom-inner w-full h-full">
+                  <img
+                    src={t.data.heroImage || '/assets/consultation-hero.png'}
+                    alt={t.data.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    width="560"
+                    height="448"
+                  />
+                </div>
+              </a>
+              <h3 class="font-serif font-normal text-[26px] m-0">
+                <a
+                  href={`/treatments/${t.id}/`}
+                  class="text-charcoal no-underline transition-colors duration-250 hover:text-clay"
+                >
+                  {t.data.title}
+                </a>
+              </h3>
+              <p class="text-[15px] leading-[1.6] text-ink-2 m-0">{t.data.benefit}</p>
+              <div class="flex justify-between text-[13px] text-ink-3 border-t border-taupe-line pt-3">
+                <span>{t.data.time}</span><span>{t.data.priceFrom}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="mt-[clamp(64px,8vw,100px)] text-center flex flex-col items-center gap-6">
+      <h2 class="font-serif font-light text-[clamp(40px,5.2vw,76px)] leading-none m-0">
+        Ready to talk through your options?
+      </h2>
+      <Btn href="/contact/">Book a Consultation</Btn>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Astro cache / type gen
+.astro/
+
+# Environment variables — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Netlify CLI local state
+.netlify/
+
+# Design handoff (local reference only, not needed in repo)
+design_handoff_skin_analysis_astro/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

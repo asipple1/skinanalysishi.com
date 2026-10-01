@@ -1,0 +1,111 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  pubDate?: Date;
+  currentNav?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, canonical, ogImage, type, pubDate, currentNav, schema } = Astro.props;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalBusiness',
+  '@id': 'https://www.skinanalysishi.com/#org',
+  name: 'Skin Analysis Medical Spa',
+  url: 'https://www.skinanalysishi.com',
+  telephone: '+1-808-213-8383',
+  email: 'skinanalysishi@gmail.com',
+  areaServed: 'Oʻahu, Hawaiʻi',
+  priceRange: '$$',
+  paymentAccepted: 'Credit Card, Debit Card',
+  sameAs: ['https://www.instagram.com/skinanalysis_aesthetics/'],
+  department: [
+    {
+      '@type': 'MedicalBusiness',
+      name: 'Skin Analysis — Ewa Beach',
+      telephone: '+1-808-213-8383',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '91-3475 Nana Hope',
+        addressLocality: 'Ewa Beach',
+        addressRegion: 'HI',
+        postalCode: '96706',
+        addressCountry: 'US',
+      },
+    },
+    {
+      '@type': 'MedicalBusiness',
+      name: 'Skin Analysis — Aiea',
+      telephone: '+1-808-979-1098',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '99-209 Moanalua Rd. #310',
+        addressLocality: 'Aiea',
+        addressRegion: 'HI',
+        postalCode: '96701',
+        addressCountry: 'US',
+      },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      type={type}
+      pubDate={pubDate}
+    />
+    <SchemaOrg schema={orgSchema} />
+    {schema && <SchemaOrg schema={schema} />}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header currentNav={currentNav} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Scroll reveal
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                (e.target as HTMLElement).classList.add('reveal-visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        requestAnimationFrame(() => {
+          document.querySelectorAll('[data-reveal]').forEach((el) => {
+            const r = el.getBoundingClientRect();
+            if (r.top >= window.innerHeight) {
+              el.classList.add('reveal-ready');
+              io.observe(el);
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

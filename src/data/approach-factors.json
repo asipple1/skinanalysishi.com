@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Skin condition",
+    "note": "What we see and measure at your visit"
+  },
+  {
+    "name": "Medical history",
+    "note": "Medications, pregnancy, sensitivities, past reactions"
+  },
+  {
+    "name": "Lifestyle",
+    "note": "Sun exposure, sleep, stress, time outdoors"
+  },
+  {
+    "name": "Current skincare routine",
+    "note": "What’s working, and what may be working against you"
+  },
+  {
+    "name": "Comfort level",
+    "note": "How much downtime and sensation you’re open to"
+  },
+  {
+    "name": "Budget",
+    "note": "A plan you can sustain, with clear pricing"
+  },
+  {
+    "name": "Long-term goals",
+    "note": "Where you want your skin to be in five years"
+  }
+]

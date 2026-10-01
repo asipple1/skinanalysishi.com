@@ -1,0 +1,49 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'outline' | 'nav';
+  size?: 'sm' | 'md' | 'lg';
+  /** Active state — only applies to variant="nav" */
+  active?: boolean;
+  /** Stretches to full width and centers content */
+  full?: boolean;
+  target?: string;
+  rel?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  active = false,
+  full = false,
+  target,
+  rel,
+  type = 'button',
+  disabled,
+  class: extraClass,
+  ...attrs
+} = Astro.props;
+
+const isNav = variant === 'nav';
+
+const classes = [
+  isNav ? `btn-nav` : `btn btn-${variant} btn-${size}`,
+  full ? 'w-full justify-center' : '',
+  extraClass ?? '',
+].filter(Boolean).join(' ');
+---
+
+{href ? (
+  <a href={href} class={classes} target={target} rel={rel} {...attrs}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes} disabled={disabled} {...attrs}>
+    <slot />
+  </button>
+)}
