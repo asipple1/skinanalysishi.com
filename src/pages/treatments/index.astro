@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
 import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { getAssetImage, consultationHero } from '../../lib/images';
 
 const treatments = (await getCollection('treatments'))
   .filter((t) => t.id !== 'consultation')
@@ -66,13 +68,14 @@ const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order -
       >
         <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-5/4 overflow-hidden rounded-sm no-underline img-zoom">
           <div class="zoom-inner w-full h-full">
-            <img
-              src={t.data.heroImage || '/assets/consultation-hero.png'}
+            <Picture
+              src={getAssetImage(t.data.heroImage) ?? consultationHero}
               alt={t.data.title}
               class="w-full h-full object-cover"
               loading="lazy"
-              width="800"
-              height="640"
+              width={800}
+              height={640}
+              formats={['avif', 'webp']}
             />
           </div>
         </a>

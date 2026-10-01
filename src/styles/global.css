@@ -181,7 +181,6 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    border-radius: var(--radius-pill);
     font-family: var(--font-sans);
     font-weight: 500;
     text-decoration: none;
