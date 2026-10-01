@@ -18,7 +18,7 @@ const treatments = defineCollection({
     shortName: z.string(),
     seoTitle: z.string(),
     metaDescription: z.string().max(160),
-    category: z.enum(['Facials + Resurfacing', 'Collagen Induction', 'Injectables', 'Hair Removal', 'Consultation']),
+    category: z.enum(['Facials + Resurfacing', 'Collagen Induction', 'Injectables', 'Hair Removal', 'Consultation', 'Professional Skincare']),
     benefit: z.string(),
     summary: z.string(),
     time: z.string(),

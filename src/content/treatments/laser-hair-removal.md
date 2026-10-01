@@ -1,7 +1,7 @@
 ---
 title: "Laser Hair Removal"
 shortName: "Laser Hair Removal"
-seoTitle: "Laser Hair Removal on Oʻahu | Skin Analysis Medical Spa — Ewa Beach + Aiea"
+seoTitle: "Laser Hair Removal on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
 metaDescription: "Laser energy targets the pigment in the hair follicle to reduce future growth. Because results depend on your skin tone, hair color, and area, we set up ev"
 category: "Hair Removal"
 benefit: "Reduces regrowth over a series of sessions, planned around your skin and hair."
@@ -43,5 +43,5 @@ providerNote:
   quote: "We’ll be upfront about how many sessions you are likely to need before you commit."
 heroImage: ""
 secondaryImage: ""
-featured: true
+featured: false
 ---

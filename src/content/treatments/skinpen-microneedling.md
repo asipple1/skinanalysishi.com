@@ -1,7 +1,7 @@
 ---
 title: "SkinPen® Microneedling"
 shortName: "SkinPen® Microneedling"
-seoTitle: "Microneedling on Oʻahu | Skin Analysis Medical Spa — Ewa Beach + Aiea"
+seoTitle: "Microneedling on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
 metaDescription: "SkinPen creates controlled micro-channels in the skin to start its natural healing process. Over the following weeks, your skin builds new collagen, soften"
 category: "Collagen Induction"
 benefit: "Stimulates collagen to improve tone and elasticity. FDA-cleared for acne scars."

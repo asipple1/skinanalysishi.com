@@ -1,7 +1,7 @@
 ---
 title: "Dermaplaning"
 shortName: "Dermaplaning"
-seoTitle: "Dermaplaning on Oʻahu | Skin Analysis Medical Spa — Ewa Beach + Aiea"
+seoTitle: "Dermaplaning on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
 metaDescription: "A gentle manual exfoliation using a sterile medical-grade blade to remove the top layer of dead skin and fine facial hair. Skin looks brighter immediately,"
 category: "Facials + Resurfacing"
 benefit: "Removes dead skin and fine vellus hair so skin feels smooth and products absorb."

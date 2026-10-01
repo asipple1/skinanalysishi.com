@@ -16,13 +16,13 @@ const treatmentOptions = treatments.map((t) => ({ id: t.id, label: t.data.title 
 
 const steps = [
   { num: '01', heading: 'We reach out', body: "We'll contact you within one business day by your preferred method to confirm your appointment time." },
-  { num: '02', heading: 'Your consultation', body: 'We look at your skin, listen to your goals, and walk you through the options — with no pressure to book anything that day.' },
+  { num: '02', heading: 'Your consultation', body: 'We look at your skin, listen to your goals, and walk you through the options, with no pressure to book anything that day.' },
   { num: '03', heading: 'Your plan', body: "If you'd like to move forward, we'll put together a treatment plan with clear pricing and realistic expectations." },
 ];
 ---
 
 <BaseLayout
-  title="Contact + Book | Skin Analysis — Ewa Beach + Aiea, Oʻahu"
+  title="Contact + Book | Skin Analysis, Ewa Beach + Aiea, Oʻahu"
   description="Book a complimentary consultation or an appointment at Skin Analysis Medical Spa. Two locations on Oʻahu: Ewa Beach and Aiea."
   currentNav="Locations"
 >
@@ -36,7 +36,7 @@ const steps = [
           Let's talk about your <em class="text-clay">skin.</em>
         </h1>
         <p class="text-body-lg leading-[1.6] text-ink-2 m-0 max-w-130">
-          You don't need to know which treatment you need. Start with a complimentary consultation — we'll look at your skin and talk through what makes sense.
+          You don't need to know which treatment you need. Start with a complimentary consultation, we'll look at your skin and talk through what makes sense.
         </p>
       </div>
 
@@ -94,7 +94,7 @@ const steps = [
       <div class="grid grid-2col-loc gap-[clamp(32px,4vw,56px)]">
         {locations.map((l) => (
           <article class="flex flex-col gap-6">
-            <div class="aspect-3/2 rounded-sm overflow-hidden bg-taupe-line-2 flex items-center justify-content-center">
+            <div class="aspect-3/2 overflow-hidden bg-taupe-line-2 flex items-center justify-content-center">
               <span class="font-serif text-[22px] text-warm-muted">{l.data.name}</span>
             </div>
             <div class="flex justify-between items-baseline gap-3 flex-wrap">

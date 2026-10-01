@@ -4,7 +4,7 @@ order: 2
 seoTitle: "Wrinkle treatment on Oʻahu | Skin Analysis"
 metaDescription: "Some lines come from repeated expression. Others come from collagen loss and sun exposure. Knowing which is which tells us whether a wrinkle relaxer, colla"
 intro: "Some lines come from repeated expression. Others come from collagen loss and sun exposure. Knowing which is which tells us whether a wrinkle relaxer, collagen stimulation, or a combination makes sense for you."
-treatments: ["dysport", "skinpen", "chemical-peels"]
+treatments: ["dysport", "skinpen-microneedling", "chemical-peels"]
 image: ""
 ---
 

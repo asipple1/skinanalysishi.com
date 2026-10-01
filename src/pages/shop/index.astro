@@ -4,7 +4,7 @@ import skincarebrands from '../../data/skincare-brands.json';
 ---
 
 <BaseLayout
-  title="Professional Skincare Shop | Skin Analysis — Oʻahu"
+  title="Professional Skincare Shop | Skin Analysis, Oʻahu"
   description="Professional skincare brands curated by the providers at Skin Analysis. Skinbetter Science, ZO Skin Health, Plated, and Colorescience."
   currentNav="Skincare"
 >
@@ -21,7 +21,7 @@ import skincarebrands from '../../data/skincare-brands.json';
     <div class="grid gap-[clamp(24px,2.4vw,36px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))">
       {skincarebrands.map((brand) => (
         <article class="flex flex-col gap-4 border-t border-taupe-line pt-5">
-          <div class="aspect-4/5 rounded-sm bg-sand flex items-center justify-center">
+          <div class="aspect-4/5 bg-sand flex items-center justify-center">
             <span class="font-serif text-[22px] text-warm-muted text-center p-5">{brand.name}</span>
           </div>
           <h2 class="font-serif font-normal text-[26px] m-0">{brand.name}</h2>
@@ -35,7 +35,7 @@ import skincarebrands from '../../data/skincare-brands.json';
         Not sure which products your skin needs?
       </p>
       <p class="text-[17px] text-sage-text m-0 max-w-120">
-        We'll tell you exactly what to use — and what to skip — at your consultation.
+        We'll tell you exactly what to use, and what to skip, at your consultation.
       </p>
       <a
         href="/contact/"

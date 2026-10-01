@@ -45,7 +45,7 @@ const treatments = d.treatments
         <div class="grid grid-auto-sm gap-[clamp(24px,2.4vw,36px)]">
           {treatments.map((t) => t && (
             <article class="flex flex-col gap-4">
-              <a href={`/treatments/${t.id}/`} class="block aspect-5/4 overflow-hidden rounded-sm no-underline img-zoom">
+              <a href={`/treatments/${t.id}/`} class="block aspect-5/4 overflow-hidden no-underline img-zoom">
                 <div class="zoom-inner w-full h-full">
                   <Picture
                     src={getAssetImage(t.data.heroImage) ?? consultationHero}

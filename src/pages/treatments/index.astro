@@ -13,7 +13,7 @@ const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order -
 ---
 
 <BaseLayout
-  title="Treatments, chosen for your skin | Skin Analysis — Ewa Beach + Aiea"
+  title="Treatments, chosen for your skin | Skin Analysis, Ewa Beach + Aiea"
   description="Evidence-based medical spa treatments in Ewa Beach and Aiea, Oʻahu. DiamondGlow, SkinPen microneedling, Dysport, chemical peels, dermaplaning and laser hair removal."
   currentNav="Treatments"
 >
@@ -66,7 +66,7 @@ const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order -
         style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))"
         data-reveal
       >
-        <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-5/4 overflow-hidden rounded-sm no-underline img-zoom">
+        <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-5/4 overflow-hidden no-underline img-zoom">
           <div class="zoom-inner w-full h-full">
             <Picture
               src={getAssetImage(t.data.heroImage) ?? consultationHero}

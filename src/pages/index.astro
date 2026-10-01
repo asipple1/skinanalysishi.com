@@ -16,7 +16,9 @@ const treatments = (await getCollection('treatments'))
   .filter((t) => t.data.featured)
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
-const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order - b.data.order);
+const concerns = (await getCollection('concerns'))
+  .filter((c) => c.id !== 'unwanted-hair')
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
 const testimonialEntries = await getCollection('testimonials');
 const locations = await getCollection('locations');
 
@@ -61,7 +63,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
 ---
 
 <BaseLayout
-  title="Medical Spa on Oʻahu | Skin Analysis — Ewa Beach + Aiea"
+  title="Medical Spa on Oʻahu | Skin Analysis, Ewa Beach + Aiea"
   description="Nurse-owned medical spa in Ewa Beach and Aiea, Oʻahu. Personalized, evidence-based skin treatments including DiamondGlow, SkinPen microneedling, Dysport, chemical peels and laser hair removal."
 >
   <!-- 1. Hero -->
@@ -103,7 +105,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
 
   <!-- 2. Statement -->
   <section aria-labelledby="season-h" class="bg-sand">
-    <div data-reveal class="max-w-[1100px] mx-auto px-gutter py-section-xl flex flex-col gap-10">
+    <div data-reveal class="max-w-[1100px] mx-auto px-gutter flex flex-col gap-10" style="padding-block:clamp(70px,9.6vw,144px)">
       <h2 id="season-h" class="font-serif font-light text-h1-lg leading-[1.02] tracking-[-0.025em] m-0 text-balance">
         Nourish your skin through every <em>season</em> of life.
       </h2>
@@ -156,7 +158,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
       <div class="grid grid-auto-xl gap-[clamp(28px,3vw,44px)] mb-[clamp(56px,6vw,88px)]">
         {treatmentsLarge.map((t) => (
           <article data-reveal class="flex flex-col gap-[22px]">
-            <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-[5/4] overflow-hidden rounded-sm no-underline img-zoom">
+            <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-[5/4] overflow-hidden no-underline img-zoom">
               <div class="zoom-inner w-full h-full">
                 <Picture
                   src={getAssetImage(t.data.heroImage) ?? consultationHero}
@@ -189,7 +191,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
       <div class="grid gap-[clamp(24px,2.4vw,36px)]" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
         {treatmentsSmall.map((t) => (
           <article data-reveal class="flex flex-col gap-[18px]">
-            <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-[4/5] overflow-hidden rounded-sm no-underline img-zoom">
+            <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-[4/5] overflow-hidden no-underline img-zoom">
               <div class="zoom-inner w-full h-full">
                 <Picture
                   src={getAssetImage(t.data.heroImage) ?? consultationHero}
@@ -259,7 +261,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
   <!-- 6. Providers -->
   <section id="about" aria-labelledby="about-h" class="max-w-site mx-auto px-gutter py-section-lg">
     <div class="grid gap-[clamp(40px,6vw,100px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
-      <div data-reveal class="aspect-[4/5] rounded-sm overflow-hidden">
+      <div data-reveal class="aspect-[4/5] overflow-hidden">
         <Picture
           src={providersTeam}
           alt="Sarah and Allison together in the studio"
@@ -365,7 +367,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
           Explore Skincare
         </a>
       </div>
-      <div data-reveal class="aspect-[4/5] rounded-[4px_4px_220px_220px] overflow-hidden">
+      <div data-reveal class="aspect-[4/5] overflow-hidden">
         <Picture
           src={skincareProducts}
           alt="Professional skincare products on natural stone in soft daylight"
@@ -396,7 +398,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
       <div class="grid grid-2col-loc gap-[clamp(32px,4vw,56px)]">
         {locations.map((l) => (
           <article data-reveal class="flex flex-col gap-6">
-            <div class="aspect-[3/2] rounded-sm overflow-hidden bg-taupe-line">
+            <div class="aspect-[3/2] overflow-hidden bg-taupe-line">
               <div class="w-full h-full bg-taupe-line-2 flex items-center justify-center text-warm-muted font-serif text-lg">
                 {l.data.name}
               </div>

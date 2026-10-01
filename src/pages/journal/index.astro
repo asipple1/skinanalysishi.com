@@ -17,7 +17,7 @@ function formatDate(d: Date) {
 ---
 
 <BaseLayout
-  title="Journal — Notes on skin, plainly explained | Skin Analysis"
+  title="Journal, Notes on skin, plainly explained | Skin Analysis"
   description="Skin health articles from the providers at Skin Analysis Medical Spa. Evidence-based guides on treatments, skincare, and what to expect."
   currentNav="Journal"
 >
@@ -32,7 +32,7 @@ function formatDate(d: Date) {
   {featured && (
     <div class="max-w-site mx-auto px-gutter pb-section">
       <article class="grid gap-[clamp(32px,5vw,80px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
-        <a href={`/journal/${featured.id}/`} class="block aspect-3/2 overflow-hidden rounded-sm no-underline img-zoom">
+        <a href={`/journal/${featured.id}/`} class="block aspect-3/2 overflow-hidden no-underline img-zoom">
           <div class="zoom-inner w-full h-full">
             <Picture
               src={getAssetImage(featured.data.heroImage)!}
@@ -81,7 +81,7 @@ function formatDate(d: Date) {
       <div class="grid gap-[clamp(32px,3vw,48px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))">
         {rest.map((article) => (
           <article data-reveal class="flex flex-col gap-4">
-            <a href={`/journal/${article.id}/`} class="block aspect-4/3 overflow-hidden rounded-sm no-underline img-zoom">
+            <a href={`/journal/${article.id}/`} class="block aspect-4/3 overflow-hidden no-underline img-zoom">
               <div class="zoom-inner w-full h-full">
                 <Picture
                   src={getAssetImage(article.data.heroImage)!}

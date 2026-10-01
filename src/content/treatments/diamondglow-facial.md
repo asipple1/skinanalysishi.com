@@ -1,9 +1,10 @@
 ---
 title: "DiamondGlow® Facial"
 shortName: "DiamondGlow®"
-seoTitle: "DiamondGlow Facial on Oʻahu | Skin Analysis Medical Spa — Ewa Beach + Aiea"
+seoTitle: "DiamondGlow Facial on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
 metaDescription: "A three-in-one resurfacing facial that exfoliates with a diamond-tip wand, extracts congestion through gentle suction, and infuses a serum chosen for your "
 category: "Facials + Resurfacing"
+order: 2
 benefit: "Exfoliates, clears pores, and infuses serums in one step for smoother, brighter skin."
 summary: "A three-in-one resurfacing facial that exfoliates with a diamond-tip wand, extracts congestion through gentle suction, and infuses a serum chosen for your skin at the same time."
 time: "45–75 min"

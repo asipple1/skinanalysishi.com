@@ -4,7 +4,7 @@ order: 5
 seoTitle: "Treatments for dull skin | Skin Analysis"
 metaDescription: "A buildup of dead skin cells and a weakened moisture barrier can make skin look flat and feel tight. Gentle exfoliation and targeted serums restore smoothn"
 intro: "A buildup of dead skin cells and a weakened moisture barrier can make skin look flat and feel tight. Gentle exfoliation and targeted serums restore smoothness and help your products absorb."
-treatments: ["diamondglow", "dermaplaning", "chemical-peels"]
+treatments: ["diamondglow-facial", "dermaplaning", "chemical-peels"]
 image: ""
 ---
 
