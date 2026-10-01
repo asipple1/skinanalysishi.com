@@ -4,7 +4,13 @@ import Btn from '../components/Btn.astro';
 import ConcernExplorer from '../components/islands/ConcernExplorer';
 import Testimonials from '../components/islands/Testimonials';
 import ResultsFilter from '../components/islands/ResultsFilter';
+import { Picture, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import { getAssetImage, consultationHero } from '../lib/images';
+import heroPortrait from '../assets/hero-portrait.png';
+import providersTeam from '../assets/providers-team.jpg';
+import skincareProducts from '../assets/skincare-products.png';
+import palmShadow from '../assets/palm-shadow.png';
 
 const treatments = (await getCollection('treatments'))
   .filter((t) => t.data.featured)
@@ -33,7 +39,9 @@ const concernData = concerns.map((c) => ({
 const treatmentsLarge = treatments.slice(0, 2);
 const treatmentsSmall = treatments.slice(2, 6);
 
-const results = [
+const palmShadowImg = await getImage({ src: palmShadow, format: 'webp' });
+
+const results = await Promise.all([
   { title: 'Acne scarring', detail: 'SkinPen® series', tags: ['Acne', 'Texture', 'Microneedling'], image: '/assets/skinpen-ba-acne.png' },
   { title: 'Sun damage + freckles', detail: 'Peels + home care, 5 months', tags: ['Pigmentation'], image: '/assets/chemical-peel-ba-1.png' },
   { title: "Crow's feet", detail: 'Dysport®, 2 weeks after', tags: ['Injectables'], image: '/assets/dysport-ba-1.png' },
@@ -42,7 +50,12 @@ const results = [
   { title: 'Neck lines', detail: '4 SkinPen® sessions', tags: ['Texture', 'Microneedling'], image: '/assets/skinpen-ba-neck.png' },
   { title: 'Forehead lines', detail: 'Dysport®, 2 weeks after', tags: ['Injectables'], image: '/assets/dysport-ba-2.png' },
   { title: 'Dull, congested skin', detail: 'DiamondGlow® series', tags: ['DiamondGlow', 'Acne'] },
-];
+].map(async (r) => ({
+  ...r,
+  image: r.image
+    ? (await getImage({ src: getAssetImage(r.image)!, format: 'webp', width: 600, height: 450 })).src
+    : undefined,
+})));
 
 const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'DiamondGlow', 'Injectables'];
 ---
@@ -55,7 +68,7 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
   <section id="top" aria-labelledby="hero-h" class="relative overflow-hidden">
     <div
       aria-hidden="true"
-      style="position:absolute;top:0;right:0;bottom:0;width:clamp(160px,18vw,300px);pointer-events:none;z-index:0;background:url(/assets/palm-shadow.png) right center / cover no-repeat;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(to right, transparent, #000 45%);mask-image:linear-gradient(to right, transparent, #000 45%)"
+      style={`position:absolute;top:0;right:0;bottom:0;width:clamp(160px,18vw,300px);pointer-events:none;z-index:0;background:url(${palmShadowImg.src}) right center / cover no-repeat;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(to right, transparent, #000 45%);mask-image:linear-gradient(to right, transparent, #000 45%)`}
     ></div>
     <div class="relative z-[1] max-w-site mx-auto px-gutter pt-[clamp(28px,4vw,56px)] pb-[clamp(64px,8vw,120px)] grid grid-auto-md gap-[clamp(36px,5vw,80px)] items-center">
       <div data-reveal class="flex flex-col gap-7 max-w-[600px]">
@@ -73,14 +86,15 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
       </div>
       <div data-reveal class="relative max-w-[600px] w-full justify-self-end">
         <div>
-          <img
-            src="/assets/hero-portrait.png"
+          <Picture
+            src={heroPortrait}
             alt="Provider portrait in soft natural light"
             class="w-full h-full object-cover object-[center_20%]"
             loading="eager"
             fetchpriority="high"
-            width="604"
-            height="772"
+            width={604}
+            height={772}
+            formats={['avif', 'webp']}
           />
         </div>
       </div>
@@ -144,13 +158,14 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
           <article data-reveal class="flex flex-col gap-[22px]">
             <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-[5/4] overflow-hidden rounded-sm no-underline img-zoom">
               <div class="zoom-inner w-full h-full">
-                <img
-                  src={t.data.heroImage || '/assets/consultation-hero.png'}
+                <Picture
+                  src={getAssetImage(t.data.heroImage) ?? consultationHero}
                   alt={t.data.title}
                   class="w-full h-full object-cover"
                   loading="lazy"
-                  width="800"
-                  height="640"
+                  width={800}
+                  height={640}
+                  formats={['avif', 'webp']}
                 />
               </div>
             </a>
@@ -176,13 +191,14 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
           <article data-reveal class="flex flex-col gap-[18px]">
             <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-[4/5] overflow-hidden rounded-sm no-underline img-zoom">
               <div class="zoom-inner w-full h-full">
-                <img
-                  src={t.data.heroImage || '/assets/consultation-hero.png'}
+                <Picture
+                  src={getAssetImage(t.data.heroImage) ?? consultationHero}
                   alt={t.data.title}
                   class="w-full h-full object-cover"
                   loading="lazy"
-                  width="400"
-                  height="500"
+                  width={400}
+                  height={500}
+                  formats={['avif', 'webp']}
                 />
               </div>
             </a>
@@ -244,13 +260,14 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
   <section id="about" aria-labelledby="about-h" class="max-w-site mx-auto px-gutter py-section-lg">
     <div class="grid gap-[clamp(40px,6vw,100px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
       <div data-reveal class="aspect-[4/5] rounded-sm overflow-hidden">
-        <img
-          src="/assets/providers-team.jpg"
+        <Picture
+          src={providersTeam}
           alt="Sarah and Allison together in the studio"
           class="w-full h-full object-cover"
           loading="lazy"
-          width="800"
-          height="1000"
+          width={800}
+          height={1000}
+          formats={['avif', 'webp']}
         />
       </div>
       <div data-reveal class="flex flex-col gap-9">
@@ -349,13 +366,14 @@ const filters = ['All', 'Acne', 'Pigmentation', 'Texture', 'Microneedling', 'Dia
         </a>
       </div>
       <div data-reveal class="aspect-[4/5] rounded-[4px_4px_220px_220px] overflow-hidden">
-        <img
-          src="/assets/skincare-products.png"
+        <Picture
+          src={skincareProducts}
           alt="Professional skincare products on natural stone in soft daylight"
           class="w-full h-full object-cover"
           loading="lazy"
-          width="800"
-          height="1000"
+          width={552}
+          height={754}
+          formats={['avif', 'webp']}
         />
       </div>
     </div>

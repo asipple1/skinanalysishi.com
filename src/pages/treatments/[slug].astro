@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
 import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { getAssetImage, consultationHero } from '../../lib/images';
+import providersTeam from '../../assets/providers-team.jpg';
 
 export async function getStaticPaths() {
   const treatments = await getCollection('treatments');
@@ -106,27 +109,16 @@ const schema = [
       </div>
     </div>
     <div class="aspect-4/5 rounded-[220px_220px_4px_4px] overflow-hidden bg-sand">
-      {d.heroImage ? (
-        <img
-          src={d.heroImage}
-          alt={d.title}
-          class="w-full h-full object-cover"
-          loading="eager"
-          fetchpriority="high"
-          width="600"
-          height="750"
-        />
-      ) : (
-        <img
-          src="/assets/consultation-hero.png"
-          alt={d.title}
-          class="w-full h-full object-cover"
-          loading="eager"
-          fetchpriority="high"
-          width="600"
-          height="750"
-        />
-      )}
+      <Picture
+        src={getAssetImage(d.heroImage) ?? consultationHero}
+        alt={d.title}
+        class="w-full h-full object-cover"
+        loading="eager"
+        fetchpriority="high"
+        width={600}
+        height={750}
+        formats={['avif', 'webp']}
+      />
     </div>
   </section>
 
@@ -155,13 +147,14 @@ const schema = [
   <!-- How it works -->
   <section class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)] grid grid-auto-xl gap-[clamp(40px,6vw,100px)] items-center">
     <div class="aspect-5/4 rounded-sm overflow-hidden bg-sand">
-      <img
-        src={d.secondaryImage || d.heroImage || '/assets/consultation-hero.png'}
+      <Picture
+        src={getAssetImage(d.secondaryImage) ?? getAssetImage(d.heroImage) ?? consultationHero}
         alt={`How ${d.title} works`}
         class="w-full h-full object-cover"
         loading="lazy"
-        width="800"
-        height="640"
+        width={800}
+        height={640}
+        formats={['avif', 'webp']}
       />
     </div>
     <div class="flex flex-col gap-5.5">
@@ -207,13 +200,14 @@ const schema = [
           {d.beforeAfter.map((b: { image: string; caption: string }) => (
             <figure class="m-0 flex flex-col gap-3">
               <div class="aspect-4/3 rounded-sm overflow-hidden bg-ivory">
-                <img
-                  src={b.image}
+                <Picture
+                  src={getAssetImage(b.image) ?? consultationHero}
                   alt={b.caption}
                   class="w-full h-full object-contain"
                   loading="lazy"
-                  width="680"
-                  height="510"
+                  width={680}
+                  height={510}
+                  formats={['avif', 'webp']}
                 />
               </div>
               <figcaption class="font-serif text-[19px]">{b.caption}</figcaption>
@@ -250,11 +244,14 @@ const schema = [
       </blockquote>
       <figcaption class="flex items-center gap-4">
         <div class="w-14 h-14 rounded-pill overflow-hidden shrink-0 bg-[#6A7E6B]">
-          <img
-            src="/assets/providers-team.jpg"
+          <Picture
+            src={providersTeam}
             alt={d.providerNote.provider}
             class="w-full h-full object-cover"
             loading="lazy"
+            width={56}
+            height={56}
+            formats={['avif', 'webp']}
           />
         </div>
         <span class="text-[15px]">{d.providerNote.provider}</span>
@@ -299,13 +296,14 @@ const schema = [
             <article class="flex flex-col gap-4">
               <a href={`/treatments/${r.id}/`} aria-label={r.data.title} class="block aspect-4/3 overflow-hidden rounded-sm bg-ivory no-underline img-zoom">
                 <div class="zoom-inner w-full h-full">
-                  <img
-                    src={r.data.heroImage || '/assets/consultation-hero.png'}
+                  <Picture
+                    src={getAssetImage(r.data.heroImage) ?? consultationHero}
                     alt={r.data.title}
                     class="w-full h-full object-cover"
                     loading="lazy"
-                    width="560"
-                    height="420"
+                    width={560}
+                    height={420}
+                    formats={['avif', 'webp']}
                   />
                 </div>
               </a>

@@ -12,6 +12,10 @@ export default defineConfig({
       filter: (page) => !page.includes('/shop/cart'),
     }),
   ],
+  image: {
+    layout: 'constrained',
+    responsiveStyles: true,
+  },
   vite: {
     plugins: [tailwindcss()],
   },

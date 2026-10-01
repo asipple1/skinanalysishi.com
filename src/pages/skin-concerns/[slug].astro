@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
 import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { getAssetImage, consultationHero } from '../../lib/images';
 
 export async function getStaticPaths() {
   const concerns = await getCollection('concerns');
@@ -45,13 +47,14 @@ const treatments = d.treatments
             <article class="flex flex-col gap-4">
               <a href={`/treatments/${t.id}/`} class="block aspect-5/4 overflow-hidden rounded-sm no-underline img-zoom">
                 <div class="zoom-inner w-full h-full">
-                  <img
-                    src={t.data.heroImage || '/assets/consultation-hero.png'}
+                  <Picture
+                    src={getAssetImage(t.data.heroImage) ?? consultationHero}
                     alt={t.data.title}
                     class="w-full h-full object-cover"
                     loading="lazy"
-                    width="560"
-                    height="448"
+                    width={560}
+                    height={448}
+                    formats={['avif', 'webp']}
                   />
                 </div>
               </a>

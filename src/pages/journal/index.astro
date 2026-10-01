@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
 import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { getAssetImage } from '../../lib/images';
 
 const allArticles = (await getCollection('journal'))
   .filter((a) => !a.data.draft)
@@ -32,14 +34,15 @@ function formatDate(d: Date) {
       <article class="grid gap-[clamp(32px,5vw,80px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
         <a href={`/journal/${featured.id}/`} class="block aspect-3/2 overflow-hidden rounded-sm no-underline img-zoom">
           <div class="zoom-inner w-full h-full">
-            <img
-              src={featured.data.heroImage}
+            <Picture
+              src={getAssetImage(featured.data.heroImage)!}
               alt={featured.data.title}
               class="w-full h-full object-cover"
               loading="eager"
               fetchpriority="high"
-              width="900"
-              height="600"
+              width={900}
+              height={600}
+              formats={['avif', 'webp']}
             />
           </div>
         </a>
@@ -80,13 +83,14 @@ function formatDate(d: Date) {
           <article data-reveal class="flex flex-col gap-4">
             <a href={`/journal/${article.id}/`} class="block aspect-4/3 overflow-hidden rounded-sm no-underline img-zoom">
               <div class="zoom-inner w-full h-full">
-                <img
-                  src={article.data.heroImage}
+                <Picture
+                  src={getAssetImage(article.data.heroImage)!}
                   alt={article.data.title}
                   class="w-full h-full object-cover"
                   loading="lazy"
-                  width="640"
-                  height="480"
+                  width={640}
+                  height={480}
+                  formats={['avif', 'webp']}
                 />
               </div>
             </a>
