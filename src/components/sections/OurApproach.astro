@@ -1,0 +1,39 @@
+---
+import approachFactors from '../../data/approach-factors.json';
+---
+
+<section id="approach" aria-labelledby="approach-h" class="bg-sage text-[#F3F0E8]">
+  <div class="max-w-site mx-auto px-gutter py-[clamp(88px,11vw,170px)] grid grid-auto-xl gap-[clamp(48px,7vw,120px)]">
+    <div data-reveal class="flex flex-col gap-[30px]">
+      <span class="text-xs tracking-[0.22em] uppercase text-sage-light">Our approach</span>
+      <h2 id="approach-h" class="font-serif font-light text-[clamp(40px,5.2vw,76px)] leading-none tracking-[-0.025em] m-0 text-balance">
+        Your skin doesn't need a trend. It needs a <em>plan.</em>
+      </h2>
+      <p class="text-[17px] leading-[1.65] text-sage-text m-0 max-w-[480px] text-pretty">
+        A treatment is only right if it's right for you. Before we recommend anything, we look at the whole picture, then explain our reasoning so you can make an informed decision. Sometimes that means fewer treatments, not more.
+      </p>
+      <a
+        href="/contact/"
+        class="self-start text-[#F3F0E8] text-[15px] font-medium flex gap-2 items-center no-underline border-b border-[rgba(243,240,232,0.35)] pb-[3px] transition-[border-color] duration-[250ms] hover:border-[rgba(243,240,232,0.75)]"
+      >
+        Book a Complimentary Consultation <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div data-reveal class="flex flex-col">
+      <span class="text-[13px] text-sage-light mb-[18px]">What shapes your recommendation</span>
+      <ol class="list-none m-0 p-0 border-t border-[rgba(243,240,232,0.25)]">
+        {approachFactors.map((f, i) => (
+          <li class="grid gap-3 items-baseline py-[18px] border-b border-[rgba(243,240,232,0.25)]" style="grid-template-columns:44px 1fr">
+            <span class="text-xs tracking-[0.1em] text-sage-light" style="font-variant-numeric:tabular-nums">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="flex flex-col gap-1">
+              <span class="font-serif text-[clamp(24px,2.2vw,30px)] font-light leading-[1.15]">{f.name}</span>
+              <span class="text-sm leading-[1.5] text-sage-light">{f.note}</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

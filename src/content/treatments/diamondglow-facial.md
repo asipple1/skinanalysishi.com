@@ -11,10 +11,10 @@ time: "45–75 min"
 downtime: "None"
 resultsAppear: "Immediately"
 typicalPlan: "Monthly, or before events"
-priceFrom: "From $250"
+priceFrom: "From $275"
 pricing:
   - label: "Face + neck"
-    value: "$250"
+    value: "$275"
   - label: "Body resurfacing (back, arms, legs)"
     value: "Call for pricing"
 concerns: ["acne-congestion", "dull-or-dehydrated-skin", "pigmentation-melasma", "preventative-skin-health"]

@@ -1,0 +1,13 @@
+---
+import Testimonials from '../islands/Testimonials';
+import { getCollection } from 'astro:content';
+
+const testimonialEntries = await getCollection('testimonials');
+---
+
+<section aria-labelledby="voices-h">
+  <Testimonials
+    client:visible
+    testimonials={testimonialEntries.map((t) => ({ text: t.data.text, name: t.data.name, detail: t.data.detail }))}
+  />
+</section>

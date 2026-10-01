@@ -93,9 +93,9 @@ export default function ConcernExplorer({ concerns, initialIndex = 0 }: Props) {
         </div>
         <a
           href={c.link}
-          class="text-[15px] font-medium text-clay flex gap-2 items-center no-underline"
+          class="text-[15px] font-medium text-charcoal flex gap-2 items-center no-underline border-b border-taupe-line pb-5 transition-colors duration-250 hover:text-clay"
         >
-          Learn about {c.name.toLowerCase()} treatment on Oʻahu <span aria-hidden="true">→</span>
+          Explore {c.name.toLowerCase()} treatment on Oʻahu <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>

@@ -9,6 +9,7 @@ const concernSlugs = z.enum([
   'dull-or-dehydrated-skin',
   'unwanted-hair',
   'preventative-skin-health',
+  'body-resurfacing',
 ]);
 
 const treatments = defineCollection({

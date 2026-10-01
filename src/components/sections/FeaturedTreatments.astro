@@ -1,0 +1,77 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { getAssetImage, consultationHero } from '../../lib/images';
+
+const treatments = (await getCollection('treatments'))
+  .filter((t) => t.data.featured)
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const treatmentsLarge = treatments.slice(0, 2);
+const treatmentsRest = treatments.slice(2);
+---
+
+<section id="treatments" aria-labelledby="treat-h" class="border-t border-taupe-line-3">
+  <div class="max-w-site mx-auto px-gutter py-section-lg">
+    <div data-reveal class="flex justify-between items-end gap-6 flex-wrap mb-[clamp(40px,5vw,72px)]">
+      <div class="flex flex-col gap-[18px]">
+        <span class="eyebrow">Featured treatments</span>
+        <h2 id="treat-h" class="font-serif font-light text-h2-xl leading-[1.02] tracking-[-0.02em] m-0">
+          Treatments we trust.
+        </h2>
+      </div>
+      <a
+        href="/treatments/"
+        class="text-[15px] font-medium border-b border-charcoal pb-1 no-underline text-charcoal transition-[color,border-color] duration-[250ms] hover:text-clay hover:border-clay"
+      >
+        View all treatments
+      </a>
+    </div>
+
+    <div class="grid grid-auto-xl gap-[clamp(28px,3vw,44px)]">
+      {treatmentsLarge.map((t) => (
+        <article data-reveal class="flex flex-col gap-[22px]">
+          <a href={`/treatments/${t.id}/`} aria-label={`Explore ${t.data.title}`} class="block aspect-[5/4] overflow-hidden no-underline img-zoom">
+            <div class="zoom-inner w-full h-full">
+              <Picture
+                src={getAssetImage(t.data.heroImage) ?? consultationHero}
+                alt={t.data.title}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                width={800}
+                height={640}
+                formats={['avif', 'webp']}
+              />
+            </div>
+          </a>
+          <div class="grid gap-[10px_24px] items-baseline" style="grid-template-columns:1fr auto">
+            <h3 class="font-serif font-normal text-[clamp(28px,2.8vw,40px)] leading-[1.05] m-0 tracking-[-0.015em]">{t.data.title}</h3>
+            <span class="text-sm text-ink-3 whitespace-nowrap">{t.data.priceFrom}</span>
+            <p class="text-base leading-[1.6] text-ink-2 m-0 max-w-[480px]">{t.data.benefit}</p>
+            <span class="text-sm text-ink-3 whitespace-nowrap">{t.data.time}</span>
+          </div>
+          <a
+            href={`/treatments/${t.id}/`}
+            class="text-[15px] font-medium flex gap-2 items-center self-start border-b border-charcoal pb-[3px] no-underline text-charcoal transition-[color,border-color] duration-[250ms] hover:text-clay hover:border-clay"
+          >
+            Explore Treatment <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {treatmentsRest.length > 0 && (
+      <div data-reveal class="mt-[clamp(40px,5vw,72px)] pt-[clamp(20px,3vw,36px)] border-t border-taupe-line-3 flex flex-wrap items-baseline gap-x-8 gap-y-3">
+        <span class="text-[12px] tracking-[0.14em] uppercase text-ink-3 shrink-0">Also</span>
+        {treatmentsRest.map((t) => (
+          <a
+            href={`/treatments/${t.id}/`}
+            class="font-serif font-light text-[clamp(18px,1.8vw,24px)] text-charcoal no-underline hover:text-clay transition-colors duration-[250ms]"
+          >
+            {t.data.title}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

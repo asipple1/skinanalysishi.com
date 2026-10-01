@@ -1,0 +1,38 @@
+---
+import ConcernExplorer from '../islands/ConcernExplorer';
+import { getCollection } from 'astro:content';
+
+const allTreatments = await getCollection('treatments');
+
+const concerns = (await getCollection('concerns'))
+  .filter((c) => c.id !== 'unwanted-hair')
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const concernData = concerns.map((c) => ({
+  name: c.data.title,
+  slug: c.id,
+  body: c.data.intro,
+  image: c.data.image,
+  treatments: c.data.treatments.slice(0, 3).map((slug: string) => {
+    const t = allTreatments.find((x) => x.id === slug);
+    return t?.data.shortName ?? slug;
+  }),
+  treatmentSlugs: c.data.treatments.slice(0, 3),
+  link: `/skin-concerns/${c.id}/`,
+}));
+---
+
+<section id="concerns" aria-labelledby="concerns-h" class="max-w-site mx-auto px-gutter py-section-lg">
+  <div data-reveal class="flex justify-between items-end gap-6 flex-wrap mb-[clamp(40px,5vw,72px)]">
+    <div class="flex flex-col gap-[18px]">
+      <span class="eyebrow">Explore by concern</span>
+      <h2 id="concerns-h" class="font-serif font-light text-h2-xl leading-[1.02] tracking-[-0.02em] m-0">
+        What would you like to work on?
+      </h2>
+    </div>
+    <p class="text-base leading-[1.6] text-ink-3 max-w-[380px] m-0">
+      You don't need to know the name of a treatment. Start with what you're noticing.
+    </p>
+  </div>
+  <ConcernExplorer client:visible concerns={concernData} />
+</section>

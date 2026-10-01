@@ -1,0 +1,57 @@
+---
+import { Picture } from 'astro:assets';
+import providersTeam from '../../assets/providers-team.jpg';
+---
+
+<section id="about" aria-labelledby="about-h" class="max-w-site mx-auto px-gutter py-section-lg">
+  <div class="grid gap-[clamp(40px,6vw,100px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
+    <div data-reveal class="aspect-[4/5] overflow-hidden">
+      <Picture
+        src={providersTeam}
+        alt="Sarah and Allison together in the studio"
+        class="w-full h-full object-cover"
+        loading="lazy"
+        width={800}
+        height={1000}
+        formats={['avif', 'webp']}
+      />
+    </div>
+    <div data-reveal class="flex flex-col gap-9">
+      <div class="flex flex-col gap-[22px]">
+        <span class="eyebrow">Meet Sarah + Allison</span>
+        <h2 id="about-h" class="font-serif font-light text-[clamp(38px,4.8vw,68px)] leading-none tracking-[-0.02em] m-0">
+          Care rooted in experience.
+        </h2>
+        <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
+          Skin Analysis is owned and run by a board-certified family nurse practitioner and a registered nurse with more than two decades of combined experience in dermatology and aesthetics. You'll see one of them at every visit.
+        </p>
+      </div>
+      <div class="grid gap-8 border-t border-taupe-line pt-8" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))">
+        <div class="flex flex-col gap-3">
+          <h3 class="font-serif font-normal text-[24px] leading-[1.15] m-0">
+            Sarah Lockwood-Sepulveda, <span class="text-[17px] text-ink-3">FNP-BC</span>
+          </h3>
+          <span class="text-[13px] text-sage">Owner + Aesthetic Provider</span>
+          <p class="text-[15px] leading-[1.6] text-ink-2 m-0">
+            Sarah sees skin health as part of overall health. She provides injectables, microneedling, chemical peels, and dermaplaning.
+          </p>
+          <a href="/providers/sarah-lockwood-sepulveda/" class="text-sm font-medium flex gap-2 text-charcoal no-underline transition-colors duration-250 hover:text-clay">
+            Read Sarah's profile <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="flex flex-col gap-3">
+          <h3 class="font-serif font-normal text-[24px] leading-[1.15] m-0">
+            Allison Sipple, <span class="text-[17px] text-ink-3">RN-BSN</span>
+          </h3>
+          <span class="text-[13px] text-sage">Owner + Aesthetic Provider</span>
+          <p class="text-[15px] leading-[1.6] text-ink-2 m-0">
+            Allison listens first. She builds plans around each person's goals, lifestyle, and comfort level, and keeps learning so her approach stays current.
+          </p>
+          <a href="/providers/allison-sipple/" class="text-sm font-medium flex gap-2 text-charcoal no-underline transition-colors duration-250 hover:text-clay">
+            Read Allison's profile <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -21,13 +21,17 @@ export default function ResultsFilter({ results, filters }: Props) {
 
   return (
     <div>
-      <div role="group" aria-label="Filter results" class="flex flex-wrap gap-2 mb-10">
+      <div role="group" aria-label="Filter results" class="flex flex-wrap gap-x-7 gap-y-2 mb-10 pb-4 border-b border-taupe-line-3">
         {filters.map((f) => (
           <button
             key={f}
             onClick={() => setActive(f)}
             aria-pressed={f === active}
-            class={f === active ? 'chip chip-active' : 'chip chip-inactive'}
+            class={`bg-transparent border-0 p-0 cursor-pointer font-sans text-[14px] transition-colors duration-200 ${
+              f === active
+                ? 'text-charcoal font-medium underline underline-offset-4 decoration-1 decoration-charcoal'
+                : 'text-ink-3 hover:text-charcoal'
+            }`}
           >
             {f}
           </button>
