@@ -11,6 +11,10 @@
   "overrides": {
     "@types/node": "22.15.21"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.63.6",
+    "@rollup/rollup-linux-x64-musl": "4.63.6"
+  },
   "dependencies": {
     "@astrojs/preact": "^4.0.0",
     "@astrojs/sitemap": "^3.0.0",
