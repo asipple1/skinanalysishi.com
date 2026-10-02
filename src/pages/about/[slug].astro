@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { Picture } from 'astro:assets';
-import { getAssetImage } from '../../lib/images';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import providersTeam from '../../assets/providers-team.jpg';
 
 export async function getStaticPaths() {
@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 
 const { provider: p } = Astro.props;
 const d = p.data;
+const { Content } = await render(p);
 ---
 
 <BaseLayout
@@ -22,14 +23,7 @@ const d = p.data;
 >
   <div class="max-w-site mx-auto px-gutter py-section-sm">
 
-    <!-- Breadcrumb -->
-    <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 mb-10">
-      <a href="/" class="text-ink-3 no-underline">Home</a>
-      <span>/</span>
-      <a href="/#about" class="text-ink-3 no-underline">About</a>
-      <span>/</span>
-      <span>{d.name}</span>
-    </nav>
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about/' }, { label: d.name }]} class="mb-10" />
 
     <!-- Profile -->
     <div class="grid gap-[clamp(48px,7vw,100px)] items-start" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr))">
@@ -61,12 +55,12 @@ const d = p.data;
         </p>
 
         <div class="prose-content border-t border-taupe-line pt-8 text-[17px] leading-[1.7] text-ink-2">
-          <slot />
+          <Content />
         </div>
 
         <div class="flex gap-3 flex-wrap border-t border-taupe-line pt-8">
           <Btn href="/contact/">Book an Appointment</Btn>
-          <Btn href="/#about" variant="outline">Meet the Team</Btn>
+          <Btn href="/about/" variant="outline">Meet the Team</Btn>
         </div>
       </div>
     </div>

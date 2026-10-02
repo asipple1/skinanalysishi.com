@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Btn from '../components/Btn.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | Skin Analysis"
+  description="The page you're looking for doesn't exist. Explore our treatments, meet our team, or book an appointment at Skin Analysis on Oʻahu."
+>
+  <div class="max-w-site mx-auto px-gutter py-section-lg flex flex-col items-center text-center gap-10 min-h-[55vh] justify-center">
+
+    <div class="flex flex-col items-center gap-5">
+      <span class="eyebrow">404 — Page Not Found</span>
+      <h1
+        class="font-serif font-light text-[clamp(42px,5.8vw,84px)] leading-none tracking-[-0.02em] m-0 max-w-[680px]"
+      >
+        This page has<br /><em>wandered off.</em>
+      </h1>
+      <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty max-w-[480px]">
+        It may have moved, been renamed, or never existed. Here are a few places to explore instead.
+      </p>
+    </div>
+
+    <div class="flex gap-3 flex-wrap justify-center">
+      <Btn href="/">Back to Home</Btn>
+      <Btn href="/treatments/" variant="outline">Browse Treatments</Btn>
+      <Btn href="/contact/" variant="outline">Book an Appointment</Btn>
+    </div>
+
+    <div class="border-t border-taupe-line pt-8 w-full max-w-[540px]">
+      <p class="text-[13px] text-ink-3 uppercase tracking-[0.18em] mb-5">Quick Links</p>
+      <div
+        class="grid gap-3"
+        style="grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr))"
+      >
+        {[
+          { label: 'Skin Concerns', href: '/skin-concerns/' },
+          { label: 'Treatments', href: '/treatments/' },
+          { label: 'Meet the Team', href: '/about/' },
+          { label: 'Journal', href: '/journal/' },
+          { label: 'Locations', href: '/#locations' },
+          { label: 'Shop', href: '/shop/' },
+        ].map(({ label, href }) => (
+          <a
+            href={href}
+            class="text-[15px] text-ink-2 no-underline hover:text-clay transition-colors duration-200 flex gap-1.5 items-center justify-center"
+          >
+            {label} <span aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

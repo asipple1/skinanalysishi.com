@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Picture } from 'astro:assets';
+import Btn from '../components/Btn.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
+import providersTeam from '../assets/providers-team.jpg';
+
+const providers = (await getCollection('providers')).sort((a, b) => a.data.order - b.data.order);
+
+const commitments = [
+  {
+    title: 'Evidence-Based Care',
+    body: 'Every treatment we offer is grounded in clinical research and proven outcomes — not trends.',
+  },
+  {
+    title: 'Personalized Plans',
+    body: 'We take time to understand your skin, your goals, and your lifestyle before recommending anything.',
+  },
+  {
+    title: 'Nurse-Led Expertise',
+    body: 'All treatments are performed by Sarah or Allison — licensed providers with deep clinical backgrounds.',
+  },
+  {
+    title: 'A No-Pressure Environment',
+    body: 'You set the pace. We believe lasting results come from trust and connection, not urgency.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Our Team | Skin Analysis Medical Spa',
+  url: 'https://www.skinanalysishi.com/about/',
+  description:
+    'Meet Sarah Lockwood-Sepulveda, FNP-BC, and Allison Sipple, RN-BSN — nurse-owners of Skin Analysis Medical Spa with over two decades of collective expertise in dermatology and aesthetics on Oʻahu.',
+  mainEntity: {
+    '@type': 'MedicalBusiness',
+    '@id': 'https://www.skinanalysishi.com/#org',
+  },
+};
+---
+
+<BaseLayout
+  title="Meet Our Team | Skin Analysis Medical Spa | Oʻahu, Hawaiʻi"
+  description="Meet Sarah Lockwood-Sepulveda, FNP-BC, and Allison Sipple, RN-BSN — nurse-owners of Skin Analysis with over two decades of collective expertise in dermatology and aesthetics on Oʻahu."
+  canonical="https://www.skinanalysishi.com/about/"
+  currentNav="About"
+  schema={schema}
+>
+
+  <div class="max-w-site mx-auto px-gutter pt-10">
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+  </div>
+
+  <!-- ── Hero: Meet Our Team ─────────────────────────────────────────── -->
+  <section aria-labelledby="about-h" class="max-w-site mx-auto px-gutter py-section-lg">
+    <div
+      class="grid gap-[clamp(48px,7vw,100px)] items-center"
+      style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))"
+    >
+      <div data-reveal class="aspect-[4/5] overflow-hidden">
+        <Picture
+          src={providersTeam}
+          alt="Sarah Lockwood-Sepulveda and Allison Sipple, owners of Skin Analysis Medical Spa on Oʻahu"
+          class="w-full h-full object-cover"
+          loading="eager"
+          width={800}
+          height={1000}
+          formats={['avif', 'webp']}
+        />
+      </div>
+
+      <div data-reveal class="flex flex-col gap-7">
+        <div class="flex flex-col gap-4">
+          <span class="eyebrow">Meet Our Dynamic Team</span>
+          <h1
+            id="about-h"
+            class="font-serif font-light text-[clamp(40px,5.2vw,72px)] leading-none tracking-[-0.02em] m-0"
+          >
+            Care rooted in expertise.
+          </h1>
+        </div>
+
+        <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
+          Skin Analysis is owned and operated by Sarah Lockwood-Sepulveda, a board-certified family
+          nurse practitioner, and Allison Sipple, a registered nurse — together bringing over two
+          decades of collective expertise in dermatology and aesthetics to every appointment
+          on Oʻahu.
+        </p>
+        <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
+          You'll see one of them at every visit. No hand-offs, no shortcuts — just knowledgeable,
+          personalized care from the people who built this practice.
+        </p>
+
+        <div class="flex gap-3 flex-wrap">
+          <Btn href="/contact/">Book an Appointment</Btn>
+          <Btn href="#our-providers" variant="outline">Meet the Providers</Btn>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Our Commitment to You ──────────────────────────────────────── -->
+  <section aria-labelledby="commitment-h" class="bg-sand">
+    <div class="max-w-site mx-auto px-gutter py-section-lg">
+
+      <div data-reveal class="flex flex-col gap-4 max-w-[620px] mb-[clamp(48px,6vw,80px)]">
+        <span class="eyebrow">Our Commitment to You</span>
+        <h2
+          id="commitment-h"
+          class="font-serif font-light text-[clamp(34px,4vw,58px)] leading-none tracking-[-0.02em] m-0"
+        >
+          Every visit, every detail — done with intention.
+        </h2>
+        <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
+          We opened Skin Analysis because we believe people deserve skin care that is both
+          clinically sound and deeply personal. Here's what that means in practice.
+        </p>
+      </div>
+
+      <div
+        class="grid gap-x-8 gap-y-10"
+        style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))"
+      >
+        {commitments.map((item, i) => (
+          <div data-reveal class="flex flex-col gap-3 border-t border-taupe-line-2 pt-6">
+            <span class="font-serif italic text-[13px] text-sage tracking-[0.04em]">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3 class="font-sans font-medium text-[18px] leading-[1.25] m-0 text-charcoal">
+              {item.title}
+            </h3>
+            <p class="text-[15px] leading-[1.65] text-ink-2 m-0">{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Provider Cards ─────────────────────────────────────────────── -->
+  <section id="our-providers" aria-labelledby="providers-h" class="max-w-site mx-auto px-gutter py-section-lg">
+
+    <div data-reveal class="flex flex-col gap-4 mb-[clamp(48px,6vw,80px)]">
+      <span class="eyebrow">Our Providers</span>
+      <h2
+        id="providers-h"
+        class="font-serif font-light text-[clamp(34px,4vw,58px)] leading-none tracking-[-0.02em] m-0"
+      >
+        Meet Sarah + Allison
+      </h2>
+    </div>
+
+    <div
+      class="grid gap-6"
+      style="grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))"
+    >
+      {providers.map((p) => (
+        <a
+          href={`/about/${p.id}/`}
+          aria-label={`Read ${p.data.name}'s full profile`}
+          class="group no-underline bg-sand border border-taupe-line overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_32px_rgb(42_40_38/0.10)]"
+          style="border-radius:var(--radius-sm)"
+        >
+          <div class="aspect-[16/9] overflow-hidden">
+            <Picture
+              src={providersTeam}
+              alt={`${p.data.name}, ${p.data.credentials} — ${p.data.role} at Skin Analysis`}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              loading="lazy"
+              width={960}
+              height={540}
+              formats={['avif', 'webp']}
+            />
+          </div>
+          <div class="p-8 flex flex-col gap-3">
+            <span class="eyebrow">{p.data.role}</span>
+            <h3 class="font-serif font-normal text-[28px] leading-[1.1] m-0 text-charcoal">
+              {p.data.name}
+              <span class="text-[17px] text-ink-3 font-sans font-normal ml-2">
+                {p.data.credentials}
+              </span>
+            </h3>
+            <p class="text-[15px] leading-[1.65] text-ink-2 m-0 text-pretty">
+              {p.data.summary}
+            </p>
+            <span class="text-sm font-medium flex items-center gap-2 text-charcoal transition-colors duration-250 group-hover:text-clay mt-1">
+              Read {p.data.name.split(' ')[0]}'s full profile
+              <span aria-hidden="true">→</span>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+</BaseLayout>

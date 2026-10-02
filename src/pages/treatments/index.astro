@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getAssetImage, consultationHero } from '../../lib/images';
 
 const treatments = (await getCollection('treatments'))
@@ -19,11 +20,7 @@ const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order -
 >
   <!-- Intro -->
   <div class="max-w-site mx-auto px-gutter pt-[clamp(40px,6vw,80px)] pb-[clamp(28px,3vw,40px)]">
-    <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 mb-6">
-      <a href="/" class="text-ink-3 no-underline">Home</a>
-      <span aria-hidden="true">/</span>
-      <span>Treatments</span>
-    </nav>
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Treatments' }]} class="mb-6" />
     <div data-reveal class="flex flex-col gap-5 max-w-190">
       <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0">
         Treatments, chosen for <em class="text-clay">your</em> skin.

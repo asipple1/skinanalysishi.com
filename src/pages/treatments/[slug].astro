@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import { getAssetImage, consultationHero } from '../../lib/images';
@@ -67,13 +68,7 @@ const schema = [
   <!-- Hero -->
   <section class="max-w-site mx-auto px-gutter pt-[clamp(32px,4vw,56px)] pb-[clamp(64px,8vw,110px)] grid gap-[clamp(36px,5vw,80px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
     <div class="flex flex-col gap-6.5">
-      <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 flex-wrap">
-        <a href="/" class="text-ink-3 no-underline">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/treatments/" class="text-ink-3 no-underline">Treatments</a>
-        <span aria-hidden="true">/</span>
-        <span>{d.title}</span>
-      </nav>
+      <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Treatments', href: '/treatments/' }, { label: d.title }]} />
       <span class="text-xs tracking-[0.22em] uppercase text-sage">{d.category} on Oʻahu</span>
       <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0 text-balance">
         {d.title}

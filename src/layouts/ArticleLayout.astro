@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Btn from '../components/Btn.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
@@ -60,13 +61,7 @@ const schema = {
 
   <!-- Article header -->
   <div class="max-w-[940px] mx-auto px-gutter pt-[clamp(40px,6vw,72px)] pb-[clamp(32px,4vw,48px)]">
-    <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 mb-6">
-      <a href="/" class="text-ink-3 no-underline">Home</a>
-      <span aria-hidden="true">/</span>
-      <a href="/journal/" class="text-ink-3 no-underline">Journal</a>
-      <span aria-hidden="true">/</span>
-      <span>{category}</span>
-    </nav>
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Journal', href: '/journal/' }, { label: category }]} class="mb-6" />
     <h1 class="font-serif font-light text-[clamp(36px,5vw,72px)] leading-[1.02] tracking-[-0.025em] m-0 mb-6 text-balance">
       {title}
     </h1>

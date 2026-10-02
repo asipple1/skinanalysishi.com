@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import { getAssetImage, consultationHero } from '../../lib/images';
@@ -24,13 +25,7 @@ const treatments = d.treatments
   description={d.metaDescription}
 >
   <div class="max-w-site mx-auto px-gutter py-section-sm">
-    <nav aria-label="Breadcrumb" class="text-[13px] text-ink-3 flex gap-2 mb-6">
-      <a href="/" class="text-ink-3 no-underline">Home</a>
-      <span>/</span>
-      <a href="/#concerns" class="text-ink-3 no-underline">Skin Concerns</a>
-      <span>/</span>
-      <span>{d.title}</span>
-    </nav>
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Skin Concerns' }, { label: d.title }]} class="mb-6" />
     <div class="flex flex-col gap-6 max-w-190 mb-[clamp(56px,7vw,96px)]">
       <span class="text-xs tracking-[0.22em] uppercase text-sage">Skin Concern</span>
       <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0">{d.title}</h1>

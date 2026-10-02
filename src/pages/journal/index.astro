@@ -4,6 +4,7 @@ import Btn from '../../components/Btn.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import { getAssetImage } from '../../lib/images';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const allArticles = (await getCollection('journal'))
   .filter((a) => !a.data.draft)
@@ -23,6 +24,7 @@ function formatDate(d: Date) {
 >
   <!-- Intro -->
   <div class="max-w-site mx-auto px-gutter pt-[clamp(40px,6vw,80px)] pb-[clamp(40px,5vw,64px)]">
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Journal' }]} class="mb-6" />
     <h1 data-reveal class="font-serif font-light text-display leading-[0.98] tracking-tight m-0 text-balance">
       Notes on skin, <em class="text-clay">plainly</em> explained.
     </h1>
