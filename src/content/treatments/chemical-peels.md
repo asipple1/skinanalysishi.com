@@ -2,7 +2,7 @@
 title: "Medical-Grade Chemical Peels"
 shortName: "Chemical Peels"
 seoTitle: "Chemical Peel on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "Our peels use professional blends from ZO® Skin Health and SkinMedica® to remove the outer layer of skin and encourage healthy renewal. We choose the stren"
+metaDescription: "Professional chemical peels in Ewa Beach + Aiea, Oʻahu. ZO® and SkinMedica® blends customized to your skin and downtime. Complimentary consultation available."
 category: "Facials + Resurfacing"
 benefit: "Light or medium peels that renew skin and improve tone and signs of aging."
 summary: "Our peels use professional blends from ZO® Skin Health and SkinMedica® to remove the outer layer of skin and encourage healthy renewal. We choose the strength based on your skin, your history, and how much downtime works for you."

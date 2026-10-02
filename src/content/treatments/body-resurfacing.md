@@ -2,7 +2,7 @@
 title: "Body Resurfacing"
 shortName: "Body Resurfacing"
 seoTitle: "Body Resurfacing on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "Body resurfacing at Skin Analysis, Ewa Beach + Aiea, Oʻahu. Treats texture, pigmentation, and dryness on back, shoulders, arms, legs, and buttocks."
+metaDescription: "Body resurfacing in Ewa Beach + Aiea, Oʻahu. Professional exfoliation and serum infusion for the back, arms, legs, and shoulders — smooths texture, fades pigmentation."
 category: "Facials + Resurfacing"
 order: 4
 benefit: "Smooths texture, fades pigmentation, and deeply resurfaces skin on the back, shoulders, arms, legs, and buttocks."

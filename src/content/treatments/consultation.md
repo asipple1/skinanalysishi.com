@@ -2,7 +2,7 @@
 title: "Complimentary Consultation"
 shortName: "Complimentary Consultation"
 seoTitle: "Skin Consultation on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "Every new client starts with a complimentary consultation. We talk through your concerns, history, and routine, then recommend a plan and explain why."
+metaDescription: "Complimentary skin consultations in Ewa Beach + Aiea, Oʻahu. We assess your concerns, review your history, and build a personalized treatment plan — no pressure."
 category: "Consultation"
 benefit: "Talk through your skin, goals, and options before committing to anything."
 summary: "Every new client starts with a complimentary consultation. We talk through your concerns, history, and routine, then recommend a plan and explain why."

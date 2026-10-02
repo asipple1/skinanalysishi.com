@@ -2,7 +2,7 @@
 title: "Professional Skincare"
 shortName: "Professional Skincare"
 seoTitle: "Professional Skincare on Oʻahu | Skin Analysis, Ewa Beach + Aiea"
-metaDescription: "Medical-grade skincare curated by our providers. We carry Skinbetter Science, ZO Skin Health, Plated Skin Science, and Colorescience on Oʻahu."
+metaDescription: "Medical-grade skincare in Ewa Beach + Aiea, Oʻahu. Provider-curated Skinbetter Science, ZO® Skin Health, Plated Skin Science, and Colorescience."
 category: "Professional Skincare"
 benefit: "A home routine that supports and extends every in-office treatment."
 summary: "In-office treatments work best when your daily routine supports them. We carry a focused selection of professional-grade lines and will recommend exactly what your skin needs, and what to skip."
