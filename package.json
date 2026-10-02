@@ -12,9 +12,12 @@
     "@types/node": "22.15.21"
   },
   "optionalDependencies": {
+    "@esbuild/linux-x64": "0.27.7",
+    "@img/sharp-linux-x64": "0.34.5",
     "@rolldown/binding-linux-x64-gnu": "1.2.12",
     "@rollup/rollup-linux-x64-gnu": "4.63.6",
     "@rollup/rollup-linux-x64-musl": "4.63.6",
+    "@tailwindcss/oxide-linux-x64-gnu": "4.3.3",
     "lightningcss-linux-x64-gnu": "1.32.0"
   },
   "dependencies": {
