@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Btn from '../components/Btn.astro';
+
+const policies = [
+  {
+    id: 'cancellation',
+    title: 'Cancellation Policy',
+    body: [
+      'We require at least 24 hours\' notice to cancel or reschedule any appointment. Cancellations made with less than 24 hours\' notice will be charged 50% of the scheduled service fee.',
+      'Appointments cancelled within 2 hours of the scheduled start time will be charged the full service fee.',
+      'We understand that emergencies happen. Please call us directly if you have an urgent situation — we handle these on a case-by-case basis.',
+    ],
+  },
+  {
+    id: 'no-show',
+    title: 'No-Show Policy',
+    body: [
+      'Clients who do not arrive for their scheduled appointment without prior notice will be charged the full service fee.',
+      'After two no-shows, we may require a non-refundable deposit to hold future appointments.',
+    ],
+  },
+  {
+    id: 'late-arrival',
+    title: 'Late Arrival',
+    body: [
+      'Please arrive on time for your appointment. Out of respect for other clients, we may need to shorten your treatment if you arrive late, and the full service fee will still apply.',
+      'If you are more than 15 minutes late, we may need to reschedule your appointment. Please call ahead if you are running behind.',
+    ],
+  },
+  {
+    id: 'deposits',
+    title: 'Deposits & Booking',
+    body: [
+      'Some services require a deposit at the time of booking. Deposits are applied toward the cost of your treatment.',
+      'Deposits are non-refundable unless cancellation occurs with 48 or more hours\' notice.',
+      'We are a cashless business. We accept all major credit cards and debit cards.',
+    ],
+  },
+  {
+    id: 'age',
+    title: 'Age Requirements',
+    body: [
+      'All clients must be 18 years of age or older to receive injectable treatments (Dysport, neuromodulators, dermal fillers).',
+      'Clients between 16 and 17 may receive certain non-invasive treatments with written parental or guardian consent and the parent or guardian present at the appointment.',
+      'We reserve the right to request a valid government-issued ID to verify age.',
+    ],
+  },
+  {
+    id: 'health',
+    title: 'Medical History & Contraindications',
+    body: [
+      'A health intake form is required before your first treatment. Please disclose all current medications, supplements, health conditions, allergies, and any previous aesthetic treatments.',
+      'Certain medical conditions, medications, or active skin concerns may make some treatments inadvisable. Your provider will review your intake form and discuss any concerns before proceeding.',
+      'If you are pregnant or breastfeeding, please inform us when booking. Many treatments are not recommended during pregnancy or while nursing.',
+    ],
+  },
+  {
+    id: 'consent',
+    title: 'Informed Consent',
+    body: [
+      'You will be asked to review and sign an informed consent form before each treatment. This form outlines the procedure, potential risks, expected outcomes, and aftercare requirements.',
+      'Please read it carefully and ask any questions before signing. We do not proceed with treatment unless consent has been given.',
+    ],
+  },
+  {
+    id: 'right-to-decline',
+    title: 'Right to Decline Service',
+    body: [
+      'Skin Analysis reserves the right to decline service to any client when, in the professional judgment of our providers, the treatment is not appropriate or safe given the client\'s health history, skin condition, or other factors.',
+      'This is not a decision we make lightly — it is made in your best interest.',
+    ],
+  },
+  {
+    id: 'photography',
+    title: 'Photography & Privacy',
+    body: [
+      'We take before and after photographs of treatment areas as part of your clinical record. These photos are stored securely and are used solely for clinical documentation.',
+      'We will never share your photos publicly — on social media, in marketing materials, or otherwise — without your explicit written consent.',
+      'If you give consent for photography to be used for educational or marketing purposes, you may revoke that consent at any time.',
+    ],
+  },
+  {
+    id: 'products',
+    title: 'Product Returns',
+    body: [
+      'Opened skincare products cannot be returned or exchanged for hygiene reasons.',
+      'Unopened products may be returned within 14 days of purchase with a receipt, subject to a restocking review.',
+      'If a product causes an adverse reaction, please contact us right away. We will work with you to find a resolution.',
+    ],
+  },
+  {
+    id: 'gift-cards',
+    title: 'Gift Cards',
+    body: [
+      'Gift cards are non-refundable and cannot be exchanged for cash.',
+      'Gift cards do not expire and may be used toward any service or product.',
+      'Skin Analysis is not responsible for lost or stolen gift cards.',
+    ],
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Spa Policies | Skin Analysis Medical Spa',
+  url: 'https://www.skinanalysishi.com/policies/',
+  description:
+    'Cancellation, no-show, age requirements, and other policies at Skin Analysis Medical Spa — nurse-owned medical spa on Oʻahu, Hawaiʻi.',
+  mainEntity: {
+    '@type': 'MedicalBusiness',
+    '@id': 'https://www.skinanalysishi.com/#org',
+  },
+};
+---
+
+<BaseLayout
+  title="Spa Policies | Skin Analysis Medical Spa | Oʻahu, Hawaiʻi"
+  description="Cancellation, no-show, age requirements, and other policies at Skin Analysis Medical Spa — nurse-owned medical spa on Oʻahu, Hawaiʻi."
+  canonical="https://www.skinanalysishi.com/policies/"
+  schema={schema}
+>
+
+  <div class="max-w-site mx-auto px-gutter pt-10">
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Spa Policies' }]} />
+  </div>
+
+  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+  <section aria-labelledby="policies-h" class="max-w-site mx-auto px-gutter py-section-lg">
+    <div class="max-w-[720px]">
+      <span class="eyebrow">Spa Policies</span>
+      <h1
+        id="policies-h"
+        class="font-serif font-light text-[clamp(40px,5.2vw,72px)] leading-none tracking-[-0.02em] mt-4 mb-6"
+      >
+        What to know before you visit.
+      </h1>
+      <p class="text-[18px] leading-[1.65] text-ink-2 m-0 text-pretty max-w-[600px]">
+        These policies help us run a practice that is fair to every client and allows our providers
+        to do their best work. Please read through them before your appointment.
+      </p>
+      <p class="text-[16px] leading-[1.65] text-ink-3 mt-4 max-w-[600px]">
+        Questions? Call or email us — we are always happy to talk things through.
+      </p>
+      <div class="flex gap-3 mt-8 flex-wrap">
+        <Btn href="/contact/">Get in Touch</Btn>
+        <Btn href="/contact/" variant="outline">Book an Appointment</Btn>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Policy Sections ──────────────────────────────────────────────── -->
+  <section aria-label="Policy details" class="bg-sand">
+    <div class="max-w-site mx-auto px-gutter py-section-lg">
+      <div
+        class="grid gap-x-12 gap-y-12"
+        style="grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))"
+      >
+        {policies.map((policy, i) => (
+          <div id={policy.id} data-reveal class="flex flex-col gap-4 border-t border-taupe-line-2 pt-6">
+            <span class="font-serif italic text-[13px] text-sage tracking-[0.04em]">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h2 class="font-sans font-medium text-[20px] leading-[1.25] m-0 text-charcoal">
+              {policy.title}
+            </h2>
+            <div class="flex flex-col gap-3">
+              {policy.body.map((paragraph) => (
+                <p class="text-[15px] leading-[1.7] text-ink-2 m-0">{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact CTA ───────────────────────────────────────────────────── -->
+  <section aria-labelledby="policy-cta-h" class="max-w-site mx-auto px-gutter py-section-lg">
+    <div class="flex flex-col gap-6 max-w-[580px]">
+      <h2
+        id="policy-cta-h"
+        class="font-serif font-light text-[clamp(32px,3.8vw,52px)] leading-none tracking-[-0.02em] m-0"
+      >
+        Ready to book?
+      </h2>
+      <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
+        Complimentary consultations are available at both our Ewa Beach and Aiea locations.
+        We will take time to understand your skin and answer any questions before recommending
+        a treatment.
+      </p>
+      <div class="flex gap-3 flex-wrap">
+        <Btn href="/contact/">Book a Consultation</Btn>
+        <Btn href="/treatments/" variant="outline">View Treatments</Btn>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
