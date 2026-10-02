@@ -1,13 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import skincarebrands from '../../data/skincare-brands.json';
+import ShopGrid from '../../components/islands/ShopGrid';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skinanalysishi.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Shop' },
+  ],
+};
 ---
 
 <BaseLayout
   title="Professional Skincare Shop | Skin Analysis, Oʻahu"
   description="Professional skincare brands curated by the providers at Skin Analysis. Skinbetter Science, ZO Skin Health, Plated, and Colorescience."
   currentNav="Skincare"
+  schema={schema}
 >
   <div class="max-w-site mx-auto px-gutter py-section-sm">
     <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Shop' }]} class="mb-6" />
@@ -20,17 +30,7 @@ import skincarebrands from '../../data/skincare-brands.json';
       </p>
     </div>
 
-    <div class="grid gap-[clamp(24px,2.4vw,36px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))">
-      {skincarebrands.map((brand) => (
-        <article class="flex flex-col gap-4 border-t border-taupe-line pt-5">
-          <div class="aspect-4/5 bg-sand flex items-center justify-center">
-            <span class="font-serif text-[22px] text-warm-muted text-center p-5">{brand.name}</span>
-          </div>
-          <h2 class="font-serif font-normal text-[26px] m-0">{brand.name}</h2>
-          <p class="text-[15px] text-ink-3 m-0">{brand.note}</p>
-        </article>
-      ))}
-    </div>
+    <ShopGrid client:visible />
 
     <div class="mt-[clamp(64px,8vw,100px)] p-[clamp(48px,6vw,80px)] bg-sage text-[#F3F0E8] rounded-sm flex flex-col items-center text-center gap-5">
       <p class="font-serif font-light text-[clamp(28px,3.6vw,50px)] leading-[1.2] m-0">

@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { shopifyFetch, ALL_PRODUCTS_QUERY } from '../../lib/shopify';
+import ProductAddToCart from '../../components/islands/ProductAddToCart';
+import ProductImageGallery from '../../components/islands/ProductImageGallery';
+
+export async function getStaticPaths() {
+  const data: any = await shopifyFetch(ALL_PRODUCTS_QUERY);
+  const products = data.products.edges.map((e: any) => e.node);
+  return products.map((p: any) => ({
+    params: { handle: p.handle },
+    props: { product: p },
+  }));
+}
+
+const { product } = Astro.props as { product: any };
+const images = product.images.edges.map((e: any) => e.node);
+const mainImage = images[0] ?? null;
+const price = parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2);
+const variants = product.variants.edges.map((e: any) => e.node);
+const firstVariant = variants[0];
+const available = firstVariant?.availableForSale ?? false;
+const canonicalUrl = `https://www.skinanalysishi.com/shop/${product.handle}/`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    description: product.description || undefined,
+    image: images.map((i: any) => i.url),
+    ...(product.vendor ? { brand: { '@type': 'Brand', name: product.vendor } } : {}),
+    offers: {
+      '@type': 'Offer',
+      url: canonicalUrl,
+      price,
+      priceCurrency: 'USD',
+      availability: available
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      seller: { '@id': 'https://www.skinanalysishi.com/#org' },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skinanalysishi.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Shop', item: 'https://www.skinanalysishi.com/shop/' },
+      { '@type': 'ListItem', position: 3, name: product.title },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${product.title} | Skin Analysis Shop`}
+  description={product.description || `Shop ${product.title} at Skin Analysis Medical Spa, Oʻahu.`}
+  currentNav="Skincare"
+  schema={schema}
+  ogImage={mainImage?.url}
+>
+  <div class="max-w-site mx-auto px-gutter py-section-sm">
+    <Breadcrumb
+      crumbs={[{ label: 'Home', href: '/' }, { label: 'Shop', href: '/shop/' }, { label: product.title }]}
+      class="mb-8"
+    />
+
+    <div class="grid gap-[clamp(40px,6vw,80px)] lg:grid-cols-2">
+      <!-- Images -->
+      <ProductImageGallery client:load images={images} title={product.title} />
+
+      <!-- Details -->
+      <div class="flex flex-col gap-5">
+        {product.vendor && (
+          <p class="text-[13px] tracking-[0.12em] uppercase text-ink-3 m-0">{product.vendor}</p>
+        )}
+        <h1 class="font-serif font-light text-[clamp(28px,4vw,42px)] leading-tight m-0">{product.title}</h1>
+        <p class="text-[20px] font-medium text-charcoal m-0">${price}</p>
+
+        {product.description && (
+          <p class="text-[15px] text-ink-2 leading-[1.7] m-0">{product.description}</p>
+        )}
+
+        <ProductAddToCart
+          client:load
+          variants={variants}
+          title={product.title}
+          image={mainImage?.url ?? null}
+          imageAlt={mainImage?.altText ?? product.title}
+        />
+
+        <p class="text-[13px] text-ink-3 m-0">
+          Free shipping on orders over $75. Questions? <a href="/contact/" class="underline">Ask our team.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
