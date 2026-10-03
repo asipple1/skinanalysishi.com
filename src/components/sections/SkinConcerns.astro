@@ -1,6 +1,7 @@
 ---
 import ConcernExplorer from '../islands/ConcernExplorer';
 import { getCollection } from 'astro:content';
+import { getAssetImage } from '../../lib/images';
 
 const allTreatments = await getCollection('treatments');
 
@@ -12,7 +13,7 @@ const concernData = concerns.map((c) => ({
   name: c.data.title,
   slug: c.id,
   body: c.data.intro,
-  image: c.data.image,
+  image: getAssetImage(c.data.image)?.src,
   treatments: c.data.treatments.slice(0, 3).map((slug: string) => {
     const t = allTreatments.find((x) => x.id === slug);
     return t?.data.shortName ?? slug;
