@@ -8,7 +8,7 @@ order: 1
 benefit: "Softens expression lines while keeping movement natural."
 summary: "Dysport relaxes the specific muscles that create expression lines, such as frown lines, forehead lines, and crow’s feet. Our aim is a rested version of your face that still moves like yours."
 time: "30–45 min"
-downtime: "None"
+downtime: "Little to none"
 resultsAppear: "2–3 days, full at 2 weeks"
 typicalPlan: "Every 3–4 months"
 priceFrom: "$15 / unit"

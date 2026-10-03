@@ -25,7 +25,7 @@ pricing:
     value: "Call for pricing"
 concerns: ["texture-scarring", "dull-or-dehydrated-skin", "pigmentation-melasma"]
 whoFor: "Anyone looking to improve skin texture, tone, or hydration on the body. Ideal before events, after summer, or as part of a regular skin maintenance routine. Suitable for most skin types."
-howItWorks: "The diamond-tip wand exfoliates the outer layer of skin while gentle suction clears congestion from pores. At the same time, a customized serum is infused directly into freshly cleared skin — improving absorption and delivering active ingredients where they're needed most. We select the serum based on your skin goals: smoothing, brightening, or deep hydration."
+howItWorks: "The diamond-tip wand exfoliates the outer layer of skin while gentle suction clears congestion from pores. At the same time, a customized serum is infused directly into freshly cleared skin, improving absorption and delivering active ingredients where they're needed most. We select the serum based on your skin goals: smoothing, brightening, or deep hydration."
 expect:
   - step: "Before"
     text: "Come with clean, dry skin. Avoid self-tanner or heavy body lotions the day before. Pause any exfoliating body products 2–3 days prior."
@@ -35,7 +35,7 @@ expect:
     text: "Skin may appear slightly pink for an hour or two. Avoid heat, friction, and heavy exercise the same day. Apply SPF to any exposed areas."
 faqs:
   - q: "Can I combine body and facial DiamondGlow in the same visit?"
-    a: "Yes. We can treat the face and a body area in one appointment — just let us know when you book so we allow enough time."
+    a: "Yes. We can treat the face and a body area in one appointment, just let us know when you book so we allow enough time."
   - q: "How many sessions do I need to see results?"
     a: "Many clients notice smoother, more radiant skin after a single treatment. For concerns like texture, hyperpigmentation, or keratosis pilaris, a series of monthly treatments typically gives the most lasting improvement."
   - q: "Is it safe for all skin tones?"
