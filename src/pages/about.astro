@@ -11,7 +11,7 @@ const providers = (await getCollection('providers')).sort((a, b) => a.data.order
 const commitments = [
   {
     title: 'Evidence-Based Care',
-    body: 'Every treatment we offer is grounded in clinical research and proven outcomes — not trends.',
+    body: 'Every treatment we offer is grounded in clinical research and proven outcomes, not trends.',
   },
   {
     title: 'Personalized Plans',
@@ -19,7 +19,7 @@ const commitments = [
   },
   {
     title: 'Nurse-Led Expertise',
-    body: 'All treatments are performed by Sarah or Allison — licensed providers with deep clinical backgrounds.',
+    body: 'All treatments are performed by Sarah or Allison, licensed providers with deep clinical backgrounds.',
   },
   {
     title: 'A No-Pressure Environment',
@@ -33,7 +33,7 @@ const schema = {
   name: 'About Our Team | Skin Analysis Medical Spa',
   url: 'https://www.skinanalysishi.com/about/',
   description:
-    'Meet Sarah Lockwood-Sepulveda, FNP-BC, and Allison Sipple, RN-BSN — nurse-owners of Skin Analysis Medical Spa with over two decades of collective expertise in dermatology and aesthetics on Oʻahu.',
+    'Meet Sarah Lockwood-Sepulveda, FNP-BC, and Allison Sipple, RN-BSN, nurse-owners of Skin Analysis Medical Spa with over two decades of collective expertise in dermatology and aesthetics on Oʻahu.',
   mainEntity: {
     '@type': 'MedicalBusiness',
     '@id': 'https://www.skinanalysishi.com/#org',
@@ -43,7 +43,7 @@ const schema = {
 
 <BaseLayout
   title="Meet Our Team | Skin Analysis Medical Spa | Oʻahu, Hawaiʻi"
-  description="Meet Sarah Lockwood-Sepulveda, FNP-BC, and Allison Sipple, RN-BSN — nurse-owners of Skin Analysis with over two decades of collective expertise in dermatology and aesthetics on Oʻahu."
+  description="Meet Sarah Lockwood-Sepulveda, FNP-BC, and Allison Sipple, RN-BSN, nurse-owners of Skin Analysis with over two decades of collective expertise in dermatology and aesthetics on Oʻahu."
   canonical="https://www.skinanalysishi.com/about/"
   currentNav="About"
   schema={schema}
@@ -84,13 +84,16 @@ const schema = {
 
         <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
           Skin Analysis is owned and operated by Sarah Lockwood-Sepulveda, a board-certified family
-          nurse practitioner, and Allison Sipple, a registered nurse — together bringing over two
+          nurse practitioner, and Allison Sipple, a registered nurse, together bringing over two
           decades of collective expertise in dermatology and aesthetics to every appointment
           on Oʻahu.
         </p>
         <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
-          You'll see one of them at every visit. No hand-offs, no shortcuts — just knowledgeable,
+          You'll see one of them at every visit. No hand-offs, no shortcuts, just knowledgeable,
           personalized care from the people who built this practice.
+        </p>
+        <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
+          Skin Analysis is your self-care sanctuary on Oʻahu, a place to relax, unwind, and emerge feeling renewed. We offer medical-grade treatments and intentional guidance that support your skin's long-term health and help you achieve results that feel beautifully your own, built around your lifestyle, preferences, and goals.
         </p>
 
         <div class="flex gap-3 flex-wrap">
@@ -103,7 +106,7 @@ const schema = {
 
   <!-- ── Our Commitment to You ──────────────────────────────────────── -->
   <section aria-labelledby="commitment-h" class="bg-sand">
-    <div class="max-w-site mx-auto px-gutter py-section-lg">
+    <div class="max-w-site mx-auto px-gutter py-[clamp(32px,4vw,56px)]">
 
       <div data-reveal class="flex flex-col gap-4 max-w-[620px] mb-[clamp(48px,6vw,80px)]">
         <span class="eyebrow">Our Commitment to You</span>
@@ -111,7 +114,7 @@ const schema = {
           id="commitment-h"
           class="font-serif font-light text-[clamp(34px,4vw,58px)] leading-none tracking-[-0.02em] m-0"
         >
-          Every visit, every detail — done with intention.
+          Every visit, every detail, done with intention.
         </h2>
         <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">
           We opened Skin Analysis because we believe people deserve skin care that is both
@@ -165,7 +168,7 @@ const schema = {
           <div class="aspect-[16/9] overflow-hidden">
             <Picture
               src={providersTeam}
-              alt={`${p.data.name}, ${p.data.credentials} — ${p.data.role} at Skin Analysis`}
+              alt={`${p.data.name}, ${p.data.credentials}, ${p.data.role} at Skin Analysis`}
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               loading="lazy"
               width={960}
