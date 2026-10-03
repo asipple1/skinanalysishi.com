@@ -40,7 +40,7 @@ related: ["dermaplaning", "chemical-peels", "skinpen"]
 providerNote:
   provider: "Allison Sipple, RN-BSN"
   quote: "If you are not sure where to start, DiamondGlow is a gentle way to see how your skin responds to treatment. We learn a lot from that first visit."
-heroImage: ""
+heroImage: "/assets/treaments/diamondglow-facial.jpg"
 secondaryImage: "/assets/consultation-hero.png"
 featured: true
 ---

@@ -47,7 +47,7 @@ related: ["skinpen", "chemical-peels", "diamondglow"]
 providerNote:
   provider: "Sarah Lockwood-Sepulveda, FNP-BC"
   quote: "The best compliment is when someone says you look rested and can’t tell why."
-heroImage: "/assets/dermaplaning-hero.jpeg"
+heroImage: "/assets/treaments/dysport.jpg"
 secondaryImage: "/assets/dysport-secondary.jpg"
 featured: true
 ---

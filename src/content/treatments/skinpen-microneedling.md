@@ -44,7 +44,7 @@ related: ["chemical-peels", "diamondglow", "dysport"]
 providerNote:
   provider: "Sarah Lockwood-Sepulveda, FNP-BC"
   quote: "Microneedling rewards patience. We plan the full series up front, so you know what to expect at each visit."
-heroImage: "/assets/skinpen-hero.png"
+heroImage: "/assets/treaments/skinpen-microneedling.jpg"
 secondaryImage: "/assets/skinpen-secondary.png"
 featured: true
 ---

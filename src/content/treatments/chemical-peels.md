@@ -46,7 +46,7 @@ related: ["dermaplaning", "diamondglow", "skinpen"]
 providerNote:
   provider: "Allison Sipple, RN-BSN"
   quote: "A peel is only as good as the routine around it. We plan your home care alongside your in-office treatments."
-heroImage: "/assets/chemical-peel-hero.jpeg"
+heroImage: "/assets/treaments/chemical-peels.jpg"
 secondaryImage: "/assets/skincare-products.png"
 featured: true
 ---

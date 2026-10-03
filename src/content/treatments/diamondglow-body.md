@@ -45,7 +45,7 @@ related: ["diamondglow-facial", "dermaplaning", "chemical-peels"]
 providerNote:
   provider: "Allison Sipple, RN-BSN"
   quote: "We often focus all our attention on our face and forget the rest. DiamondGlow Body is a way to give your skin the same level of care from the neck down."
-heroImage: ""
+heroImage: "/assets/treaments/diamondglow-body.jpg"
 secondaryImage: "/assets/consultation-hero.png"
 featured: true
 ---

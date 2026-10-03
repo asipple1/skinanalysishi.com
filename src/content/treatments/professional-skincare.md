@@ -35,6 +35,8 @@ related: ["diamondglow-facial", "chemical-peels", "consultation"]
 providerNote:
   provider: "Sarah Lockwood-Sepulveda, FNP-BC"
   quote: "Most people are either over-complicating their routine or using the wrong things for their skin type. A five-minute conversation usually clears it up."
+beforeAfter: []
+heroImage: "/assets/treaments/professional-skincare.jpg"
 featured: false
 order: 99
 ---

@@ -103,18 +103,15 @@ const schema = [
         <Btn href="#faq" variant="outline">Read FAQs</Btn>
       </div>
     </div>
-    <div class="aspect-4/5 overflow-hidden bg-sand">
       <Picture
         src={getAssetImage(d.heroImage) ?? consultationHero}
         alt={d.title}
-        class="w-full h-full object-cover"
         loading="eager"
         fetchpriority="high"
         width={600}
         height={750}
         formats={['avif', 'webp']}
       />
-    </div>
   </section>
 
   <!-- Who it's for + concerns -->
