@@ -116,12 +116,14 @@ const schema = [
 
   <!-- Who it's for + concerns -->
   <section class="bg-sand">
-    <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)] grid grid-auto-lg gap-[clamp(40px,6vw,100px)]">
+    <div class="max-w-site mx-auto px-gutter py-[clamp(40px,5vw,72px)] grid grid-auto-lg gap-[clamp(40px,6vw,100px)]">
       <div class="flex flex-col gap-5">
         <span class="text-xs tracking-[0.22em] uppercase text-sage">Who it's for</span>
-        <p class="font-serif font-light text-[clamp(26px,2.6vw,36px)] leading-tight m-0 text-pretty">
-          {d.whoFor}
-        </p>
+        <div class="flex flex-col gap-4">
+          {d.whoFor.split('\n\n').map((para: string) => para.trim() && (
+            <p class="text-[17px] leading-[1.7] text-ink-2 m-0 text-pretty">{para.trim()}</p>
+          ))}
+        </div>
       </div>
       {treatmentConcerns.length > 0 && (
         <div class="flex flex-col gap-5">
@@ -137,7 +139,7 @@ const schema = [
   </section>
 
   <!-- How it works -->
-  <section class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)] grid grid-auto-xl gap-[clamp(40px,6vw,100px)] items-center">
+  <section class="max-w-site mx-auto px-gutter py-[clamp(40px,5vw,72px)] grid grid-auto-xl gap-[clamp(40px,6vw,100px)] items-center">
     <div class="aspect-5/4 overflow-hidden bg-sand">
       <Picture
         src={getAssetImage(d.secondaryImage) ?? getAssetImage(d.heroImage) ?? consultationHero}
@@ -154,64 +156,125 @@ const schema = [
       <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
         The science, <em>plainly.</em>
       </h2>
-      <p class="text-[17px] leading-[1.7] text-ink-2 m-0 text-pretty">{d.howItWorks}</p>
-    </div>
-  </section>
-
-  <!-- What to expect -->
-  <section class="border-t border-taupe-line-3">
-    <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
-      <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 mb-[clamp(36px,4vw,56px)]">
-        What to expect
-      </h2>
-      <ol class="list-none m-0 p-0 grid grid-auto-sm gap-[clamp(28px,3vw,48px)]">
-        {d.expect.map((e: { step: string; text: string }) => (
-          <li class="flex flex-col gap-3.5 border-t border-charcoal pt-5">
-            <span class="text-xs tracking-widest text-ink-3">{e.step}</span>
-            <h3 class="font-serif font-normal text-[30px] m-0">{e.step}</h3>
-            <p class="text-base leading-[1.65] text-ink-2 m-0">{e.text}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <!-- Before + After -->
-  {d.beforeAfter.length > 0 && (
-    <section class="bg-sand">
-      <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
-        <div class="flex justify-between items-end gap-6 flex-wrap mb-10">
-          <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
-            Before + after
-          </h2>
-          <p class="text-sm leading-[1.6] text-ink-3 max-w-100 m-0">
-            Individual results vary. Some images are provided by the device or product manufacturer.
-          </p>
-        </div>
-        <div class="grid gap-[clamp(24px,2.4vw,36px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))">
-          {d.beforeAfter.map((b: { image: string; caption: string }) => (
-            <figure class="m-0 flex flex-col gap-3">
-              <div class="aspect-4/3 overflow-hidden bg-ivory">
-                <Picture
-                  src={getAssetImage(b.image) ?? consultationHero}
-                  alt={b.caption}
-                  class="w-full h-full object-contain"
-                  loading="lazy"
-                  width={680}
-                  height={510}
-                  formats={['avif', 'webp']}
-                />
-              </div>
-              <figcaption class="font-serif text-[19px]">{b.caption}</figcaption>
-            </figure>
+      <div class="flex flex-col gap-4">
+          {d.howItWorks.split('\n\n').map((para: string) => para.trim() && (
+            <p class="text-[17px] leading-[1.7] text-ink-2 m-0 text-pretty">{para.trim()}</p>
           ))}
         </div>
+    </div>
+  </section>
+
+  <!-- Real Results -->
+  {d.beforeAfter.length > 0 && (
+    <section class="bg-sand">
+      <div class="max-w-site mx-auto px-gutter py-[clamp(40px,5vw,72px)]">
+        <div class={`grid grid-cols-1 gap-[clamp(40px,5vw,72px)]${d.beforeAfter.length > 1 ? ' lg:grid-cols-[3fr_2fr] lg:gap-x-[clamp(72px,8vw,120px)]' : ''}`}>
+          <!-- Left: heading + featured pair -->
+          <div class="flex flex-col gap-7">
+            <div class="flex flex-col gap-3">
+              <span class="text-xs tracking-[0.22em] uppercase text-sage">Real results</span>
+              <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 text-pretty">
+                {d.realResultsHeadline ?? 'Before + after'}
+              </h2>
+            </div>
+            <figure class="m-0 flex flex-col gap-3">
+              <div class="grid grid-cols-2 gap-0.5">
+                <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+                  <Picture
+                    src={getAssetImage(d.beforeAfter[0].before) ?? consultationHero}
+                    alt={`Before: ${d.beforeAfter[0].caption}`}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    width={680}
+                    height={510}
+                    formats={['avif', 'webp']}
+                  />
+                  <span class="absolute bottom-3 left-3 text-[11px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2.5 py-1">Before</span>
+                </div>
+                <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+                  <Picture
+                    src={getAssetImage(d.beforeAfter[0].after) ?? consultationHero}
+                    alt={`After: ${d.beforeAfter[0].caption}`}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    width={680}
+                    height={510}
+                    formats={['avif', 'webp']}
+                  />
+                  <span class="absolute bottom-3 left-3 text-[11px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2.5 py-1">After</span>
+                </div>
+              </div>
+              <figcaption class="text-sm text-ink-3">{d.beforeAfter[0].caption}</figcaption>
+            </figure>
+          </div>
+
+          <!-- Right: remaining pairs stacked -->
+          {d.beforeAfter.length > 1 && (
+            <div class="flex flex-col gap-[clamp(28px,3vw,44px)] justify-center">
+              {d.beforeAfter.slice(1).map((pair: { before: string; after: string; caption: string }) => (
+                <figure class="m-0 flex flex-col gap-3">
+                  <div class="grid grid-cols-2 gap-0.5">
+                    <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+                      <Picture
+                        src={getAssetImage(pair.before) ?? consultationHero}
+                        alt={`Before: ${pair.caption}`}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        width={400}
+                        height={300}
+                        formats={['avif', 'webp']}
+                      />
+                      <span class="absolute bottom-2 left-2 text-[10px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2 py-0.5">Before</span>
+                    </div>
+                    <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+                      <Picture
+                        src={getAssetImage(pair.after) ?? consultationHero}
+                        alt={`After: ${pair.caption}`}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        width={400}
+                        height={300}
+                        formats={['avif', 'webp']}
+                      />
+                      <span class="absolute bottom-2 left-2 text-[10px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2 py-0.5">After</span>
+                    </div>
+                  </div>
+                  <figcaption class="text-sm text-ink-3">{pair.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+        </div>
+        <p class="text-xs text-ink-3 mt-8 m-0">Individual results vary. Some images are provided by the device or product manufacturer.</p>
       </div>
     </section>
   )}
 
+  <!-- Your Appointment -->
+  <section class="border-t border-taupe-line-3">
+    <div class="max-w-site mx-auto px-gutter py-[clamp(40px,5vw,72px)]">
+      <span class="text-xs tracking-[0.22em] uppercase text-sage block mb-10">Your {d.shortName} appointment</span>
+      <div class="flex flex-col sm:flex-row items-start">
+        {d.expect.map((e: { step: string; text: string }, i: number) => (
+          <div class="flex-1 flex flex-col min-w-0">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full border border-taupe-line flex items-center justify-center text-xs tracking-wide text-ink-3 shrink-0 bg-ivory">
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              {i < d.expect.length - 1 && <div class="flex-1 h-px bg-taupe-line" />}
+            </div>
+            <div class="mt-5 pr-5 pb-8 sm:pb-0">
+              <h3 class="font-serif font-normal text-[clamp(19px,1.6vw,24px)] m-0 mb-2">{e.step}</h3>
+              <p class="text-[15px] leading-[1.65] text-ink-2 m-0">{e.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing + Provider note -->
-  <section class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)] grid grid-auto-lg gap-[clamp(48px,6vw,100px)]">
+  <section class="max-w-site mx-auto px-gutter py-[clamp(40px,5vw,72px)] grid grid-auto-lg gap-[clamp(48px,6vw,100px)]">
     <div class="flex flex-col gap-5.5">
       <span class="text-xs tracking-[0.22em] uppercase text-sage">Pricing</span>
       <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
@@ -253,7 +316,7 @@ const schema = [
 
   <!-- FAQ -->
   <section id="faq" class="border-t border-taupe-line-3">
-    <div class="max-w-250 mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
+    <div class="max-w-250 mx-auto px-gutter py-[clamp(40px,5vw,72px)]">
       <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 mb-10">
         Questions we hear often
       </h2>
@@ -279,36 +342,29 @@ const schema = [
   <!-- Related treatments -->
   {relatedTreatments.length > 0 && (
     <section class="bg-sand">
-      <div class="max-w-site mx-auto px-gutter py-[clamp(80px,9vw,140px)]">
-        <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0 mb-10">
+      <div class="max-w-site mx-auto px-gutter py-[clamp(24px,3vw,40px)]">
+        <h2 class="font-serif font-light text-[clamp(20px,2vw,26px)] leading-tight tracking-[-0.02em] m-0 mb-5">
           Often paired with
         </h2>
-        <div class="grid grid-auto-sm gap-[clamp(24px,2.4vw,36px)]">
+        <div class="flex flex-col gap-3">
           {relatedTreatments.map((r) => r && (
-            <article class="flex flex-col gap-4">
-              <a href={`/treatments/${r.id}/`} aria-label={r.data.title} class="block aspect-4/3 overflow-hidden bg-ivory no-underline img-zoom">
-                <div class="zoom-inner w-full h-full">
-                  <Picture
-                    src={getAssetImage(r.data.heroImage) ?? consultationHero}
-                    alt={r.data.title}
-                    class="w-full h-full object-cover"
-                    loading="lazy"
-                    width={560}
-                    height={420}
-                    formats={['avif', 'webp']}
-                  />
-                </div>
-              </a>
-              <h3 class="font-serif font-normal text-[26px] m-0">
-                <a href={`/treatments/${r.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-olivee">
-                  {r.data.title}
-                </a>
-              </h3>
-              <p class="text-[15px] leading-[1.6] text-ink-2 m-0">{r.data.benefit}</p>
-              <div class="flex justify-between text-[13px] text-ink-3 border-t border-taupe-line pt-3">
-                <span>{r.data.time}</span><span>{r.data.priceFrom}</span>
+            <a href={`/treatments/${r.id}/`} class="flex gap-5 items-center no-underline group">
+              <div class="w-28 h-20 shrink-0 overflow-hidden bg-ivory">
+                <Picture
+                  src={getAssetImage(r.data.heroImage) ?? consultationHero}
+                  alt={r.data.title}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                  width={224}
+                  height={160}
+                  formats={['avif', 'webp']}
+                />
               </div>
-            </article>
+              <div class="flex flex-col gap-1">
+                <span class="font-serif text-[18px] text-charcoal group-hover:text-olivee transition-colors duration-250">{r.data.title}</span>
+                <span class="text-[13px] text-ink-3">{r.data.benefit}</span>
+              </div>
+            </a>
           ))}
         </div>
       </div>
@@ -316,7 +372,7 @@ const schema = [
   )}
 
   <!-- Closing CTA -->
-  <section class="max-w-250 mx-auto px-gutter py-[clamp(100px,12vw,180px)] text-center flex flex-col items-center gap-6.5">
+  <section class="max-w-250 mx-auto px-gutter py-[clamp(56px,6vw,96px)] text-center flex flex-col items-center gap-6.5">
     <h2 class="font-serif font-light text-[clamp(42px,6vw,86px)] leading-[0.98] tracking-[-0.03em] m-0">
       Ready when you are.
     </h2>

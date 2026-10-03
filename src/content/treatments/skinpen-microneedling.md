@@ -36,9 +36,11 @@ faqs:
   - q: "Can I microneedle at home?"
     a: "Home rollers do not reach the depth needed for collagen change and carry infection risk. We recommend professional treatment only."
 beforeAfter:
-  - image: "/assets/skinpen-ba-acne.png"
+  - before: "/assets/skinpen-ba-acne.png"
+    after: "/assets/skinpen-ba-acne.png"
     caption: "Acne scarring, after a SkinPen series"
-  - image: "/assets/skinpen-ba-neck.png"
+  - before: "/assets/skinpen-ba-neck.png"
+    after: "/assets/skinpen-ba-neck.png"
     caption: "Neck lines, after 4 SkinPen sessions"
 related: ["chemical-peels", "diamondglow", "dysport"]
 providerNote:

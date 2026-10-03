@@ -36,12 +36,12 @@ faqs:
   - q: "Will my face visibly peel?"
     a: "It depends on strength. Mild peels often cause no visible peeling; medium peels flake for a few days."
 beforeAfter:
-  - image: "/assets/chemical-peel-ba-1.png"
+  - before: "/assets/chemical-peel-ba-1.png"
+    after: "/assets/chemical-peel-ba-2.png"
     caption: "Sun damage + freckles, 5 months"
-  - image: "/assets/chemical-peel-ba-3.png"
+  - before: "/assets/chemical-peel-ba-3.png"
+    after: "/assets/chemical-peel-ba-4.png"
     caption: "Melasma, 8 months"
-  - image: "/assets/chemical-peel-ba-2.png"
-    caption: "Acne + PIH, 6 months"
 related: ["dermaplaning", "diamondglow", "skinpen"]
 providerNote:
   provider: "Allison Sipple, RN-BSN"
