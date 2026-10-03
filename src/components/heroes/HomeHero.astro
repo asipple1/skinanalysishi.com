@@ -1,32 +1,57 @@
 ---
-import Btn from '../Btn.astro';
-import { Picture, getImage } from 'astro:assets';
-import heroPortrait from '../../assets/hero-portrait.png';
-import palmShadow from '../../assets/palm-shadow.png';
-
-const palmShadowImg = await getImage({ src: palmShadow, format: 'webp' });
+import Btn from "../Btn.astro";
+import { Picture, getImage } from "astro:assets";
+import heroPortrait from "../../assets/hero-image.jpg";
+import palmShadow from "../../assets/palm-shadow.png";
 ---
 
 <section id="top" aria-labelledby="hero-h" class="relative overflow-hidden">
+  <!-- Palm frond video — drop files at /public/assets/palm-fronds.mp4 + .webm -->
+  <div aria-hidden="true" class="palm-fronds-wrap">
+    <video
+      class="palm-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      poster="/assets/palm-fronds-poster.webp"
+    >
+      <source src="/assets/palm-fronds-1.mp4" type="video/mp4" />
+    </video>
+  </div>
+
   <div
-    aria-hidden="true"
-    style={`position:absolute;top:0;right:0;bottom:0;width:clamp(160px,18vw,300px);pointer-events:none;z-index:0;background:url(${palmShadowImg.src}) right center / cover no-repeat;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(to right, transparent, #000 45%);mask-image:linear-gradient(to right, transparent, #000 45%)`}
-  ></div>
-  <div class="relative z-[1] max-w-site mx-auto px-gutter pt-[clamp(28px,4vw,56px)] pb-[clamp(80px,10vw,140px)] grid grid-auto-md gap-[clamp(36px,5vw,80px)] items-center">
+    class="relative z-2 max-w-site mx-auto px-gutter pt-[clamp(28px,4vw,56px)] pb-[clamp(80px,10vw,140px)] grid grid-auto-md gap-[clamp(36px,5vw,80px)] items-center"
+  >
     <div data-reveal class="flex flex-col gap-7 max-w-[600px]">
       <span class="eyebrow">Ewa Beach + Aiea, Oʻahu</span>
-      <h1 id="hero-h" class="font-serif font-light text-display leading-[0.98] tracking-[-0.025em] m-0 text-balance">
-        Healthy skin starts with <em class="text-clay">understanding</em> yours.
+      <h1
+        id="hero-h"
+        class="font-serif font-light text-display leading-[0.98] tracking-[-0.025em] m-0 text-balance"
+      >
+        Healthy skin starts with <em class="text-olive">understanding</em> yours.
       </h1>
-      <p class="text-body-lg leading-[1.65] text-ink-2 m-0 max-w-[520px] text-pretty">
-        At Skin Analysis, we take the time to understand your skin, lifestyle, and goals before recommending treatment. Our approach combines medical expertise, thoughtful guidance, and personalized care designed to support healthy skin for the long term.
+      <p
+        class="text-body-lg leading-[1.65] text-ink-2 m-0 max-w-[520px] text-pretty"
+      >
+        At Skin Analysis, we take the time to understand your skin, lifestyle,
+        and goals before recommending treatment. Our approach combines medical
+        expertise, thoughtful guidance, and personalized care designed to
+        support healthy skin for the long term.
       </p>
       <div class="flex gap-[14px] flex-wrap mt-[6px]">
-        <Btn href="/contact/">Start With a Consultation <span aria-hidden="true">→</span></Btn>
-        <Btn href="/treatments/" variant="secondary">Explore Treatments <span aria-hidden="true">→</span></Btn>
+        <Btn href="/contact/"
+          >Start With a Consultation <span aria-hidden="true">→</span></Btn
+        >
+        <Btn href="/treatments/" variant="secondary"
+          >Explore Treatments <span aria-hidden="true">→</span></Btn
+        >
       </div>
     </div>
-    <div data-reveal class="relative max-w-[600px] w-full justify-self-end">
+    <div
+      data-reveal
+      class="hero-portrait relative max-w-[600px] w-full justify-self-end"
+    >
       <Picture
         src={heroPortrait}
         alt="Provider portrait in soft natural light"
@@ -35,8 +60,60 @@ const palmShadowImg = await getImage({ src: palmShadow, format: 'webp' });
         fetchpriority="high"
         width={604}
         height={772}
-        formats={['avif', 'webp']}
+        formats={["avif", "webp"]}
       />
     </div>
   </div>
 </section>
+
+<style>
+  /* Green palm frond layer — sits above shadow, behind portrait */
+  .palm-fronds-wrap {
+    position: absolute;
+    top: 0%;
+    right: -3%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    /* Fade out at bottom and left edges so fronds blend naturally */
+    -webkit-mask-image:
+      linear-gradient(to bottom, #000 45%, transparent 98%),
+      linear-gradient(to left, #000 35%, transparent 82%);
+    mask-image:
+      linear-gradient(to bottom, #000 45%, transparent 98%),
+      linear-gradient(to left, #000 35%, transparent 82%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  .palm-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right top;
+    opacity: 0.6;
+    mix-blend-mode: luminosity;
+  }
+
+  @media (max-width: 767px) {
+    .hero-portrait {
+      display: none;
+    }
+
+    .palm-fronds-wrap {
+      top: 0;
+      height: 100%;
+    }
+
+    .palm-video {
+      opacity: 0.2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .palm-video {
+      display: none;
+    }
+  }
+</style>

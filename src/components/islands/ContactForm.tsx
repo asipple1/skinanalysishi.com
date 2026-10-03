@@ -76,7 +76,7 @@ export default function ContactForm({ treatments, preselect }: Props) {
       <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
 
       {tried && !valid && (
-        <p role="alert" class="text-sm text-clay m-0 px-4 py-3 border border-clay rounded-sm">
+        <p role="alert" class="text-sm text-olive m-0 px-4 py-3 border border-oliverounded-sm">
           Please add your name and a valid email so we can reach you.
         </p>
       )}
@@ -114,7 +114,7 @@ export default function ContactForm({ treatments, preselect }: Props) {
             onInput={(e) => setName((e.target as HTMLInputElement).value)}
             required
             autocomplete="name"
-            class={`border rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none transition-[border-color] duration-250 ${tried && !nameOk ? 'border-clay' : 'border-taupe-line-2'}`}
+            class={`border rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none transition-[border-color] duration-250 ${tried && !nameOk ? 'border-olive' : 'border-taupe-line-2'}`}
           />
         </div>
         <div class="flex flex-col gap-2">
@@ -142,7 +142,7 @@ export default function ContactForm({ treatments, preselect }: Props) {
           onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
           required
           autocomplete="email"
-          class={`border rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none transition-[border-color] duration-250 ${tried && !emailOk ? 'border-clay' : 'border-taupe-line-2'}`}
+          class={`border rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none transition-[border-color] duration-250 ${tried && !emailOk ? 'border-olive' : 'border-taupe-line-2'}`}
         />
       </div>
 

@@ -83,7 +83,7 @@ export default function CartDrawer() {
                   </div>
                   <button
                     onClick={() => removeFromCart(item.variantId)}
-                    class="text-[13px] text-ink-3 hover:text-clay transition-colors underline"
+                    class="text-[13px] text-ink-3 hover:text-olive transition-colors underline"
                   >Remove</button>
                 </div>
               </div>

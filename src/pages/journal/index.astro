@@ -26,7 +26,7 @@ function formatDate(d: Date) {
   <div class="max-w-site mx-auto px-gutter pt-[clamp(40px,6vw,80px)] pb-[clamp(40px,5vw,64px)]">
     <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Journal' }]} class="mb-6" />
     <h1 data-reveal class="font-serif font-light text-display leading-[0.98] tracking-tight m-0 text-balance">
-      Notes on skin, <em class="text-clay">plainly</em> explained.
+      Notes on skin, <em class="text-olive">plainly</em> explained.
     </h1>
   </div>
 
@@ -51,7 +51,7 @@ function formatDate(d: Date) {
         <div class="flex flex-col gap-5">
           <span class="text-xs tracking-[0.22em] uppercase text-sage">{featured.data.category}</span>
           <h2 class="font-serif font-light text-h2-md leading-[1.05] tracking-[-0.02em] m-0">
-            <a href={`/journal/${featured.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-clay">
+            <a href={`/journal/${featured.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-olive">
               {featured.data.title}
             </a>
           </h2>
@@ -65,7 +65,7 @@ function formatDate(d: Date) {
           </div>
           <a
             href={`/journal/${featured.id}/`}
-            class="text-[15px] font-medium flex gap-2 items-center text-charcoal no-underline transition-colors duration-250 hover:text-clay"
+            class="text-[15px] font-medium flex gap-2 items-center text-charcoal no-underline transition-colors duration-250 hover:text-olive"
           >
             Read article <span aria-hidden="true">→</span>
           </a>
@@ -98,7 +98,7 @@ function formatDate(d: Date) {
             </a>
             <span class="text-xs tracking-[0.22em] uppercase text-sage">{article.data.category}</span>
             <h3 class="font-serif font-normal text-[clamp(22px,2.2vw,28px)] leading-[1.15] m-0">
-              <a href={`/journal/${article.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-clay">
+              <a href={`/journal/${article.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-olive">
                 {article.data.title}
               </a>
             </h3>

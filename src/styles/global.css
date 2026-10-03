@@ -17,8 +17,9 @@
   --color-sage: #4F5E50;
   --color-sage-light: #CBD4C6;
   --color-sage-text: #DDE3D8;
-  --color-clay: #A8583D;
+  --color-olive: #A8583D;
   --color-white: #FFFFFF;
+  --color-olive: #52583A;
   --color-footer-text: #D9D2C6;
   --color-footer-meta: #A39C90;
   --color-footer-line: #45423E;
@@ -58,7 +59,7 @@
   --sage: #4F5E50;
   --sage-light: #CBD4C6;
   --sage-text: #DDE3D8;
-  --clay: #A8583D;
+  --olive: #52583A;
   --white: #FFFFFF;
   --footer-text: #D9D2C6;
   --footer-meta: #A39C90;
@@ -96,7 +97,7 @@ body {
     text-decoration: none;
   }
   a:hover {
-    color: var(--clay);
+    color: var(--olive);
   }
   button {
     font-family: inherit;
@@ -195,7 +196,7 @@ body {
     border: none;
     transition: background 250ms;
   }
-  .btn-primary:hover:not(:disabled) { background: var(--color-clay); }
+  .btn-primary:hover:not(:disabled) { background: var(--color-olive); }
   .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
 
   .btn-secondary {
@@ -237,10 +238,10 @@ body {
     color: var(--color-charcoal);
     transition: color 250ms, border-color 250ms;
   }
-  .btn-nav:hover { color: var(--color-clay); }
+  .btn-nav:hover { color: var(--color-olive); }
   .btn-nav[aria-current="page"] {
-    color: var(--color-clay);
-    border-bottom-color: var(--color-clay);
+    color: var(--color-olive);
+    border-bottom-color: var(--color-olive);
   }
 
   /* Sizes */

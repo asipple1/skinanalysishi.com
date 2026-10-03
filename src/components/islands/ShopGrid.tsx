@@ -122,7 +122,7 @@ export default function ShopGrid() {
               )}
             </a>
             <a href={`/shop/${p.handle}/`} class="no-underline group">
-              <h2 class="font-serif font-normal text-[22px] m-0 leading-tight text-charcoal group-hover:text-clay transition-colors">{p.title}</h2>
+              <h2 class="font-serif font-normal text-[22px] m-0 leading-tight text-charcoal group-hover:text-olive transition-colors">{p.title}</h2>
             </a>
             {p.description && (
               <p class="text-[15px] text-ink-3 m-0 line-clamp-2">{p.description}</p>
