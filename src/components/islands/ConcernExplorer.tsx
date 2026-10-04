@@ -44,7 +44,7 @@ export default function ConcernExplorer({ concerns, initialIndex = 0 }: Props) {
             onKeyDown={(e) => handleKey(e as unknown as KeyboardEvent, i)}
             class={`bg-transparent border-0 border-b border-taupe-line py-5 flex items-baseline gap-5 cursor-pointer text-left transition-colors duration-250 ${i === active ? 'text-charcoal pl-3' : 'text-warm-muted pl-0 hover:text-charcoal'}`}
           >
-            <span class="text-xs tracking-widest font-variant-numeric w-5.5 shrink-0" style="font-variant-numeric:tabular-nums">
+            <span class="text-xs tracking-widest font-variant-numeric w-5.5 shrink-0 text-ink-3" style="font-variant-numeric:tabular-nums">
               {String(i + 1).padStart(2, '0')}
             </span>
             <span class="font-serif text-[clamp(24px,2.4vw,34px)] font-light leading-[1.1] flex-1">
