@@ -5,7 +5,7 @@ category: "Skin Health"
 pubDate: "2023-08-05"
 author: "sarah-lockwood-sepulveda"
 readingTime: "3 min read"
-heroImage: "/assets/journal/journal-skinnyonskincare.jpeg"
+heroImage: "/assets/journal/journal-skinnyonskincare-1200x800-full-bleed.jpg"
 relatedTreatments: []
 draft: false
 ---

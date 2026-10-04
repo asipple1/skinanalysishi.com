@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-12-20"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/journal/journal-thepowerofdysport.jpg"
+heroImage: "/assets/journal/journal-thepowerofdysport-1200x800-full-bleed.jpg"
 relatedTreatments: ["dysport"]
 draft: false
 ---

@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-08-06"
 author: "sarah-lockwood-sepulveda"
 readingTime: "3 min read"
-heroImage: "/assets/journal/journal-peelornopeel.png"
+heroImage: "/assets/journal/journal-peelornopeel-1200x800-full-bleed.jpg"
 relatedTreatments: ["chemical-peels"]
 draft: false
 ---

@@ -5,7 +5,7 @@ category: "Getting Started"
 pubDate: "2026-08-04"
 author: "allison-sipple"
 readingTime: "4 min read"
-heroImage: "/assets/journal/journal-firstconsult.jpg"
+heroImage: "/assets/journal/journal-firstconsult-1200x800-full-bleed.jpg"
 relatedTreatments: ["consultation", "diamondglow-facial"]
 draft: false
 ---

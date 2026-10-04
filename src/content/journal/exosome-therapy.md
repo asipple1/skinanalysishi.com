@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2025-10-08"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/journal/journal-exosomes.png"
+heroImage: "/assets/journal/journal-exosomes-1200x800-full-bleed.jpg"
 relatedTreatments: ["skinpen-microneedling"]
 draft: false
 ---

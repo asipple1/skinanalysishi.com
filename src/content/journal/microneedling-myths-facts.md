@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-08-04"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/journal/journal-microneedling-myths.jpg"
+heroImage: "/assets/journal/journal-microneedling-myths-1200x800-full-bleed.jpg"
 relatedTreatments: ["skinpen-microneedling"]
 draft: false
 ---

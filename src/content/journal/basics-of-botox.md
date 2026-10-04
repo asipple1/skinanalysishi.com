@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-08-03"
 author: "sarah-lockwood-sepulveda"
 readingTime: "5 min read"
-heroImage: "/assets/journal/journal-wrinkletreatments.png"
+heroImage: "/assets/journal/journal-wrinkletreatments-1200x800-full-bleed.jpg"
 relatedTreatments: ["dysport"]
 draft: false
 ---

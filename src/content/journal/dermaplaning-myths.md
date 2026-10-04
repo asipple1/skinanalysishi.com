@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2026-05-30"
 author: "sarah-lockwood-sepulveda"
 readingTime: "3 min read"
-heroImage: "/assets/journal/journal-dermaplaning.jpg"
+heroImage: "/assets/journal/journal-dermaplaning-1200x800-full-bleed.jpg"
 relatedTreatments: ["dermaplaning", "chemical-peels"]
 draft: false
 ---
