@@ -3,100 +3,120 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Btn from '../components/Btn.astro';
 
-const policies = [
+type PolicyItem = string | { h3: string } | { html: string };
+
+const policies: { id: string; title: string; body: PolicyItem[] }[] = [
   {
     id: 'cancellation',
     title: 'Cancellation Policy',
     body: [
-      'We require at least 24 hours\' notice to cancel or reschedule any appointment. Cancellations made with less than 24 hours\' notice will be charged 50% of the scheduled service fee.',
-      'Appointments cancelled within 2 hours of the scheduled start time will be charged the full service fee.',
-      'We understand that emergencies happen. Please call us directly if you have an urgent situation — we handle these on a case-by-case basis.',
+      "We kindly ask for at least 24 hours' notice if you need to cancel or reschedule your appointment.",
+      "Cancellations or rescheduling requests made with less than 24 hours' notice will result in the full appointment deposit being retained.",
+      "True emergencies may be reviewed on a case-by-case basis. Please contact us directly if something urgent comes up.",
     ],
   },
   {
     id: 'no-show',
     title: 'No-Show Policy',
     body: [
-      'Clients who do not arrive for their scheduled appointment without prior notice will be charged the full service fee.',
-      'After two no-shows, we may require a non-refundable deposit to hold future appointments.',
+      "If you miss your scheduled appointment without contacting us beforehand, your full appointment deposit will be retained.",
     ],
   },
   {
     id: 'late-arrival',
-    title: 'Late Arrival',
+    title: 'Late Arrivals',
     body: [
-      'Please arrive on time for your appointment. Out of respect for other clients, we may need to shorten your treatment if you arrive late, and the full service fee will still apply.',
-      'If you are more than 15 minutes late, we may need to reschedule your appointment. Please call ahead if you are running behind.',
+      "Please arrive on time so we can give you the full treatment time reserved for your appointment.",
+      "If you arrive late, we may need to shorten your service to stay on schedule. The full scheduled service fee will still apply.",
+      "If you are more than 15 minutes late, we may need to reschedule your appointment. Please call us as soon as possible if you're running behind.",
     ],
   },
   {
     id: 'deposits',
     title: 'Deposits & Booking',
     body: [
-      'Some services require a deposit at the time of booking. Deposits are applied toward the cost of your treatment.',
-      'Deposits are non-refundable unless cancellation occurs with 48 or more hours\' notice.',
-      'We are a cashless business. We accept all major credit cards and debit cards.',
+      "All treatments require a deposit at the time of booking.",
+      { html: "<strong>Weekday appointments:</strong> $25 deposit" },
+      { html: "<strong>Weekend appointments:</strong> $50 deposit" },
+      "Your deposit is applied toward the total cost of your treatment.",
+      "Deposits are non-refundable when an appointment is cancelled or rescheduled with less than 24 hours' notice or when a client does not arrive for their scheduled appointment.",
+      "Skin Analysis is a cashless business. We accept major credit cards and debit cards.",
     ],
   },
   {
     id: 'age',
     title: 'Age Requirements',
     body: [
-      'All clients must be 18 years of age or older to receive injectable treatments (Dysport, neuromodulators, dermal fillers).',
-      'Clients between 16 and 17 may receive certain non-invasive treatments with written parental or guardian consent and the parent or guardian present at the appointment.',
-      'We reserve the right to request a valid government-issued ID to verify age.',
+      "Clients age 18 and under must have consent from a parent or legal guardian before receiving treatment. A parent or legal guardian may also be required to be present depending on the service.",
+      "Certain treatments, including injectables, may have additional age or eligibility requirements. We reserve the right to request a valid government-issued ID to verify age.",
     ],
   },
   {
     id: 'health',
-    title: 'Medical History & Contraindications',
+    title: 'Medical History & Treatment Safety',
     body: [
-      'A health intake form is required before your first treatment. Please disclose all current medications, supplements, health conditions, allergies, and any previous aesthetic treatments.',
-      'Certain medical conditions, medications, or active skin concerns may make some treatments inadvisable. Your provider will review your intake form and discuss any concerns before proceeding.',
-      'If you are pregnant or breastfeeding, please inform us when booking. Many treatments are not recommended during pregnancy or while nursing.',
+      "A health intake form is required before your first treatment. Please disclose all current medications, supplements, allergies, medical conditions, recent procedures, and previous aesthetic treatments.",
+      "Certain health conditions, medications, or active skin concerns may mean a treatment should be postponed or avoided. Your provider will review any concerns with you before treatment.",
+      "If you are pregnant, trying to become pregnant, or breastfeeding, please let us know when booking. Some treatments are not recommended during pregnancy or while nursing.",
     ],
   },
   {
     id: 'consent',
     title: 'Informed Consent',
     body: [
-      'You will be asked to review and sign an informed consent form before each treatment. This form outlines the procedure, potential risks, expected outcomes, and aftercare requirements.',
-      'Please read it carefully and ask any questions before signing. We do not proceed with treatment unless consent has been given.',
+      "Before treatment, you will be asked to review and sign an informed consent form outlining the procedure, possible risks, expected outcomes, and aftercare instructions.",
+      "Please read it carefully and ask any questions before signing. We will not proceed without your consent.",
     ],
   },
   {
     id: 'right-to-decline',
-    title: 'Right to Decline Service',
+    title: 'Right to Decline Treatment',
     body: [
-      'Skin Analysis reserves the right to decline service to any client when, in the professional judgment of our providers, the treatment is not appropriate or safe given the client\'s health history, skin condition, or other factors.',
-      'This is not a decision we make lightly — it is made in your best interest.',
+      "Skin Analysis reserves the right to postpone or decline treatment if, in the professional judgment of your provider, the service is not appropriate or safe based on your health history, skin condition, medications, treatment history, or other relevant factors.",
+      "If we recommend waiting or choosing a different approach, it is because we believe it is the safer or more appropriate option.",
     ],
   },
   {
     id: 'photography',
     title: 'Photography & Privacy',
     body: [
-      'We take before and after photographs of treatment areas as part of your clinical record. These photos are stored securely and are used solely for clinical documentation.',
-      'We will never share your photos publicly — on social media, in marketing materials, or otherwise — without your explicit written consent.',
-      'If you give consent for photography to be used for educational or marketing purposes, you may revoke that consent at any time.',
+      "Before-and-after photographs may be taken as part of your confidential clinical record to document treatment and monitor progress.",
+      "Your photos will not be shared on social media, our website, advertising, or other marketing materials without your separate written consent.",
+      "Permission to use photographs for educational or marketing purposes is optional and may be withdrawn at any time.",
     ],
   },
   {
     id: 'products',
-    title: 'Product Returns',
+    title: 'Product Returns & Exchanges',
     body: [
-      'Opened skincare products cannot be returned or exchanged for hygiene reasons.',
-      'Unopened products may be returned within 14 days of purchase with a receipt, subject to a restocking review.',
-      'If a product causes an adverse reaction, please contact us right away. We will work with you to find a resolution.',
+      { html: "<strong>All sales are final, except as specifically outlined below.</strong>" },
+      "Services cannot be returned, refunded, or transferred. Sale items and gift cards are also non-returnable and non-refundable.",
+      { h3: "Defective or incorrect products" },
+      "Please inspect your order upon receipt and contact us immediately if an item is defective, damaged, or if you receive the wrong product so we can evaluate the issue and correct it as soon as possible.",
+      { h3: "Skincare Product Exchanges" },
+      "Unopened skincare products may be eligible for exchange if you contact us within 7 days of purchase. Products must be unused, unopened, and in the same condition as they were when purchased.",
+      "Opened skincare products are not eligible for return or exchange.",
+      "Please understand that every person's skin is unique, and individual responses and result timelines may vary. If you experience irritation, including redness, swelling, itching, raw areas, or hives, discontinue use immediately and contact us.",
+    ],
+  },
+  {
+    id: 'shipping',
+    title: 'Shipping Policy',
+    body: [
+      "Orders are typically processed and shipped within 2 business days of purchase.",
+      { h3: "Flat-rate shipping" },
+      { html: "<strong>Neighbor Islands:</strong> $15" },
+      "Please note that orders shipping from Oahu may experience longer transit times or carrier delays. Once your order has shipped, delivery timing is determined by the carrier.",
+      "We appreciate your patience and understanding.",
     ],
   },
   {
     id: 'gift-cards',
     title: 'Gift Cards',
     body: [
-      'Gift cards are non-refundable and cannot be exchanged for cash.',
-      'Gift cards do not expire and may be used toward any service or product.',
-      'Skin Analysis is not responsible for lost or stolen gift cards.',
+      "Gift cards are non-refundable and cannot be redeemed for cash.",
+      { html: "Gift cards expire <strong>one year from the original date of purchase</strong> and may be used toward eligible Skin Analysis services or products during that period." },
+      "Skin Analysis is not responsible for lost or stolen gift cards.",
     ],
   },
 ];
@@ -127,9 +147,9 @@ const schema = {
   </div>
 
   <!-- ── Hero ─────────────────────────────────────────────────────────── -->
-  <section aria-labelledby="policies-h" class="max-w-site mx-auto px-gutter py-section-lg">
+  <section aria-labelledby="policies-h" class="max-w-site mx-auto px-gutter pt-section pb-6">
     <div class="max-w-[720px]">
-      <span class="eyebrow">Spa Policies</span>
+      <span class="eyebrow">Appointment &amp; Studio Policies</span>
       <h1
         id="policies-h"
         class="font-serif font-light text-[clamp(40px,5.2vw,72px)] leading-none tracking-[-0.02em] mt-4 mb-6"
@@ -137,11 +157,10 @@ const schema = {
         What to know before you visit.
       </h1>
       <p class="text-[18px] leading-[1.65] text-ink-2 m-0 text-pretty max-w-[600px]">
-        These policies help us run a practice that is fair to every client and allows our providers
-        to do their best work. Please read through them before your appointment.
+        These policies help us protect the time reserved for you, stay on schedule, and provide a consistent experience for every client.
       </p>
       <p class="text-[16px] leading-[1.65] text-ink-3 mt-4 max-w-[600px]">
-        Questions? Call or email us — we are always happy to talk things through.
+        If something unexpected comes up, please contact us directly. We're always happy to talk through the situation while keeping our policies fair and consistent.
       </p>
       <div class="flex gap-3 mt-8 flex-wrap">
         <Btn href="/contact/">Get in Touch</Btn>
@@ -150,35 +169,94 @@ const schema = {
     </div>
   </section>
 
-  <!-- ── Policy Sections ──────────────────────────────────────────────── -->
-  <section aria-label="Policy details" class="bg-sand">
-    <div class="max-w-site mx-auto px-gutter py-section-lg">
-      <div
-        class="grid gap-x-12 gap-y-12"
-        style="grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))"
-      >
+  <!-- ── Sidebar + Content ────────────────────────────────────────────── -->
+  <section aria-label="Policy details" class="border-t border-taupe-line">
+    <div class="max-w-site mx-auto px-gutter pt-10 pb-section-lg flex gap-[clamp(32px,6vw,80px)] items-start">
+
+      <!-- Sticky TOC sidebar -->
+      <nav aria-label="Jump to section" class="toc-sidebar hidden lg:block w-52 shrink-0 sticky self-start" style="top:calc(var(--header-h,72px) + 32px)">
+        <p class="text-[11px] tracking-[0.14em] uppercase text-sage font-medium mb-4 m-0">On this page</p>
+        <ol class="list-none p-0 m-0 flex flex-col">
+          {policies.map((p, i) => (
+            <li>
+              <a
+                href={`#${p.id}`}
+                data-toc={p.id}
+                class="toc-link flex gap-2.5 text-[13px] text-ink-3 no-underline py-1.5 hover:text-charcoal transition-colors duration-200 border-l-2 border-transparent pl-3 hover:border-taupe-line"
+              >
+                <span class="font-serif italic text-[11px] text-sage shrink-0 mt-0.75">{String(i + 1).padStart(2, '0')}</span>
+                <span>{p.title}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <!-- Policy content -->
+      <div class="flex flex-col min-w-0 flex-1 max-w-170">
         {policies.map((policy, i) => (
-          <div id={policy.id} data-reveal class="flex flex-col gap-4 border-t border-taupe-line-2 pt-6">
+          <div
+            id={policy.id}
+            data-reveal
+            class="flex flex-col gap-4 py-10 border-b border-taupe-line-2 last:border-b-0 first:pt-0"
+            style="scroll-margin-top:calc(var(--header-h,72px) + 32px)"
+          >
             <span class="font-serif italic text-[13px] text-sage tracking-[0.04em]">
               {String(i + 1).padStart(2, '0')}
             </span>
-            <h2 class="font-sans font-medium text-[20px] leading-[1.25] m-0 text-charcoal">
+            <h2 class="font-sans font-medium text-[20px] leading-tight m-0 text-charcoal">
               {policy.title}
             </h2>
             <div class="flex flex-col gap-3">
-              {policy.body.map((paragraph) => (
-                <p class="text-[15px] leading-[1.7] text-ink-2 m-0">{paragraph}</p>
+              {policy.body.map((item) => (
+                typeof item === 'string'
+                  ? <p class="text-[15px] leading-[1.7] text-ink-2 m-0">{item}</p>
+                  : 'h3' in item
+                  ? <h3 class="font-sans font-medium text-[13px] uppercase tracking-[0.08em] text-charcoal mt-2 mb-0">{item.h3}</h3>
+                  : <p class="text-[15px] leading-[1.7] text-ink-2 m-0" set:html={item.html} />
               ))}
             </div>
           </div>
         ))}
       </div>
+
     </div>
   </section>
 
+  <script>
+    // Highlight active TOC link on scroll
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('[data-toc]');
+    if (tocLinks.length) {
+      const setActive = (id: string) => {
+        tocLinks.forEach((l) => {
+          const active = l.dataset.toc === id;
+          l.classList.toggle('text-charcoal', active);
+          l.classList.toggle('border-sage', active);
+          l.classList.toggle('border-transparent', !active);
+          l.classList.toggle('text-ink-3', !active);
+        });
+      };
+
+      const ids = Array.from(tocLinks).map((l) => l.dataset.toc!);
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) setActive(e.target.id);
+          });
+        },
+        { rootMargin: '-20% 0px -70% 0px' }
+      );
+
+      ids.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) io.observe(el);
+      });
+    }
+  </script>
+
   <!-- ── Contact CTA ───────────────────────────────────────────────────── -->
   <section aria-labelledby="policy-cta-h" class="max-w-site mx-auto px-gutter py-section-lg">
-    <div class="flex flex-col gap-6 max-w-[580px]">
+    <div class="flex flex-col gap-6 max-w-145">
       <h2
         id="policy-cta-h"
         class="font-serif font-light text-[clamp(32px,3.8vw,52px)] leading-none tracking-[-0.02em] m-0"

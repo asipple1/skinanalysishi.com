@@ -7,6 +7,8 @@ photo: "/assets/providers/sarah-sepulveda.jpg"
 order: 1
 ---
 
-Beautiful skin is just as important as overall health, but there has always been a lack of attention when it comes to skincare and aesthetic treatments. I have developed a strong passion for helping my patients not only feel and look beautiful, but also feel confident in themselves.
+I see healthy skin as an important part of feeling good overall. My background in medical aesthetics has given me a real passion for helping people care for their skin in a way that feels approachable, effective, and confidence-building.
 
-My services include injectables, dermaplaning, chemical peels, microneedling, and other various procedures. I can't wait to meet you and help you on your skin journey!
+I offer injectables, microneedling, chemical peels, dermaplaning, and other aesthetic treatments, with a focus on improving skin health and supporting natural-looking results.
+
+What I love most is helping people feel more comfortable and confident in their skin, whether we're working on texture, tone, signs of aging, or simply creating a routine that helps their skin look and feel its best.

@@ -7,8 +7,8 @@ photo: "/assets/providers/allison-sipple.jpg"
 order: 2
 ---
 
-With a strong foundation in nursing and years of experience in dermatology and aesthetics, I've found my true passion in helping people feel confident in their skin.
+I've always believed good skin care starts with listening. I take the time to understand what's bothering you, what you're hoping to improve, and what actually fits into your lifestyle before recommending a treatment plan.
 
-I take my time to truly listen and understand each person's goals, lifestyle, and comfort level before developing a plan that fits naturally into their routine. I believe lasting results come from connection, education, and care that's tailored to the individual — not just the treatment.
+My background in nursing, dermatology, and medical aesthetics has given me a strong foundation in skin health, but what I love most is helping people feel more confident in their own skin. I'm not interested in chasing every trend or recommending more than you need. I want you to understand your options and feel comfortable with the plan we create together.
 
-Staying curious and continuing to learn keeps me inspired and allows me to bring the latest, most effective approaches to every appointment. My greatest reward is seeing someone light up when they start to see (and feel) real changes in their skin!
+I'm always learning and staying current with the latest treatments and approaches in aesthetics, so I can offer care that feels thoughtful, effective, and personal. Seeing someone notice real changes in their skin and feel good about those changes is still my favorite part of what I do.
