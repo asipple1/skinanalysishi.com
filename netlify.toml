@@ -12,7 +12,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://skinanalysishi.myshopify.com; frame-src https://maps.google.com https://www.google.com; media-src 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://skinanalysishi.myshopify.com; frame-src https://maps.google.com https://www.google.com; media-src 'self'"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 [[headers]]
