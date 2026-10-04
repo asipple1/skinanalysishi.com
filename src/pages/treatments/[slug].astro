@@ -31,12 +31,24 @@ const schema = [
     description: d.summary,
     provider: { '@id': 'https://www.skinanalysishi.com/#org' },
     areaServed: 'Oʻahu',
-    offers: d.pricing.map((p: { label: string; value: string }) => ({
-      '@type': 'Offer',
-      name: p.label,
-      price: p.value,
-      priceCurrency: 'USD',
-    })),
+    offers: d.pricing.map((p: { label: string; value: string }) => {
+      const numericPrice = parseFloat(p.value.replace(/[^0-9.]/g, ''));
+      const offer: Record<string, unknown> = {
+        '@type': 'Offer',
+        name: p.label,
+        priceCurrency: 'USD',
+      };
+      if (!isNaN(numericPrice)) {
+        offer.price = numericPrice;
+      } else {
+        offer.priceSpecification = {
+          '@type': 'PriceSpecification',
+          priceCurrency: 'USD',
+          description: p.value,
+        };
+      }
+      return offer;
+    }),
   },
   {
     '@context': 'https://schema.org',

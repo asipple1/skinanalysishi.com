@@ -6,7 +6,7 @@ pubDate: "2026-07-15"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
 heroImage: "/assets/journal/journal-thepowerofdysport.jpg"
-relatedTreatments: ["dysport", "skinpen"]
+relatedTreatments: ["dysport", "skinpen-microneedling"]
 draft: false
 ---
 

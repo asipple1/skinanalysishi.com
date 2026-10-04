@@ -6,7 +6,7 @@ pubDate: "2026-08-28"
 author: "sarah-lockwood-sepulveda"
 readingTime: "5 min read"
 heroImage: "/assets/journal/journal-microneedlingorchemicalpeel.png"
-relatedTreatments: ["skinpen", "chemical-peels"]
+relatedTreatments: ["skinpen-microneedling", "chemical-peels"]
 draft: false
 ---
 

@@ -6,7 +6,7 @@ pubDate: "2026-08-04"
 author: "allison-sipple"
 readingTime: "4 min read"
 heroImage: "/assets/journal/journal-firstconsult.jpg"
-relatedTreatments: ["consultation", "diamondglow"]
+relatedTreatments: ["consultation", "diamondglow-facial"]
 draft: false
 ---
 

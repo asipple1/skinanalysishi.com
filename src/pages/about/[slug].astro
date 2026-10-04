@@ -14,12 +14,32 @@ export async function getStaticPaths() {
 const { provider: p } = Astro.props;
 const d = p.data;
 const { Content } = await render(p);
+
+const siteUrl = 'https://www.skinanalysishi.com';
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['Person', 'Physician'],
+  '@id': `${siteUrl}/about/${p.id}/#person`,
+  name: d.name,
+  honorificSuffix: d.credentials,
+  jobTitle: d.role,
+  description: d.summary,
+  url: `${siteUrl}/about/${p.id}/`,
+  image: `${siteUrl}${d.photo}`,
+  worksFor: { '@id': `${siteUrl}/#org` },
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'Professional License',
+    name: d.credentials,
+  },
+};
 ---
 
 <BaseLayout
   title={`${d.name}, ${d.credentials} | Skin Analysis`}
   description={d.summary}
   currentNav="About"
+  schema={personSchema}
 >
   <div class="max-w-site mx-auto px-gutter py-section-sm">
 

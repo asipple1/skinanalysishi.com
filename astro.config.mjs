@@ -9,7 +9,7 @@ export default defineConfig({
   integrations: [
     preact({ compat: true }),
     sitemap({
-      filter: (page) => !page.includes('/shop/cart'),
+      filter: (page) => !page.includes('/shop/cart') && !page.includes('/specials'),
     }),
   ],
   image: {

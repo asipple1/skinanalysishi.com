@@ -10,6 +10,12 @@ export async function getStaticPaths() {
 const { article } = Astro.props;
 const { Content } = await render(article);
 const d = article.data;
+
+const providers = await getCollection('providers');
+const authorProvider = providers.find((p) => p.id === d.author);
+const resolvedAuthor = authorProvider
+  ? `${authorProvider.data.name}, ${authorProvider.data.credentials}`
+  : d.author;
 ---
 
 <ArticleLayout
@@ -17,7 +23,7 @@ const d = article.data;
   description={d.description}
   pubDate={d.pubDate}
   updatedDate={d.updatedDate}
-  author={d.author}
+  author={resolvedAuthor}
   readingTime={d.readingTime}
   heroImage={d.heroImage}
   category={d.category}

@@ -15,9 +15,10 @@ interface Props {
   pubDate?: Date;
   currentNav?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  noIndex?: boolean;
 }
 
-const { title, description, canonical, ogImage, type, pubDate, currentNav, schema } = Astro.props;
+const { title, description, canonical, ogImage, type, pubDate, currentNav, schema, noIndex } = Astro.props;
 
 const globalSchema = [
   {
@@ -29,23 +30,47 @@ const globalSchema = [
   },
   {
     '@context': 'https://schema.org',
-    '@type': 'MedicalBusiness',
+    '@type': ['MedicalBusiness', 'MedicalClinic'],
     '@id': 'https://www.skinanalysishi.com/#org',
     name: 'Skin Analysis Medical Spa',
     legalName: 'Skin Analysis, LLC',
     url: 'https://www.skinanalysishi.com',
-    telephone: '+1-808-213-8383',
+    telephone: '+18082138383',
     email: 'skinanalysishi@gmail.com',
-    areaServed: 'Oʻahu, Hawaiʻi',
+    image: 'https://www.skinanalysishi.com/assets/palm-fronds-poster.webp',
+    logo: 'https://www.skinanalysishi.com/assets/logo-light.webp',
+    areaServed: {
+      '@type': 'AdministrativeArea',
+      name: 'Oʻahu, Hawaiʻi',
+    },
     priceRange: '$$',
     paymentAccepted: 'Credit Card, Debit Card',
-    sameAs: ['https://www.instagram.com/skinanalysis_aesthetics/'],
+    currenciesAccepted: 'USD',
+    sameAs: [
+      'https://www.instagram.com/skinanalysis_aesthetics/',
+    ],
     department: [
       {
-        '@type': 'MedicalBusiness',
-        name: 'Skin Analysis, Ewa Beach',
-        telephone: '+1-808-213-8383',
-        openingHours: 'Mo-Sa 08:30-18:00',
+        '@type': ['MedicalBusiness', 'MedicalClinic'],
+        '@id': 'https://www.skinanalysishi.com/#location-ewa-beach',
+        name: 'Skin Analysis Medical Spa — Ewa Beach',
+        url: 'https://www.skinanalysishi.com/contact/',
+        telephone: '+18082138383',
+        image: 'https://www.skinanalysishi.com/assets/palm-fronds-poster.webp',
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            opens: '08:30',
+            closes: '18:00',
+          },
+        ],
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 21.32660,
+          longitude: -158.01080,
+        },
+        hasMap: 'https://maps.google.com/?q=91-3475+Nana+Hope+Ewa+Beach+HI+96706',
         address: {
           '@type': 'PostalAddress',
           streetAddress: '91-3475 Nana Hope',
@@ -54,12 +79,29 @@ const globalSchema = [
           postalCode: '96706',
           addressCountry: 'US',
         },
+        branchOf: { '@id': 'https://www.skinanalysishi.com/#org' },
       },
       {
-        '@type': 'MedicalBusiness',
-        name: 'Skin Analysis, Aiea',
-        telephone: '+1-808-979-1098',
-        openingHours: 'Mo-Sa 08:30-18:00',
+        '@type': ['MedicalBusiness', 'MedicalClinic'],
+        '@id': 'https://www.skinanalysishi.com/#location-aiea',
+        name: 'Skin Analysis Medical Spa — Aiea',
+        url: 'https://www.skinanalysishi.com/contact/',
+        telephone: '+18089791098',
+        image: 'https://www.skinanalysishi.com/assets/palm-fronds-poster.webp',
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            opens: '08:30',
+            closes: '18:00',
+          },
+        ],
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 21.38310,
+          longitude: -157.93110,
+        },
+        hasMap: 'https://maps.google.com/?q=99-209+Moanalua+Rd+310+Aiea+HI+96701',
         address: {
           '@type': 'PostalAddress',
           streetAddress: '99-209 Moanalua Rd. #310',
@@ -68,6 +110,7 @@ const globalSchema = [
           postalCode: '96701',
           addressCountry: 'US',
         },
+        branchOf: { '@id': 'https://www.skinanalysishi.com/#org' },
       },
     ],
   },
@@ -84,6 +127,7 @@ const globalSchema = [
       ogImage={ogImage}
       type={type}
       pubDate={pubDate}
+      noIndex={noIndex}
     />
     <SchemaOrg schema={globalSchema} />
     {schema && <SchemaOrg schema={schema} />}
@@ -95,7 +139,7 @@ const globalSchema = [
       <slot />
     </main>
     <Footer />
-    <CartDrawer client:load />
+    <CartDrawer client:idle />
 
     <!-- Mobile sticky booking bar -->
     <div id="mobile-book-bar" class="hidden fixed left-4 right-4 bottom-4 z-60">

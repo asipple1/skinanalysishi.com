@@ -36,16 +36,19 @@ function formatDate(d: Date) {
   });
 }
 
+const siteUrl = 'https://www.skinanalysishi.com';
+const absoluteImage = heroImage?.startsWith('http') ? heroImage : `${siteUrl}${heroImage}`;
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: title,
   description,
-  image: heroImage,
+  image: absoluteImage,
   datePublished: pubDate.toISOString(),
   dateModified: (updatedDate ?? pubDate).toISOString(),
   author: { "@type": "Person", name: author },
-  publisher: { "@id": "https://www.skinanalysishi.com/#org" },
+  publisher: { "@id": `${siteUrl}/#org` },
 };
 ---
 
