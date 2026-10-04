@@ -1,7 +1,29 @@
 ---
 import Btn from "../Btn.astro";
-import { Picture, getImage } from "astro:assets";
+import { Picture } from "astro:assets";
 import heroPortrait from "../../assets/site/hero-image.jpg";
+import sharp from "sharp";
+import { encode, decode } from "blurhash";
+import { join } from "path";
+
+const imgPath = join(process.cwd(), "src/assets/site/hero-image.jpg");
+
+const { data, info } = await sharp(imgPath)
+  .resize(32, 48, { fit: "cover" })
+  .ensureAlpha()
+  .raw()
+  .toBuffer({ resolveWithObject: true });
+
+const hash = encode(new Uint8ClampedArray(data), info.width, info.height, 4, 4);
+
+const pixels = decode(hash, 32, 48);
+const placeholderBuf = await sharp(Buffer.from(pixels), {
+  raw: { width: 32, height: 48, channels: 4 },
+})
+  .jpeg({ quality: 60 })
+  .toBuffer();
+
+const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}`;
 ---
 
 <section id="top" aria-labelledby="hero-h" class="relative overflow-hidden">
@@ -50,11 +72,12 @@ import heroPortrait from "../../assets/site/hero-image.jpg";
     <div
       data-reveal
       class="hero-portrait relative max-w-[600px] w-full justify-self-end"
+      style={`background-image: url('${placeholder}'); background-size: cover; background-position: center 20%;`}
     >
       <Picture
         src={heroPortrait}
         alt="Sarah and Allison, owners and aesthetic providers at Skin Analysis Medical Spa, Oʻahu"
-        class="w-full h-full object-cover object-[center_20%]"
+        class="hero-img w-full h-full object-cover object-[center_20%]"
         loading="eager"
         fetchpriority="high"
         width={604}
@@ -115,4 +138,24 @@ import heroPortrait from "../../assets/site/hero-image.jpg";
       display: none;
     }
   }
+
+  .hero-img {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .hero-img.is-loaded {
+    opacity: 1;
+  }
 </style>
+
+<script>
+  const img = document.querySelector<HTMLImageElement>('.hero-img');
+  if (img) {
+    if (img.complete) {
+      img.classList.add('is-loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('is-loaded'));
+    }
+  }
+</script>
