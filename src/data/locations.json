@@ -9,7 +9,7 @@
     "country": "US",
     "phone": "808.213.8383",
     "tel": "+18082138383",
-    "mapUrl": "https://maps.google.com/?q=91-3475+Nana+Hope+Ewa+Beach+HI",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=91-3475+Nana+Hope+St,+Ewa+Beach,+HI",
     "appointments": "By appointment only",
     "main": true
   },
@@ -23,7 +23,7 @@
     "country": "US",
     "phone": "808.979.1098",
     "tel": "+18089791098",
-    "mapUrl": "https://maps.google.com/?q=99-209+Moanalua+Rd+310+Aiea+HI",
+    "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=99-209+Moanalua+Rd+%23310,+Aiea,+HI",
     "appointments": "By appointment only",
     "main": false
   }
