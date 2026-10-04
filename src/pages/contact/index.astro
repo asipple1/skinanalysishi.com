@@ -27,6 +27,18 @@ const steps = [
   description="Book a complimentary consultation or an appointment at Skin Analysis Medical Spa. Two locations on Oʻahu: Ewa Beach and Aiea."
   currentNav="Locations"
 >
+  {/* Hidden static form so Netlify's build scanner registers the "contact" form */}
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="contact" />
+    <input name="bot-field" />
+    <input name="location" />
+    <input name="name" />
+    <input name="phone" />
+    <input name="email" />
+    <input name="interest" />
+    <textarea name="message"></textarea>
+    <input name="reach" />
+  </form>
   <div class="max-w-site mx-auto px-gutter pt-10">
     <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
   </div>
