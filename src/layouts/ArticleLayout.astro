@@ -101,8 +101,8 @@ const schema = {
   </div>
 
   <!-- Hero image -->
-  <div class="max-w-site mx-auto px-gutter mb-[clamp(48px,6vw,80px)]">
-    <div class="aspect-21/9 overflow-hidden">
+  <div class="max-w-[800px] mx-auto px-gutter mb-[clamp(48px,6vw,80px)]">
+    <div class="aspect-3/2 overflow-hidden">
       {
         getAssetImage(heroImage) && (
           <Picture
@@ -111,7 +111,8 @@ const schema = {
             class="w-full h-full object-cover"
             loading="eager"
             fetchpriority="high"
-            inferSize
+            width={500}
+            height={333}
             formats={["avif", "webp"]}
           />
         )
