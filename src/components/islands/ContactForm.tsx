@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useState, useEffect, useRef } from 'preact/hooks';
 
 interface Props {
   treatments: { id: string; label: string }[];
@@ -6,14 +6,100 @@ interface Props {
 }
 
 type ReachMethod = 'Email' | 'Phone call' | 'Text';
-type Location = 'Ewa Beach' | 'Aiea';
+
+function TreatmentDropdown({
+  treatments,
+  interests,
+  onToggle,
+}: {
+  treatments: { id: string; label: string }[];
+  interests: Set<string>;
+  onToggle: (id: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [open]);
+
+  const count = interests.size;
+  const label =
+    count === 0
+      ? 'Not sure yet — consultation'
+      : count === 1
+      ? treatments.find((t) => interests.has(t.id))?.label ?? `${count} selected`
+      : `${count} treatments selected`;
+
+  return (
+    <div ref={ref} class="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        class="w-full flex items-center justify-between border border-taupe-line-2 rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] text-left cursor-pointer transition-[border-color] duration-250 hover:border-charcoal"
+      >
+        <span class={count === 0 ? 'text-ink-3' : 'text-charcoal'}>{label}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class={`text-ink-3 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          role="listbox"
+          aria-multiselectable="true"
+          class="absolute z-20 top-[calc(100%+4px)] left-0 right-0 bg-white border border-taupe-line-2 rounded-sm shadow-lg py-1 max-h-64 overflow-y-auto"
+        >
+          {treatments.map((t) => {
+            const checked = interests.has(t.id);
+            return (
+              <label
+                key={t.id}
+                class="flex items-center gap-3 px-4 py-2.5 cursor-pointer hover:bg-sand transition-colors duration-150 text-[15px]"
+              >
+                <input
+                  type="checkbox"
+                  name="interests"
+                  value={t.id}
+                  checked={checked}
+                  onChange={() => onToggle(t.id)}
+                  class="w-4 h-4 accent-charcoal shrink-0"
+                />
+                <span>{t.label}</span>
+              </label>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function ContactForm({ treatments, preselect }: Props) {
-  const [location, setLocation] = useState<Location>('Ewa Beach');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [interest, setInterest] = useState(preselect || '');
+  const [interests, setInterests] = useState<Set<string>>(
+    preselect ? new Set([preselect]) : new Set()
+  );
   const [message, setMessage] = useState('');
   const [reach, setReach] = useState<ReachMethod>('Email');
   const [tried, setTried] = useState(false);
@@ -24,22 +110,38 @@ export default function ContactForm({ treatments, preselect }: Props) {
   const emailOk = /^.+@.+\..+$/.test(email.trim());
   const valid = nameOk && emailOk;
 
+  const toggleInterest = (id: string) => {
+    setInterests((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
     setTried(true);
     if (!valid) return;
     setLoading(true);
-    const form = e.target as HTMLFormElement;
-    const data = new FormData(form);
+
+    const params = new URLSearchParams();
+    params.set('form-name', 'contact');
+    params.set('name', name);
+    params.set('phone', phone);
+    params.set('email', email);
+    params.set('message', message);
+    params.set('reach', reach);
+    interests.forEach((id) => params.append('interests', id));
+
     try {
       await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+        body: params.toString(),
       });
       setSent(true);
     } catch {
-      form.submit();
+      (e.target as HTMLFormElement).submit();
     } finally {
       setLoading(false);
     }
@@ -53,8 +155,7 @@ export default function ContactForm({ treatments, preselect }: Props) {
           Mahalo, {first}.
         </h2>
         <p class="text-base leading-[1.65] text-ink-2 m-0">
-          We received your message and will reach out to you by {reach.toLowerCase()} within one business day
-          {location === 'Ewa Beach' ? ' from our Ewa Beach studio' : ' from our Aiea studio'}.
+          We received your message and will reach out to you by {reach.toLowerCase()} within one business day.
         </p>
         <p class="text-[13px] text-ink-3 m-0">
           This form is not a secure messaging system. Please do not submit protected health information.
@@ -76,31 +177,10 @@ export default function ContactForm({ treatments, preselect }: Props) {
       <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
 
       {tried && !valid && (
-        <p role="alert" class="text-sm text-olive m-0 px-4 py-3 border border-oliverounded-sm">
+        <p role="alert" class="text-sm text-olive m-0 px-4 py-3 border border-olive rounded-sm">
           Please add your name and a valid email so we can reach you.
         </p>
       )}
-
-      {/* Location */}
-      <div class="flex flex-col gap-2.5">
-        <label class="text-[13px] text-ink-3 font-medium">Location</label>
-        <div role="group" aria-label="Choose location" class="grid gap-2" style="grid-template-columns:1fr 1fr">
-          {(['Ewa Beach', 'Aiea'] as Location[]).map((loc) => (
-            <button
-              key={loc}
-              type="button"
-              onClick={() => setLocation(loc)}
-              aria-pressed={location === loc}
-              class={location === loc
-                ? 'border border-charcoal bg-charcoal text-ivory rounded-sm p-3 text-sm cursor-pointer font-sans transition-all duration-250'
-                : 'border border-taupe-line-2 bg-transparent text-charcoal rounded-sm p-3 text-sm cursor-pointer font-sans transition-all duration-250'}
-            >
-              {loc}
-            </button>
-          ))}
-        </div>
-        <input type="hidden" name="location" value={location} />
-      </div>
 
       {/* Name + Phone */}
       <div class="grid gap-4" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))">
@@ -146,21 +226,14 @@ export default function ContactForm({ treatments, preselect }: Props) {
         />
       </div>
 
-      {/* Interest */}
+      {/* Interests dropdown */}
       <div class="flex flex-col gap-2">
-        <label for="contact-interest" class="text-[13px] text-ink-3 font-medium">I'm interested in</label>
-        <select
-          id="contact-interest"
-          name="interest"
-          value={interest}
-          onChange={(e) => setInterest((e.target as HTMLSelectElement).value)}
-          class="border border-taupe-line-2 rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none appearance-none cursor-pointer"
-        >
-          <option value="">Not sure yet — consultation</option>
-          {treatments.map((t) => (
-            <option key={t.id} value={t.id}>{t.label}</option>
-          ))}
-        </select>
+        <label class="text-[13px] text-ink-3 font-medium">I'm interested in</label>
+        <TreatmentDropdown
+          treatments={treatments}
+          interests={interests}
+          onToggle={toggleInterest}
+        />
       </div>
 
       {/* Message */}
@@ -192,7 +265,6 @@ export default function ContactForm({ treatments, preselect }: Props) {
             </button>
           ))}
         </div>
-        <input type="hidden" name="reach" value={reach} />
       </div>
 
       <button
