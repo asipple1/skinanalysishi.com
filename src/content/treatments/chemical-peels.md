@@ -47,11 +47,7 @@ faqs:
     a: "Carefully chosen peels can help. We start mild and pair them with home care, because aggressive treatment can make melasma worse."
   - q: "Will my face visibly peel after a chemical peel?"
     a: "Not necessarily, and that's completely normal. Visible peeling is a side effect of the treatment, not a measure of how well it worked. Some people peel noticeably after a medium-depth peel, others experience only subtle flaking, and some see no visible peeling at all. Every person responds differently, and even the same person can have a different experience from one treatment to the next. A great result doesn't require visible peeling, the renewal is happening at a cellular level regardless."
-beforeAfter:
-  - image: "/assets/treaments/chemical-peels/chemical-peel-ba-1.png"
-    caption: "Sun damage + freckles, 5 months"
-  - image: "/assets/treaments/chemical-peels/chemical-peel-ba-3.png"
-    caption: "Melasma, 8 months"
+beforeAfter: []
 related: ["dermaplaning", "diamondglow-facial", "skinpen"]
 providerNote:
   provider: "Allison Sipple, RN-BSN"
