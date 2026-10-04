@@ -8,7 +8,7 @@ order: 1
 benefit: "Softens expression lines while keeping movement natural."
 summary: "Dysport relaxes the specific muscles that create expression lines, such as frown lines, forehead lines, and crow’s feet. Our aim is a rested version of your face that still moves like yours."
 time: "30–45 min"
-downtime: "Little to none"
+downtime: "None"
 resultsAppear: "2–3 days, full at 2 weeks"
 typicalPlan: "Every 3–4 months"
 priceFrom: "$15 / unit"
@@ -52,20 +52,17 @@ faqs:
     a: "There’s no single right time. Some people start Dysport when expression lines begin to bother them; others come in earlier as a preventative measure, before lines have a chance to deepen. We look at your skin, your movement patterns, and what you’re hoping to achieve, and go from there. If you’re not sure whether now is the right time, a free consultation is a great place to start."
 realResultsHeadline: "Softening movement. Not changing your face."
 beforeAfter:
-  - before: "/assets/dysport-ba-1.png"
-    after: "/assets/dysport-ba-1.png"
+  - image: "/assets/treaments/dysport/dysport-ba-1.png"
     caption: "Crow’s feet · Dysport® · 2 weeks"
-  - before: "/assets/dysport-ba-2.png"
-    after: "/assets/dysport-ba-2.png"
-    caption: "Frown lines · Dysport® · 2 weeks"
-  - before: "/assets/dysport-ba-3.png"
-    after: "/assets/dysport-ba-3.png"
-    caption: "Forehead lines · Dysport® · 2 weeks"
+  - image: "/assets/treaments/dysport/dysport-ba-2.png"
+    caption: "Frown line · Dysport® · 2 weeks"
+  - image: "/assets/treaments/dysport/dysport-ba-3.png"
+    caption: "Crow's feet · Dysport® · 2 weeks"
 related: ["diamondglow"]
 providerNote:
   provider: "Sarah Lockwood-Sepulveda, FNP-BC"
   quote: "The best compliment is when someone says you look rested and can’t tell why."
-heroImage: "/assets/treaments/dysport.jpg"
-secondaryImage: "/assets/dysport-secondary.jpg"
+heroImage: "/assets/treaments/dysport/dysport.jpg"
+secondaryImage: "/assets/treaments/dysport/dysport-secondary.jpg"
 featured: true
 ---

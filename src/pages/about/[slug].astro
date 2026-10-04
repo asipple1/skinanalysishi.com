@@ -4,7 +4,7 @@ import Btn from '../../components/Btn.astro';
 import { getCollection, render } from 'astro:content';
 import { Picture } from 'astro:assets';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import providersTeam from '../../assets/providers-team.jpg';
+import providersTeam from '../../assets/site/providers-team.jpg';
 
 export async function getStaticPaths() {
   const providers = await getCollection('providers');

@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-12-20"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/dysport-design.jpg"
+heroImage: "/assets/shared/dysport-design.jpg"
 relatedTreatments: ["dysport"]
 draft: false
 ---

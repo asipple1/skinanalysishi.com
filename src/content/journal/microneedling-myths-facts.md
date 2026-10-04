@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-08-04"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/blog-microneedling-myths.webp"
+heroImage: "/assets/journal/blog-microneedling-myths.webp"
 relatedTreatments: ["skinpen-microneedling"]
 draft: false
 ---

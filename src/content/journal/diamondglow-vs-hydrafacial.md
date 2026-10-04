@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2024-06-02"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/blog-diamondglow-vs-hydrafacial.webp"
+heroImage: "/assets/journal/blog-diamondglow-vs-hydrafacial.webp"
 relatedTreatments: ["diamondglow-facial"]
 draft: false
 ---

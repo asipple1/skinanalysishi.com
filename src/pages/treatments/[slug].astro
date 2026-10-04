@@ -4,8 +4,8 @@ import Btn from '../../components/Btn.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
-import { getAssetImage, consultationHero } from '../../lib/images';
-import providersTeam from '../../assets/providers-team.jpg';
+import { getAssetImage } from '../../lib/images';
+import providersTeam from '../../assets/site/providers-team.jpg';
 
 export async function getStaticPaths() {
   const treatments = await getCollection('treatments');
@@ -103,15 +103,17 @@ const schema = [
         <Btn href="#faq" variant="outline">Read FAQs</Btn>
       </div>
     </div>
-      <Picture
-        src={getAssetImage(d.heroImage) ?? consultationHero}
-        alt={d.title}
-        loading="eager"
-        fetchpriority="high"
-        width={600}
-        height={750}
-        formats={['avif', 'webp']}
-      />
+      {getAssetImage(d.heroImage) && (
+        <Picture
+          src={getAssetImage(d.heroImage)!}
+          alt={d.title}
+          loading="eager"
+          fetchpriority="high"
+          width={600}
+          height={750}
+          formats={['avif', 'webp']}
+        />
+      )}
   </section>
 
   <!-- Who it's for + concerns -->
@@ -140,17 +142,19 @@ const schema = [
 
   <!-- How it works -->
   <section class="max-w-site mx-auto px-gutter py-[clamp(40px,5vw,72px)] grid grid-auto-xl gap-[clamp(40px,6vw,100px)] items-center">
-    <div class="aspect-5/4 overflow-hidden bg-sand">
-      <Picture
-        src={getAssetImage(d.secondaryImage) ?? getAssetImage(d.heroImage) ?? consultationHero}
-        alt={`How ${d.title} works`}
-        class="w-full h-full object-cover"
-        loading="lazy"
-        width={800}
-        height={640}
-        formats={['avif', 'webp']}
-      />
-    </div>
+    {(getAssetImage(d.secondaryImage) ?? getAssetImage(d.heroImage)) && (
+      <div class="aspect-5/4 overflow-hidden">
+        <Picture
+          src={(getAssetImage(d.secondaryImage) ?? getAssetImage(d.heroImage))!}
+          alt={`How ${d.title} works`}
+          class="w-full h-full object-cover"
+          loading="lazy"
+          width={800}
+          height={640}
+          formats={['avif', 'webp']}
+        />
+      </div>
+    )}
     <div class="flex flex-col gap-5.5">
       <span class="text-xs tracking-[0.22em] uppercase text-sage">How it works</span>
       <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
@@ -169,7 +173,7 @@ const schema = [
     <section class="bg-sand">
       <div class="max-w-site mx-auto px-gutter py-[clamp(40px,5vw,72px)]">
         <div class={`grid grid-cols-1 gap-[clamp(40px,5vw,72px)]${d.beforeAfter.length > 1 ? ' lg:grid-cols-[3fr_2fr] lg:gap-x-[clamp(72px,8vw,120px)]' : ''}`}>
-          <!-- Left: heading + featured pair -->
+          <!-- Left: heading + featured image -->
           <div class="flex flex-col gap-7">
             <div class="flex flex-col gap-3">
               <span class="text-xs tracking-[0.22em] uppercase text-sage">Real results</span>
@@ -178,68 +182,56 @@ const schema = [
               </h2>
             </div>
             <figure class="m-0 flex flex-col gap-3">
-              <div class="grid grid-cols-2 gap-0.5">
-                <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+              <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+                {getAssetImage(d.beforeAfter[0].image) && (
                   <Picture
-                    src={getAssetImage(d.beforeAfter[0].before) ?? consultationHero}
-                    alt={`Before: ${d.beforeAfter[0].caption}`}
+                    src={getAssetImage(d.beforeAfter[0].image)!}
+                    alt={d.beforeAfter[0].caption}
                     class="w-full h-full object-cover"
                     loading="lazy"
-                    width={680}
-                    height={510}
+                    width={880}
+                    height={660}
                     formats={['avif', 'webp']}
                   />
-                  <span class="absolute bottom-3 left-3 text-[11px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2.5 py-1">Before</span>
-                </div>
-                <div class="relative overflow-hidden aspect-4/3 bg-ivory">
-                  <Picture
-                    src={getAssetImage(d.beforeAfter[0].after) ?? consultationHero}
-                    alt={`After: ${d.beforeAfter[0].caption}`}
-                    class="w-full h-full object-cover"
-                    loading="lazy"
-                    width={680}
-                    height={510}
-                    formats={['avif', 'webp']}
-                  />
-                  <span class="absolute bottom-3 left-3 text-[11px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2.5 py-1">After</span>
-                </div>
+                )}
               </div>
-              <figcaption class="text-sm text-ink-3">{d.beforeAfter[0].caption}</figcaption>
+              <figcaption class="flex items-center gap-2 text-sm">
+                {d.beforeAfter[0].caption.split(' · ').map((part: string, i: number, arr: string[]) => (
+                  <>
+                    <span class={i === 0 ? 'text-ink-2 font-medium' : 'text-ink-3'}>{part}</span>
+                    {i < arr.length - 1 && <span class="text-taupe-line-3 select-none" aria-hidden="true">·</span>}
+                  </>
+                ))}
+              </figcaption>
             </figure>
           </div>
 
-          <!-- Right: remaining pairs stacked -->
+          <!-- Right: remaining images stacked -->
           {d.beforeAfter.length > 1 && (
             <div class="flex flex-col gap-[clamp(28px,3vw,44px)] justify-center">
-              {d.beforeAfter.slice(1).map((pair: { before: string; after: string; caption: string }) => (
+              {d.beforeAfter.slice(1).map((pair: { image: string; caption: string }) => (
                 <figure class="m-0 flex flex-col gap-3">
-                  <div class="grid grid-cols-2 gap-0.5">
-                    <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+                  <div class="relative overflow-hidden aspect-4/3 bg-ivory">
+                    {getAssetImage(pair.image) && (
                       <Picture
-                        src={getAssetImage(pair.before) ?? consultationHero}
-                        alt={`Before: ${pair.caption}`}
+                        src={getAssetImage(pair.image)!}
+                        alt={pair.caption}
                         class="w-full h-full object-cover"
                         loading="lazy"
-                        width={400}
-                        height={300}
+                        width={480}
+                        height={360}
                         formats={['avif', 'webp']}
                       />
-                      <span class="absolute bottom-2 left-2 text-[10px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2 py-0.5">Before</span>
-                    </div>
-                    <div class="relative overflow-hidden aspect-4/3 bg-ivory">
-                      <Picture
-                        src={getAssetImage(pair.after) ?? consultationHero}
-                        alt={`After: ${pair.caption}`}
-                        class="w-full h-full object-cover"
-                        loading="lazy"
-                        width={400}
-                        height={300}
-                        formats={['avif', 'webp']}
-                      />
-                      <span class="absolute bottom-2 left-2 text-[10px] tracking-[0.14em] uppercase text-white font-medium bg-charcoal/50 px-2 py-0.5">After</span>
-                    </div>
+                    )}
                   </div>
-                  <figcaption class="text-sm text-ink-3">{pair.caption}</figcaption>
+                  <figcaption class="flex items-center gap-2 text-xs">
+                    {pair.caption.split(' · ').map((part: string, i: number, arr: string[]) => (
+                      <>
+                        <span class={i === 0 ? 'text-ink-2 font-medium' : 'text-ink-3'}>{part}</span>
+                        {i < arr.length - 1 && <span class="text-taupe-line-3 select-none" aria-hidden="true">·</span>}
+                      </>
+                    ))}
+                  </figcaption>
                 </figure>
               ))}
             </div>
@@ -349,17 +341,19 @@ const schema = [
         <div class="flex flex-col gap-3">
           {relatedTreatments.map((r) => r && (
             <a href={`/treatments/${r.id}/`} class="flex gap-5 items-center no-underline group">
-              <div class="w-28 h-20 shrink-0 overflow-hidden bg-ivory">
-                <Picture
-                  src={getAssetImage(r.data.heroImage) ?? consultationHero}
-                  alt={r.data.title}
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                  width={224}
-                  height={160}
-                  formats={['avif', 'webp']}
-                />
-              </div>
+              {getAssetImage(r.data.heroImage) && (
+                <div class="w-28 h-20 shrink-0 overflow-hidden bg-ivory">
+                  <Picture
+                    src={getAssetImage(r.data.heroImage)!}
+                    alt={r.data.title}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    width={224}
+                    height={160}
+                    formats={['avif', 'webp']}
+                  />
+                </div>
+              )}
               <div class="flex flex-col gap-1">
                 <span class="font-serif text-[18px] text-charcoal group-hover:text-olivee transition-colors duration-250">{r.data.title}</span>
                 <span class="text-[13px] text-ink-3">{r.data.benefit}</span>

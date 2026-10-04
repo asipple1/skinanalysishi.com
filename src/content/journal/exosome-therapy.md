@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2025-10-08"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/blog-exosome.webp"
+heroImage: "/assets/journal/blog-exosome.webp"
 relatedTreatments: ["skinpen-microneedling"]
 draft: false
 ---

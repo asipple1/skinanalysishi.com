@@ -4,13 +4,13 @@ import { getImage } from 'astro:assets';
 import { getAssetImage } from '../../lib/images';
 
 const results = await Promise.all([
-  { title: 'Acne scarring',        detail: 'SkinPen® series',                tags: ['Acne', 'Texture', 'Microneedling'], image: '/assets/skinpen-ba-acne.png' },
-  { title: 'Sun damage + freckles', detail: 'Peels + home care, 5 months',    tags: ['Pigmentation'],                    image: '/assets/chemical-peel-ba-1.png' },
-  { title: "Crow's feet",           detail: 'Dysport®, 2 weeks after',         tags: ['Injectables'],                     image: '/assets/dysport-ba-1.png' },
-  { title: 'Melasma',               detail: 'Peels + home care, 8 months',     tags: ['Pigmentation'],                    image: '/assets/chemical-peel-ba-2.png' },
-  { title: 'Acne + post-acne marks',detail: 'Peels + home care, 6 months',     tags: ['Acne', 'Pigmentation'],            image: '/assets/chemical-peel-ba-3.png' },
-  { title: 'Neck lines',            detail: '4 SkinPen® sessions',             tags: ['Texture', 'Microneedling'],        image: '/assets/skinpen-ba-neck.png' },
-  { title: 'Forehead lines',        detail: 'Dysport®, 2 weeks after',         tags: ['Injectables'],                     image: '/assets/dysport-ba-2.png' },
+  { title: 'Acne scarring',        detail: 'SkinPen® series',                tags: ['Acne', 'Texture', 'Microneedling'], image: '/assets/treaments/skinpen-microneedling/skinpen-ba-acne.png' },
+  { title: 'Sun damage + freckles', detail: 'Peels + home care, 5 months',    tags: ['Pigmentation'],                    image: '/assets/treaments/chemical-peels/chemical-peel-ba-1.png' },
+  { title: "Crow's feet",           detail: 'Dysport®, 2 weeks after',         tags: ['Injectables'],                     image: '/assets/treaments/dysport/dysport-ba-1.png' },
+  { title: 'Melasma',               detail: 'Peels + home care, 8 months',     tags: ['Pigmentation'],                    image: '/assets/treaments/chemical-peels/chemical-peel-ba-2.png' },
+  { title: 'Acne + post-acne marks',detail: 'Peels + home care, 6 months',     tags: ['Acne', 'Pigmentation'],            image: '/assets/treaments/chemical-peels/chemical-peel-ba-3.png' },
+  { title: 'Neck lines',            detail: '4 SkinPen® sessions',             tags: ['Texture', 'Microneedling'],        image: '/assets/treaments/skinpen-microneedling/skinpen-ba-neck.png' },
+  { title: 'Forehead lines',        detail: 'Dysport®, 2 weeks after',         tags: ['Injectables'],                     image: '/assets/treaments/dysport/dysport-ba-2.png' },
   { title: 'Dull, congested skin',  detail: 'DiamondGlow® series',             tags: ['DiamondGlow', 'Acne'] },
 ].map(async (r) => ({
   ...r,

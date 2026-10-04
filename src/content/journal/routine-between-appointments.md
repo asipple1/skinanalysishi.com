@@ -5,7 +5,7 @@ category: "Skincare"
 pubDate: "2026-06-20"
 author: "allison-sipple"
 readingTime: "5 min read"
-heroImage: "/assets/skincare-products.png"
+heroImage: "/assets/shared/skincare-products.png"
 relatedTreatments: ["chemical-peels", "diamondglow"]
 draft: false
 ---

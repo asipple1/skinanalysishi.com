@@ -5,7 +5,7 @@ category: "Getting Started"
 pubDate: "2026-08-04"
 author: "allison-sipple"
 readingTime: "4 min read"
-heroImage: "/assets/consultation-hero.png"
+heroImage: "/assets/shared/consultation-hero.jpg"
 relatedTreatments: ["consultation", "diamondglow"]
 draft: false
 ---

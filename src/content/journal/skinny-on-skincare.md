@@ -5,7 +5,7 @@ category: "Skin Health"
 pubDate: "2023-08-05"
 author: "sarah-lockwood-sepulveda"
 readingTime: "3 min read"
-heroImage: "/assets/blog-skinny-on-skincare.webp"
+heroImage: "/assets/journal/blog-skinny-on-skincare.webp"
 relatedTreatments: []
 draft: false
 ---

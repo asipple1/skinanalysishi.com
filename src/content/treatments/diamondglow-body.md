@@ -38,14 +38,15 @@ faqs:
     a: "Yes. We can treat the face and a body area in one appointment, just let us know when you book so we allow enough time."
   - q: "How many sessions do I need to see results?"
     a: "Many clients notice smoother, more radiant skin after a single treatment. For concerns like texture, hyperpigmentation, or keratosis pilaris, a series of monthly treatments typically gives the most lasting improvement."
-  - q: "Is it safe for all skin tones?"
+  - q: "Is it safe for all skin tones?" 
     a: "Yes. DiamondGlow does not use heat or light energy, so it is safe for all skin tones and types."
 beforeAfter: []
 related: ["diamondglow-facial", "dermaplaning", "chemical-peels"]
 providerNote:
   provider: "Allison Sipple, RN-BSN"
   quote: "We often focus all our attention on our face and forget the rest. DiamondGlow Body is a way to give your skin the same level of care from the neck down."
-heroImage: "/assets/treaments/diamondglow-body.jpg"
-secondaryImage: "/assets/consultation-hero.png"
+heroImage: "/assets/treaments/diamondglow-body/diamondglow-body-secondary.jpg"
+secondaryImage: "/assets/treaments/diamondglow-body/diamond-glow-body-sarah.jpg"
+
 featured: true
 ---

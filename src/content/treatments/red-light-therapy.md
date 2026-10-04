@@ -51,7 +51,7 @@ related: ["skinpen-microneedling", "diamondglow-facial", "chemical-peels"]
 providerNote:
   provider: "Allison Sipple, RN-BSN"
   quote: "Red light is one of the most underrated tools in skincare. It works quietly — no peeling, no downtime — but consistent use adds up."
-heroImage: "/assets/treaments/red-light-therapy.jpg"
-secondaryImage: ""
+heroImage: "/assets/treaments/red-light-therapy/red-light-therapy.jpg"
+secondaryImage: "/assets/treaments/red-light-therapy/red-light-therapy-secondary.jpg"
 featured: true
 ---

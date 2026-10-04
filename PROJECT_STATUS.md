@@ -49,7 +49,7 @@
 
 ### Local assets (`public/assets/`)
 All images downloaded from Squarespace CDN and design handoff — no external CDN dependencies:
-`hero-portrait.png`, `palm-shadow.png`, `consultation-hero.png`, `skinpen-hero.png`, `skinpen-secondary.png`, `skinpen-ba-acne.png`, `skinpen-ba-neck.png`, `chemical-peel-hero.jpeg`, `chemical-peel-ba-1..4.png`, `dysport-hero.jpeg`, `dysport-secondary.jpg`, `dysport-ba-1..3.png`, `dysport-design.jpg`, `dermaplaning-hero.jpeg`, `providers-team.jpg`, `skincare-products.png`
+`hero-portrait.png`, `palm-shadow.png`, `consultation-hero.jpg`, `skinpen-hero.png`, `skinpen-secondary.png`, `skinpen-ba-acne.png`, `skinpen-ba-neck.png`, `chemical-peel-hero.jpeg`, `chemical-peel-ba-1..4.png`, `dysport-hero.jpeg`, `dysport-secondary.jpg`, `dysport-ba-1..3.png`, `dysport-design.jpg`, `dermaplaning-hero.jpeg`, `providers-team.jpg`, `skincare-products.png`
 
 ### Other
 - `public/robots.txt` — allows all, disallows `/shop/cart`, references sitemap

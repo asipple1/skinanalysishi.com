@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2026-08-28"
 author: "sarah-lockwood-sepulveda"
 readingTime: "5 min read"
-heroImage: "/assets/skinpen-secondary.png"
+heroImage: "/assets/treaments/skinpen-microneedling/skinpen-secondary.png"
 relatedTreatments: ["skinpen", "chemical-peels"]
 draft: false
 ---

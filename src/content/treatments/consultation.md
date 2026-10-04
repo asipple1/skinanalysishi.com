@@ -35,7 +35,7 @@ related: ["diamondglow", "chemical-peels", "skinpen"]
 providerNote:
   provider: "Sarah + Allison"
   quote: "You don’t need to know what you want. That’s our job."
-heroImage: "/assets/consultation-hero.png"
+heroImage: "/assets/shared/consultation-hero.jpg"
 secondaryImage: ""
 featured: false
 ---

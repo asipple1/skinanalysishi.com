@@ -5,7 +5,7 @@ category: "Skin Concerns"
 pubDate: "2026-09-12"
 author: "allison-sipple"
 readingTime: "6 min read"
-heroImage: "/assets/chemical-peel-ba-4.png"
+heroImage: "/assets/treaments/chemical-peels/chemical-peel-ba-4.png"
 relatedTreatments: ["chemical-peels", "diamondglow"]
 draft: false
 ---

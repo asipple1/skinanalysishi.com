@@ -39,7 +39,7 @@ related: ["chemical-peels", "diamondglow-facial", "dermaplaning"]
 providerNote:
   provider: "Sarah Lockwood-Sepulveda, FNP-BC"
   quote: "Dermaplaning is simple, but technique matters. It should leave your skin smooth, never irritated."
-heroImage: "/assets/treaments/dermaplaning.jpg"
-secondaryImage: "/assets/dysport-design.jpg"
+heroImage: "/assets/treaments/dermaplaning/dermaplaning.jpg"
+secondaryImage: "/assets/shared/dysport-design.jpg"
 featured: true
 ---

@@ -4,7 +4,7 @@ import { Picture } from 'astro:assets';
 import Btn from '../components/Btn.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
-import providersTeam from '../assets/providers-team.jpg';
+import providersTeam from '../assets/site/providers-team.jpg';
 
 const providers = (await getCollection('providers')).sort((a, b) => a.data.order - b.data.order);
 

@@ -1,5 +1,5 @@
 import type { ImageMetadata } from 'astro';
-import fallback from '../assets/consultation-hero.png';
+import fallback from '../assets/shared/consultation-hero.jpg';
 
 export const consultationHero: ImageMetadata = fallback;
 
