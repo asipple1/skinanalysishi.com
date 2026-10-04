@@ -26,7 +26,7 @@ const treatmentConcerns = d.concerns.map((slug: string) => concerns.find((c) => 
 const schema = [
   {
     '@context': 'https://schema.org',
-    '@type': 'MedicalProcedure',
+    '@type': 'Service',
     name: d.title,
     description: d.summary,
     provider: { '@id': 'https://www.skinanalysishi.com/#org' },
