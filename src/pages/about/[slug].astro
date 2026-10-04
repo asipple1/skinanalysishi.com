@@ -4,7 +4,7 @@ import Btn from '../../components/Btn.astro';
 import { getCollection, render } from 'astro:content';
 import { Picture } from 'astro:assets';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import providersTeam from '../../assets/site/providers-team.jpg';
+import { getAssetImage } from '../../lib/images';
 
 export async function getStaticPaths() {
   const providers = await getCollection('providers');
@@ -29,17 +29,19 @@ const { Content } = await render(p);
     <div class="grid gap-[clamp(48px,7vw,100px)] items-start" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr))">
 
       <!-- Photo -->
-      <div class="overflow-hidden">
-        <Picture
-          src={providersTeam}
-          alt={d.name}
-          class="w-full h-full object-cover"
-          loading="eager"
-          width={800}
-          height={1000}
-          formats={['avif', 'webp']}
-        />
-      </div>
+      {getAssetImage(d.photo) && (
+        <div class="aspect-square overflow-hidden">
+          <Picture
+            src={getAssetImage(d.photo)!}
+            alt={d.name}
+            class="w-full h-full object-cover"
+            loading="eager"
+            width={800}
+            height={800}
+            formats={['avif', 'webp']}
+          />
+        </div>
+      )}
 
       <!-- Bio -->
       <div class="flex flex-col gap-8">

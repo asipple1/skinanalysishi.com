@@ -4,6 +4,7 @@ import { Picture } from 'astro:assets';
 import Btn from '../components/Btn.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
+import { getAssetImage } from '../lib/images';
 import providersTeam from '../assets/site/providers-team.jpg';
 
 const providers = (await getCollection('providers')).sort((a, b) => a.data.order - b.data.order);
@@ -154,29 +155,28 @@ const schema = {
       </h2>
     </div>
 
-    <div
-      class="grid gap-6"
-      style="grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))"
-    >
+    <div class="flex flex-col gap-6">
       {providers.map((p) => (
         <a
           href={`/about/${p.id}/`}
           aria-label={`Read ${p.data.name}'s full profile`}
-          class="group no-underline bg-sand border border-taupe-line overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_32px_rgb(42_40_38/0.10)]"
+          class="group no-underline bg-sand border border-taupe-line overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_32px_rgb(42_40_38/0.10)] flex flex-col sm:flex-row"
           style="border-radius:var(--radius-sm)"
         >
-          {/* <div class="aspect-[16/9] overflow-hidden">
-            <Picture
-              src={''}
-              alt={`${p.data.name}, ${p.data.credentials}, ${p.data.role} at Skin Analysis`}
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              loading="lazy"
-              width={960}
-              height={540}
-              formats={['avif', 'webp']}
-            />
-          </div> */}
-          <div class="p-8 flex flex-col gap-3">
+          {getAssetImage(p.data.photo) && (
+            <div class="w-full sm:w-48 shrink-0 overflow-hidden aspect-square sm:aspect-auto">
+              <Picture
+                src={getAssetImage(p.data.photo)!}
+                alt={`${p.data.name}, ${p.data.credentials}, ${p.data.role} at Skin Analysis`}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+                width={800}
+                height={800}
+                formats={['avif', 'webp']}
+              />
+            </div>
+          )}
+          <div class="p-8 flex flex-col gap-3 justify-center">
             <span class="eyebrow">{p.data.role}</span>
             <h3 class="font-serif font-normal text-[28px] leading-[1.1] m-0 text-charcoal">
               {p.data.name}

@@ -3,7 +3,7 @@ name: "Sarah Lockwood-Sepulveda"
 credentials: "FNP-BC"
 role: "Owner + Aesthetic Provider"
 summary: "Sarah sees skin health as part of overall health. She provides injectables, microneedling, chemical peels, and dermaplaning."
-photo: ""
+photo: "/assets/providers/sarah-sepulveda.jpg"
 order: 1
 ---
 

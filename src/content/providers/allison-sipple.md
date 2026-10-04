@@ -3,7 +3,7 @@ name: "Allison Sipple"
 credentials: "RN-BSN"
 role: "Owner + Aesthetic Provider"
 summary: "Allison listens first. She builds plans around each person's goals, lifestyle, and comfort level, and keeps learning so her approach stays current."
-photo: ""
+photo: "/assets/providers/allison-sipple.jpg"
 order: 2
 ---
 
