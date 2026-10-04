@@ -96,6 +96,24 @@ const globalSchema = [
     </main>
     <Footer />
     <CartDrawer client:load />
+
+    <!-- Mobile sticky booking bar -->
+    <div id="mobile-book-bar" class="hidden fixed left-4 right-4 bottom-4 z-60">
+      <a
+        href="/contact/"
+        class="block bg-charcoal text-ivory text-center py-4 text-[15px] font-medium shadow-[0_8px_24px_rgb(42_40_38/0.18)] no-underline"
+      >
+        Book an Appointment
+      </a>
+    </div>
+    <script>
+      const mobileBookBar = document.getElementById('mobile-book-bar');
+      if (mobileBookBar && window.innerWidth < 960) {
+        window.addEventListener('scroll', () => {
+          mobileBookBar.style.display = window.scrollY > 700 ? 'block' : 'none';
+        }, { passive: true });
+      }
+    </script>
     <script>
       // Scroll reveal
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {

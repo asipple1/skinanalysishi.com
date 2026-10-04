@@ -89,20 +89,18 @@ const navItems = [
     const y = window.scrollY;
 
     if (bar) {
-      const shouldCollapse = y > 40;
-      if (shouldCollapse !== collapsed) {
-        collapsed = shouldCollapse;
-        if (shouldCollapse) {
-          bar.style.maxHeight = '0';
-          bar.style.paddingTop = '0';
-          bar.style.paddingBottom = '0';
-          bar.style.opacity = '0';
-        } else {
-          bar.style.maxHeight = '60px';
-          bar.style.paddingTop = '10px';
-          bar.style.paddingBottom = '10px';
-          bar.style.opacity = '1';
-        }
+      if (!collapsed && y > 60) {
+        collapsed = true;
+        bar.style.maxHeight = '0';
+        bar.style.paddingTop = '0';
+        bar.style.paddingBottom = '0';
+        bar.style.opacity = '0';
+      } else if (collapsed && y < 20) {
+        collapsed = false;
+        bar.style.maxHeight = '60px';
+        bar.style.paddingTop = '10px';
+        bar.style.paddingBottom = '10px';
+        bar.style.opacity = '1';
       }
     }
 

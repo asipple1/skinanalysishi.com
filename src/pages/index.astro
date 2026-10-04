@@ -27,21 +27,5 @@ import BookCTA from '../components/sections/BookCTA.astro';
   <Locations />
   <BookCTA />
 
-  <!-- Mobile sticky booking bar -->
-  <div id="mobile-book-bar" class="hidden fixed left-4 right-4 bottom-4 z-[60]">
-    <a
-      href="/contact/"
-      class="block bg-charcoal text-ivory text-center py-4 rounded-pill text-[15px] font-medium shadow-[0_8px_24px_rgb(42_40_38/0.18)] no-underline"
-    >
-      Book an Appointment
-    </a>
-  </div>
-  <script>
-    const bar = document.getElementById('mobile-book-bar');
-    if (bar && window.innerWidth < 960) {
-      window.addEventListener('scroll', () => {
-        bar.style.display = window.scrollY > 700 ? 'block' : 'none';
-      }, { passive: true });
-    }
-  </script>
+
 </BaseLayout>
