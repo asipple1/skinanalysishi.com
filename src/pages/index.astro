@@ -21,7 +21,7 @@ const heroAvif = await getImage({ src: heroPortrait, format: 'avif', width: 604,
   description="Nurse-owned medical spa in Ewa Beach and Aiea, Oʻahu. Personalized, evidence-based skin treatments including DiamondGlow, SkinPen microneedling, Dysport, chemical peels and dermaplaning."
 >
   <link slot="head" rel="preload" as="image" href={heroAvif.src} type="image/avif" fetchpriority="high" />
-  <link slot="head" rel="preload" as="image" href="/assets/palm-fronds-poster.webp" type="image/webp" />
+  <link slot="head" rel="preload" as="image" href="/assets/palm-fronds-poster.webp" type="image/webp" fetchpriority="high" />
   <HomeHero />
   <BrandPhilosophy />
   <SkinConcerns />
