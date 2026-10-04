@@ -13,7 +13,10 @@ async function checkout(items: ReturnType<typeof cartItems.get>) {
       cart { checkoutUrl }
     }
   }`);
-  window.location.href = data.cartCreate.cart.checkoutUrl;
+  const url = new URL(data.cartCreate.cart.checkoutUrl);
+  url.searchParams.set('return_to', 'https://www.skinanalysishi.com/shop/');
+  cartItems.set([]);
+  window.location.href = url.toString();
 }
 
 export default function CartDrawer() {
