@@ -131,6 +131,7 @@ const globalSchema = [
     />
     <SchemaOrg schema={globalSchema} />
     {schema && <SchemaOrg schema={schema} />}
+    <slot name="head" />
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>

@@ -24,12 +24,12 @@ import approachFactors from '../../data/approach-factors.json';
       <ol class="list-none m-0 p-0 border-t border-[rgba(243,240,232,0.25)]">
         {approachFactors.map((f, i) => (
           <li class="grid gap-3 items-baseline py-[18px] border-b border-[rgba(243,240,232,0.25)]" style="grid-template-columns:44px 1fr">
-            <span class="text-xs tracking-[0.1em] text-sage-light" style="font-variant-numeric:tabular-nums">
+            <span class="text-xs tracking-[0.1em] text-[#F3F0E8]" style="font-variant-numeric:tabular-nums">
               {String(i + 1).padStart(2, '0')}
             </span>
             <div class="flex flex-col gap-1">
               <span class="font-serif text-[clamp(24px,2.2vw,30px)] font-light leading-[1.15]">{f.name}</span>
-              <span class="text-sm leading-[1.5] text-sage-light">{f.note}</span>
+              <span class="text-sm leading-[1.5] text-sage-text">{f.note}</span>
             </div>
           </li>
         ))}
