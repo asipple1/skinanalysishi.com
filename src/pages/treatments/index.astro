@@ -79,7 +79,7 @@ const concerns = (await getCollection('concerns')).sort((a, b) => a.data.order -
         <div class="flex flex-col gap-6">
           <span class="text-xs tracking-[0.22em] uppercase text-sage">{t.data.category}</span>
           <h2 class="font-serif font-light text-h2-lg leading-[1.02] tracking-[-0.02em] m-0">
-            {t.data.title}
+            <a href={`/treatments/${t.id}/`} class="no-underline text-inherit hover:text-sage transition-colors duration-200">{t.data.title}</a>
           </h2>
           <p class="text-[17px] leading-[1.65] text-ink-2 m-0 text-pretty">{t.data.summary}</p>
           <dl class="m-0 grid gap-4 border-t border-taupe-line pt-5" style="grid-template-columns:repeat(3,1fr)">

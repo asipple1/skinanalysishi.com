@@ -37,6 +37,7 @@ providerNote:
   quote: "Most people are either over-complicating their routine or using the wrong things for their skin type. A five-minute conversation usually clears it up."
 beforeAfter: []
 heroImage: "/assets/treaments/professional-skincare/professional-skincare.jpg"
+secondaryImage: "/assets/treaments/professional-skincare/professional-skincare-secondary.jpg"
 featured: false
 order: 99
 ---

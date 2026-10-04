@@ -30,58 +30,85 @@ function formatDate(d: Date) {
     </h1>
   </div>
 
-  <!-- Featured article -->
+  <!-- Magazine top block: featured left (2fr) + 2 stories right (1fr) -->
   {featured && (
     <div class="max-w-site mx-auto px-gutter py-section">
-      <article class="grid gap-[clamp(32px,5vw,80px)] items-center" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))">
-        <a href={`/journal/${featured.id}/`} class="block aspect-3/2 overflow-hidden no-underline img-zoom">
-          <div class="zoom-inner w-full h-full">
-            <Picture
-              src={getAssetImage(featured.data.heroImage)!}
-              alt={featured.data.title}
-              class="w-full h-full object-cover"
-              loading="eager"
-              fetchpriority="high"
-              width={900}
-              height={600}
-              formats={['avif', 'webp']}
-            />
-          </div>
-        </a>
-        <div class="flex flex-col gap-5">
-          <span class="text-xs tracking-[0.22em] uppercase text-sage">{featured.data.category}</span>
-          <h2 class="font-serif font-light text-h2-md leading-[1.05] tracking-[-0.02em] m-0">
-            <a href={`/journal/${featured.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-olive">
-              {featured.data.title}
-            </a>
-          </h2>
-          <p class="text-[17px] leading-[1.65] text-ink-2 m-0">{featured.data.description}</p>
-          <div class="flex gap-4 flex-wrap text-sm text-ink-3 items-center">
-            <span>{featured.data.author}</span>
-            <span>·</span>
-            <time datetime={featured.data.pubDate.toISOString()}>{formatDate(featured.data.pubDate)}</time>
-            <span>·</span>
-            <span>{featured.data.readingTime}</span>
-          </div>
-          <a
-            href={`/journal/${featured.id}/`}
-            class="text-[15px] font-medium flex gap-2 items-center text-charcoal no-underline transition-colors duration-250 hover:text-olive"
-          >
-            Read article <span aria-hidden="true">→</span>
+      <div class="grid grid-magazine gap-[clamp(32px,4vw,64px)]">
+
+        <!-- Featured article -->
+        <article>
+          <a href={`/journal/${featured.id}/`} class="block aspect-4/3 overflow-hidden no-underline img-zoom">
+            <div class="zoom-inner w-full h-full">
+              <Picture
+                src={getAssetImage(featured.data.heroImage)!}
+                alt={featured.data.title}
+                class="w-full h-full object-cover"
+                loading="eager"
+                fetchpriority="high"
+                width={900}
+                height={675}
+                formats={['avif', 'webp']}
+              />
+            </div>
           </a>
+          <div class="flex flex-col gap-4 mt-6">
+            <span class="text-xs tracking-[0.22em] uppercase text-sage">{featured.data.category}</span>
+            <h2 class="font-serif font-light text-h2-md leading-[1.05] tracking-[-0.02em] m-0">
+              <a href={`/journal/${featured.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-olive">
+                {featured.data.title}
+              </a>
+            </h2>
+            <p class="text-[17px] leading-[1.65] text-ink-2 m-0">{featured.data.description}</p>
+            <div class="flex gap-3 flex-wrap text-sm text-ink-3 items-center">
+              <span>{featured.data.author}</span>
+              <span aria-hidden="true">·</span>
+              <time datetime={featured.data.pubDate.toISOString()}>{formatDate(featured.data.pubDate)}</time>
+              <span aria-hidden="true">·</span>
+              <span>{featured.data.readingTime}</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Sidebar: next 2 articles stacked -->
+        <div class="grid-magazine-sidebar flex flex-col gap-[clamp(28px,3vw,44px)]">
+          {rest.slice(0, 2).map((article) => (
+            <article class="flex flex-col gap-3">
+              <a href={`/journal/${article.id}/`} class="block aspect-3/2 overflow-hidden no-underline img-zoom">
+                <div class="zoom-inner w-full h-full">
+                  <Picture
+                    src={getAssetImage(article.data.heroImage)!}
+                    alt={article.data.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    width={500}
+                    height={333}
+                    formats={['avif', 'webp']}
+                  />
+                </div>
+              </a>
+              <span class="text-xs tracking-[0.22em] uppercase text-sage">{article.data.category}</span>
+              <h3 class="font-serif font-normal text-[22px] leading-[1.2] m-0">
+                <a href={`/journal/${article.id}/`} class="text-charcoal no-underline transition-colors duration-250 hover:text-olive">
+                  {article.data.title}
+                </a>
+              </h3>
+              <div class="text-[13px] text-ink-3">{article.data.readingTime}</div>
+            </article>
+          ))}
         </div>
-      </article>
+
+      </div>
     </div>
   )}
 
-  <!-- Article grid -->
+  <!-- Remaining articles grid -->
   <div class="bg-sand">
     <div class="max-w-site mx-auto px-gutter py-section">
       <h2 class="text-xs tracking-[0.22em] uppercase text-sage font-normal m-0 mb-10">
         More articles
       </h2>
       <div class="grid gap-[clamp(32px,3vw,48px)]" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))">
-        {rest.map((article) => (
+        {rest.slice(2).map((article) => (
           <article data-reveal class="flex flex-col gap-4">
             <a href={`/journal/${article.id}/`} class="block aspect-4/3 overflow-hidden no-underline img-zoom">
               <div class="zoom-inner w-full h-full">

@@ -99,9 +99,20 @@ const steps = [
       <div class="grid grid-2col-loc gap-[clamp(32px,4vw,56px)]">
         {locations.map((l) => (
           <article class="flex flex-col gap-6">
-            <div class="aspect-3/2 overflow-hidden bg-taupe-line-2 flex items-center justify-content-center">
-              <span class="font-serif text-[22px] text-warm-muted">{l.data.name}</span>
-            </div>
+            <a
+              href={l.data.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block aspect-3/2 overflow-hidden bg-taupe-line-2"
+              aria-label={`Open ${l.data.name} location in Google Maps`}
+            >
+              <iframe
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(`${l.data.streetAddress}, ${l.data.locality}, ${l.data.region}`)}&output=embed&z=15`}
+                class="w-full h-full border-0 pointer-events-none"
+                loading="lazy"
+                title={`Map of Skin Analysis ${l.data.name}`}
+              ></iframe>
+            </a>
             <div class="flex justify-between items-baseline gap-3 flex-wrap">
               <h3 class="font-serif font-normal text-[clamp(30px,3vw,42px)] m-0 tracking-[-0.015em]">{l.data.name}</h3>
               <span class="text-[13px] text-sage">{l.data.tag}</span>
