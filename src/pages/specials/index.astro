@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Btn from '../../components/Btn.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const month = 'October 2026';
+const expires = 'October 31, 2026';
+
+const specials = [
+  {
+    category: 'Facials + Resurfacing',
+    title: 'Chemical Peel Series',
+    description:
+      'Book a series of three Vitalize Peels and save on your path to smoother, more even skin. Includes a complimentary follow-up consultation between sessions.',
+    offer: 'Buy 3, save $75',
+    originalPrice: '$675',
+    salePrice: '$600',
+    href: '/treatments/chemical-peels/',
+  },
+  {
+    category: 'Resurfacing',
+    title: 'DiamondGlow Facial',
+    description:
+      'Our most popular resurfacing treatment — infused with SkinMedica serums chosen for your skin. Book in October and receive a complimentary SkinMedica travel-size kit.',
+    offer: 'Free gift with service',
+    originalPrice: null,
+    salePrice: '$225',
+    href: '/treatments/diamondglow-facial/',
+  },
+  {
+    category: 'Injectables',
+    title: 'Dysport — New Client Offer',
+    description:
+      "First time trying Dysport? We'll apply $50 toward your first treatment when you book a complimentary injectable consultation this month.",
+    offer: '$50 off your first session',
+    originalPrice: null,
+    salePrice: null,
+    href: '/treatments/dysport/',
+  },
+  {
+    category: 'Skin Renewal',
+    title: 'SkinPen Microneedling',
+    description:
+      'Collagen-stimulating microneedling for texture, scars, and tone. Book two sessions in October and receive the third at half price.',
+    offer: 'Buy 2, get 1 at 50% off',
+    originalPrice: null,
+    salePrice: null,
+    href: '/treatments/skinpen-microneedling/',
+  },
+];
+---
+
+<BaseLayout
+  title="Monthly Specials — October 2026 | Skin Analysis, Oʻahu"
+  description="October specials at Skin Analysis Medical Spa — limited-time offers on chemical peels, DiamondGlow facials, Dysport, and microneedling in Ewa Beach and Aiea, Oʻahu."
+  canonical="https://www.skinanalysishi.com/specials/"
+  currentNav=""
+>
+  <!-- Intro -->
+  <div class="max-w-site mx-auto px-gutter pt-[clamp(40px,6vw,80px)] pb-[clamp(28px,3vw,40px)]">
+    <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Specials' }]} class="mb-6" />
+    <div data-reveal class="flex flex-col gap-5 max-w-190">
+      <span class="text-xs tracking-[0.22em] uppercase text-sage">{month}</span>
+      <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0">
+        This month's <em class="italic">specials.</em>
+      </h1>
+      <p class="text-body-lg leading-[1.6] text-ink-2 m-0 max-w-2xl">
+        Limited-time offers available at both our Ewa Beach and Aiea locations. All specials expire {expires}. Mention the offer when booking.
+      </p>
+    </div>
+  </div>
+
+  <!-- Specials grid -->
+  <div class="max-w-site mx-auto px-gutter py-[clamp(48px,6vw,88px)]">
+    <div class="grid gap-6" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,480px),1fr))">
+      {specials.map((s) => (
+        <article
+          data-reveal
+          class="flex flex-col gap-6 border border-taupe-line-3 bg-white p-[clamp(28px,3vw,40px)]"
+        >
+          <div class="flex flex-col gap-3">
+            <span class="text-xs tracking-[0.22em] uppercase text-sage">{s.category}</span>
+            <h2 class="font-serif font-light text-h2-sm leading-[1.08] tracking-[-0.02em] m-0">
+              {s.title}
+            </h2>
+            <p class="text-[16px] leading-[1.65] text-ink-2 m-0">{s.description}</p>
+          </div>
+
+          <div class="border-t border-taupe-line-3 pt-5 flex flex-col gap-4">
+            <!-- Offer badge -->
+            <div class="inline-flex self-start bg-sand px-4 py-2 text-[13px] tracking-[0.06em] uppercase text-charcoal font-medium">
+              {s.offer}
+            </div>
+
+            {(s.originalPrice || s.salePrice) && (
+              <div class="flex items-baseline gap-3">
+                {s.salePrice && (
+                  <span class="font-serif font-light text-[28px] leading-none text-charcoal">
+                    {s.salePrice}
+                  </span>
+                )}
+                {s.originalPrice && (
+                  <span class="text-[15px] text-ink-3 line-through">{s.originalPrice}</span>
+                )}
+              </div>
+            )}
+
+            <div class="flex gap-3 flex-wrap">
+              <Btn href="/contact/" size="sm">Book This Special</Btn>
+              <Btn href={s.href} variant="outline" size="sm">Learn More</Btn>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Expiry note -->
+  <div class="max-w-site mx-auto px-gutter pb-[clamp(48px,6vw,80px)]">
+    <p class="text-[14px] text-ink-3 border-t border-taupe-line-3 pt-6">
+      All offers valid through {expires} at Skin Analysis Ewa Beach and Aiea locations. Cannot be combined with other discounts. Subject to provider availability. Call us at <a href="tel:+18082138383" class="text-charcoal underline underline-offset-2">(808) 213-8383</a> or <a href="/contact/" class="text-charcoal underline underline-offset-2">book online</a>.
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div class="bg-sage text-[#F3F0E8]">
+    <div class="max-w-site mx-auto px-gutter py-section flex flex-col items-center text-center gap-6">
+      <h2 class="font-serif font-light text-h2-xl leading-[1.02] m-0">
+        Not sure which special is right for you?
+      </h2>
+      <p class="text-[17px] leading-[1.65] text-sage-text m-0 max-w-120">
+        Book a complimentary consultation and we'll match you with the treatment — and the offer — that fits your skin and your goals.
+      </p>
+      <a
+        href="/contact/"
+        class="bg-[#F3F0E8] text-charcoal px-7.5 py-4 text-[15px] font-medium transition-[background] duration-250 no-underline hover:bg-white"
+      >
+        Book a Free Consultation
+      </a>
+    </div>
+  </div>
+</BaseLayout>
