@@ -1,6 +1,7 @@
 ---
 import ConcernExplorer from '../islands/ConcernExplorer';
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
 import { getAssetImage } from '../../lib/images';
 
 const allTreatments = await getCollection('treatments');
@@ -9,17 +10,23 @@ const concerns = (await getCollection('concerns'))
   .filter((c) => c.id !== 'unwanted-hair')
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 
-const concernData = concerns.map((c) => ({
-  name: c.data.title,
-  slug: c.id,
-  body: c.data.intro,
-  image: getAssetImage(c.data.image)?.src,
-  treatments: c.data.treatments.slice(0, 3).map((slug: string) => {
-    const t = allTreatments.find((x) => x.id === slug);
-    return t?.data.shortName ?? slug;
-  }),
-  treatmentSlugs: c.data.treatments.slice(0, 3),
-  link: `/skin-concerns/${c.id}/`,
+const concernData = await Promise.all(concerns.map(async (c) => {
+  const imageMetadata = getAssetImage(c.data.image);
+  const optimizedImage = imageMetadata
+    ? await getImage({ src: imageMetadata, format: 'webp', width: 800, height: 500 })
+    : null;
+  return {
+    name: c.data.title,
+    slug: c.id,
+    body: c.data.intro,
+    image: optimizedImage?.src,
+    treatments: c.data.treatments.slice(0, 3).map((slug: string) => {
+      const t = allTreatments.find((x) => x.id === slug);
+      return t?.data.shortName ?? slug;
+    }),
+    treatmentSlugs: c.data.treatments.slice(0, 3),
+    link: `/skin-concerns/${c.id}/`,
+  };
 }));
 ---
 
