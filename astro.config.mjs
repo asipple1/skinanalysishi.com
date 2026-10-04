@@ -2,12 +2,14 @@ import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import partytown from '@astrojs/partytown';
 
 export default defineConfig({
   site: 'https://www.skinanalysishi.com',
   output: 'static',
   integrations: [
     preact({ compat: true }),
+    partytown({ config: { forward: ['dataLayer.push'] } }),
     sitemap({
       filter: (page) => !page.includes('/shop/cart') && !page.includes('/specials'),
     }),
