@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-08-06"
 author: "sarah-lockwood-sepulveda"
 readingTime: "3 min read"
-heroImage: "/assets/journal/blog-peel-or-no-peel.webp"
+heroImage: "/assets/journal/journal-peelornopeel.png"
 relatedTreatments: ["chemical-peels"]
 draft: false
 ---

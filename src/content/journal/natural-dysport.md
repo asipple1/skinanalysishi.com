@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2026-07-15"
 author: "sarah-lockwood-sepulveda"
 readingTime: "4 min read"
-heroImage: "/assets/journal/dermaplaning-hero.jpeg"
+heroImage: "/assets/journal/journal-thepowerofdysport.jpg"
 relatedTreatments: ["dysport", "skinpen"]
 draft: false
 ---

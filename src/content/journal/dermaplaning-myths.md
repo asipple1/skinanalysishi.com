@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2026-05-30"
 author: "sarah-lockwood-sepulveda"
 readingTime: "3 min read"
-heroImage: "/assets/shared/dysport-design.jpg"
+heroImage: "/assets/journal/journal-dermaplaning.jpg"
 relatedTreatments: ["dermaplaning", "chemical-peels"]
 draft: false
 ---

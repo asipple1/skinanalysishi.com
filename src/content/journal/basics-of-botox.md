@@ -5,7 +5,7 @@ category: "Treatments"
 pubDate: "2023-08-03"
 author: "sarah-lockwood-sepulveda"
 readingTime: "5 min read"
-heroImage: "/assets/journal/blog-basics-of-botox.webp"
+heroImage: "/assets/journal/journal-wrinkletreatments.png"
 relatedTreatments: ["dysport"]
 draft: false
 ---
