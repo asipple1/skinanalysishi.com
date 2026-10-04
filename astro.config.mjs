@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import netlify from '@astrojs/netlify';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -7,6 +8,7 @@ import partytown from '@astrojs/partytown';
 export default defineConfig({
   site: 'https://www.skinanalysishi.com',
   output: 'static',
+  adapter: netlify(),
   integrations: [
     preact({ compat: true }),
     partytown({ config: { forward: ['dataLayer.push'] } }),
