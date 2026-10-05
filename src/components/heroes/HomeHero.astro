@@ -37,8 +37,7 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
       widths={[320, 480, 640, 960, 1280]}
       sizes="100vw"
       formats={["avif", "webp"]}
-      loading="eager"
-      fetchpriority="low"
+      loading="lazy"
     />
     <video class="palm-video" autoplay loop muted playsinline preload="none">
       <source src="/assets/palm-fronds-1.mp4" type="video/mp4" />
