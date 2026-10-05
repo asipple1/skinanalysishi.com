@@ -10,18 +10,12 @@ import OurApproach from '../components/sections/OurApproach.astro';
 import TestimonialsSection from '../components/sections/TestimonialsSection.astro';
 import Locations from '../components/sections/Locations.astro';
 import BookCTA from '../components/sections/BookCTA.astro';
-import { getImage } from 'astro:assets';
-import heroPortrait from '../assets/site/hero-image.jpg';
-
-const heroAvif = await getImage({ src: heroPortrait, format: 'avif', width: 604, height: 772 });
 ---
 
 <BaseLayout
   title="Medical Spa on Oʻahu | Skin Analysis, Ewa Beach + Aiea"
   description="Nurse-owned medical spa in Ewa Beach and Aiea, Oʻahu. Personalized, evidence-based skin treatments including DiamondGlow, SkinPen microneedling, Dysport, chemical peels and dermaplaning."
 >
-  <link slot="head" rel="preload" as="image" href={heroAvif.src} type="image/avif" fetchpriority="high" />
-  <link slot="head" rel="preload" as="image" href="/assets/palm-fronds-poster.webp" type="image/webp" fetchpriority="high" />
   <HomeHero />
   <BrandPhilosophy />
   <SkinConcerns />

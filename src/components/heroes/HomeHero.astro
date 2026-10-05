@@ -2,6 +2,7 @@
 import Btn from "../Btn.astro";
 import { Picture } from "astro:assets";
 import heroPortrait from "../../assets/site/hero-image.jpg";
+import palmFrondsPosterSrc from "../../assets/site/palm-fronds-poster.webp";
 import sharp from "sharp";
 import { encode, decode } from "blurhash";
 import { join } from "path";
@@ -27,16 +28,19 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
 ---
 
 <section id="top" aria-labelledby="hero-h" class="relative overflow-hidden">
-  <!-- Palm frond video — drop files at /public/assets/palm-fronds.mp4 + .webm -->
+  <!-- Palm frond layer — poster image shows instantly, video overlays once loaded -->
   <div aria-hidden="true" class="palm-fronds-wrap">
-    <video
-      class="palm-video"
-      autoplay
-      loop
-      muted
-      playsinline
-      poster="/assets/palm-fronds-poster.webp"
-    >
+    <Picture
+      src={palmFrondsPosterSrc}
+      alt=""
+      class="palm-poster"
+      widths={[320, 480, 640, 960, 1280]}
+      sizes="100vw"
+      formats={["avif", "webp"]}
+      loading="eager"
+      fetchpriority="low"
+    />
+    <video class="palm-video" autoplay loop muted playsinline preload="none">
       <source src="/assets/palm-fronds-1.mp4" type="video/mp4" />
     </video>
   </div>
@@ -109,7 +113,16 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
     mask-composite: intersect;
   }
 
+  .palm-fronds-wrap :global(picture) {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  .palm-poster,
   .palm-video {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -128,6 +141,7 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
       height: 100%;
     }
 
+    .palm-poster,
     .palm-video {
       opacity: 0.2;
     }
@@ -150,12 +164,12 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
 </style>
 
 <script>
-  const img = document.querySelector<HTMLImageElement>('.hero-img');
+  const img = document.querySelector<HTMLImageElement>(".hero-img");
   if (img) {
     if (img.complete) {
-      img.classList.add('is-loaded');
+      img.classList.add("is-loaded");
     } else {
-      img.addEventListener('load', () => img.classList.add('is-loaded'));
+      img.addEventListener("load", () => img.classList.add("is-loaded"));
     }
   }
 </script>
