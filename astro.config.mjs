@@ -16,6 +16,9 @@ export default defineConfig({
       filter: (page) => !page.includes('/shop/cart') && !page.includes('/specials'),
     }),
   ],
+  build: {
+    inlineStylesheets: 'always',
+  },
   image: {
     layout: 'constrained',
     responsiveStyles: true,
