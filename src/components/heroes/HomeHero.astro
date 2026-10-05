@@ -2,7 +2,7 @@
 import Btn from "../Btn.astro";
 import { Picture } from "astro:assets";
 import heroPortrait from "../../assets/site/hero-image.jpg";
-import palmFrondsPosterSrc from "../../assets/site/palm-fronds-poster.webp";
+import palmFrondsPosterSrc from "../../assets/site/palm-fronds-poster.jpg";
 import sharp from "sharp";
 import { encode, decode } from "blurhash";
 import { join } from "path";
@@ -32,7 +32,7 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
   <div aria-hidden="true" class="palm-fronds-wrap">
     <Picture
       src={palmFrondsPosterSrc}
-      alt=""
+      alt="Palm fronds"
       class="palm-poster"
       widths={[320, 480, 640, 960, 1280]}
       sizes="100vw"
