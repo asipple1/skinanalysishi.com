@@ -37,7 +37,8 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
       widths={[320, 480, 640, 960, 1280]}
       sizes="100vw"
       formats={["avif", "webp"]}
-      loading="lazy"
+      loading="eager"
+      fetchpriority="high"
     />
     <video class="palm-video" autoplay loop muted playsinline preload="none">
       <source src="/assets/palm-fronds-1.mp4" type="video/mp4" />
@@ -47,7 +48,7 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
   <div
     class="relative z-2 max-w-site mx-auto px-gutter pt-[clamp(28px,4vw,56px)] pb-[clamp(40px,10vw,140px)] grid grid-auto-md gap-[clamp(36px,5vw,80px)] items-center"
   >
-    <div data-reveal class="flex flex-col gap-7 max-w-[600px]">
+    <div class="flex flex-col gap-7 max-w-[600px]">
       <span class="eyebrow">Ewa Beach + Aiea, Oʻahu</span>
       <h1
         id="hero-h"
@@ -73,7 +74,6 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
       </div>
     </div>
     <div
-      data-reveal
       class="hero-portrait relative max-w-[600px] w-full justify-self-end"
       style={`background-image: url('${placeholder}'); background-size: cover; background-position: center 20%;`}
     >

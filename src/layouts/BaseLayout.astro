@@ -157,7 +157,7 @@ const globalSchema = [
     <CartDrawer client:idle />
 
     <!-- Mobile sticky booking bar -->
-    <div id="mobile-book-bar" class="hidden fixed left-4 right-4 bottom-4 z-60">
+    <div id="mobile-book-bar" class="fixed left-4 right-4 bottom-4 z-60" style="display:none">
       <a
         href="/contact/"
         class="block bg-charcoal text-ivory text-center py-4 text-[15px] font-medium shadow-[0_8px_24px_rgb(42_40_38/0.18)] no-underline"
@@ -167,31 +167,39 @@ const globalSchema = [
     </div>
     <script>
       const mobileBookBar = document.getElementById('mobile-book-bar');
-      if (mobileBookBar && window.innerWidth < 960) {
-        window.addEventListener('scroll', () => {
-          mobileBookBar.style.display = window.scrollY > 700 ? 'block' : 'none';
-        }, { passive: true });
+      if (mobileBookBar) {
+        const mobileQuery = window.matchMedia('(max-width: 959px)');
+        let visible = false;
+        const updateBookBar = () => {
+          if (!mobileQuery.matches) return;
+          const shouldShow = window.scrollY > 700;
+          if (shouldShow === visible) return;
+          visible = shouldShow;
+          mobileBookBar.style.display = visible ? 'block' : 'none';
+        };
+        window.addEventListener('scroll', updateBookBar, { passive: true });
+        updateBookBar();
       }
     </script>
     <script>
-      // Scroll reveal
+      // Scroll reveal — reveal-ready is only added via the IO else-branch so
+      // above-fold elements are never marked invisible before first paint.
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((e) => {
+              const el = e.target as HTMLElement;
               if (e.isIntersecting) {
-                (e.target as HTMLElement).classList.add('reveal-visible');
-                io.unobserve(e.target);
+                el.classList.add('reveal-visible');
+                io.unobserve(el);
+              } else {
+                el.classList.add('reveal-ready');
               }
             });
           },
           { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
         );
-        requestAnimationFrame(() => {
-          const els = [...document.querySelectorAll('[data-reveal]')];
-          const below = els.filter(el => el.getBoundingClientRect().top >= window.innerHeight);
-          below.forEach(el => { el.classList.add('reveal-ready'); io.observe(el); });
-        });
+        document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
       }
     </script>
   </body>
