@@ -130,6 +130,14 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
     mix-blend-mode: luminosity;
   }
 
+  .palm-poster {
+    transition: opacity 0.6s ease;
+  }
+
+  .palm-poster.is-hidden {
+    opacity: 0;
+  }
+
   @media (max-width: 875px) {
     .hero-portrait {
       display: none;
@@ -170,5 +178,11 @@ const placeholder = `data:image/jpeg;base64,${placeholderBuf.toString("base64")}
     } else {
       img.addEventListener("load", () => img.classList.add("is-loaded"));
     }
+  }
+
+  const video = document.querySelector<HTMLVideoElement>(".palm-video");
+  const poster = document.querySelector<HTMLImageElement>(".palm-poster");
+  if (video && poster) {
+    video.addEventListener("playing", () => poster.classList.add("is-hidden"), { once: true });
   }
 </script>
