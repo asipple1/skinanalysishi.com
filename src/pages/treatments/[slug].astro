@@ -23,14 +23,19 @@ const relatedTreatments = d.related
 const concerns = await getCollection('concerns');
 const treatmentConcerns = d.concerns.map((slug: string) => concerns.find((c) => c.id === slug)).filter(Boolean);
 
+const siteUrl = 'https://www.skinanalysishi.com';
+
 const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${siteUrl}/treatments/${t.id}/#service`,
     name: d.title,
     description: d.summary,
-    provider: { '@id': 'https://www.skinanalysishi.com/#org' },
-    areaServed: 'Oʻahu',
+    url: Astro.url.href,
+    image: d.heroImage ? `${siteUrl}${d.heroImage}` : undefined,
+    provider: { '@id': `${siteUrl}/#org` },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Oʻahu, Hawaiʻi' },
     offers: d.pricing.map((p: { label: string; value: string }) => {
       const numericPrice = parseFloat(p.value.replace(/[^0-9.]/g, ''));
       const offer: Record<string, unknown> = {

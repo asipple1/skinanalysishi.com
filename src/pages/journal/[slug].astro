@@ -11,11 +11,13 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 const d = article.data;
 
+const siteUrl = 'https://www.skinanalysishi.com';
 const providers = await getCollection('providers');
 const authorProvider = providers.find((p) => p.id === d.author);
 const resolvedAuthor = authorProvider
   ? `${authorProvider.data.name}, ${authorProvider.data.credentials}`
   : d.author;
+const authorUrl = authorProvider ? `${siteUrl}/about/${d.author}/` : undefined;
 ---
 
 <ArticleLayout
@@ -24,6 +26,7 @@ const resolvedAuthor = authorProvider
   pubDate={d.pubDate}
   updatedDate={d.updatedDate}
   author={resolvedAuthor}
+  authorUrl={authorUrl}
   readingTime={d.readingTime}
   heroImage={d.heroImage}
   category={d.category}

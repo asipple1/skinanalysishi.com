@@ -30,15 +30,17 @@ const globalSchema = [
   },
   {
     '@context': 'https://schema.org',
-    '@type': ['MedicalBusiness', 'MedicalClinic'],
+    '@type': ['MedicalBusiness', 'MedicalClinic', 'DaySpa'],
     '@id': 'https://www.skinanalysishi.com/#org',
     name: 'Skin Analysis Medical Spa',
     legalName: 'Skin Analysis, LLC',
+    description: 'Medical spa on Oʻahu offering provider-led skin treatments including microneedling, injectables, chemical peels, laser hair removal, and advanced facials. Two locations: Ewa Beach and Aiea.',
     url: 'https://www.skinanalysishi.com',
     telephone: '+18082138383',
     email: 'skinanalysishi@gmail.com',
     image: 'https://www.skinanalysishi.com/assets/palm-fronds-poster.webp',
     logo: 'https://www.skinanalysishi.com/assets/logo-light.webp',
+    medicalSpecialty: 'Dermatology',
     areaServed: {
       '@type': 'AdministrativeArea',
       name: 'Oʻahu, Hawaiʻi',
@@ -46,8 +48,20 @@ const globalSchema = [
     priceRange: '$$',
     paymentAccepted: 'Credit Card, Debit Card',
     currenciesAccepted: 'USD',
+    potentialAction: {
+      '@type': 'ReserveAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://www.skinanalysishi.com/contact/',
+        actionPlatform: [
+          'http://schema.org/DesktopWebPlatform',
+          'http://schema.org/MobileWebPlatform',
+        ],
+      },
+    },
     sameAs: [
       'https://www.instagram.com/skinanalysis_aesthetics/',
+      'https://www.youtube.com/@skinanalysisaesthetics',
     ],
     department: [
       {
