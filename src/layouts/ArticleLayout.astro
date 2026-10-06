@@ -2,7 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import Btn from "../components/Btn.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
-import { Picture } from "astro:assets";
+import { Picture, getImage } from "astro:assets";
 import { getAssetImage } from "../lib/images";
 
 interface Props {
@@ -39,7 +39,14 @@ function formatDate(d: Date) {
 }
 
 const siteUrl = 'https://www.skinanalysishi.com';
-const absoluteImage = heroImage?.startsWith('http') ? heroImage : `${siteUrl}${heroImage}`;
+
+const heroImageMeta = getAssetImage(heroImage);
+const processedHeroImage = heroImageMeta
+  ? (await getImage({ src: heroImageMeta, width: 1200, height: 630, format: 'webp' })).src
+  : heroImage;
+const absoluteImage = processedHeroImage.startsWith('http')
+  ? processedHeroImage
+  : `${siteUrl}${processedHeroImage}`;
 
 const schema = {
   "@context": "https://schema.org",
@@ -60,7 +67,7 @@ const schema = {
   description={description}
   type="article"
   pubDate={pubDate}
-  ogImage={heroImage}
+  ogImage={processedHeroImage}
   currentNav="Journal"
   schema={schema}
 >
