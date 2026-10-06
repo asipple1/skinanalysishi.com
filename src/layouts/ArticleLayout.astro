@@ -219,5 +219,11 @@ const schema = {
       color: #a8583d;
       border-bottom: 1px solid currentColor;
     }
+
+    /* Accordion group: top border on the first accordion after a non-accordion sibling */
+    .article-body :global(.sa-accordion:first-child),
+    .article-body :global(*:not(.sa-accordion) + .sa-accordion) {
+      border-top: 1px solid #e8e3dc;
+    }
   </style>
 </BaseLayout>

@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import netlify from '@astrojs/netlify';
+import mdx from '@astrojs/mdx';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -10,6 +11,7 @@ export default defineConfig({
   output: 'static',
   adapter: netlify(),
   integrations: [
+    mdx(),
     preact({ compat: true }),
     partytown({ config: { forward: ['dataLayer.push'] } }),
     sitemap({
