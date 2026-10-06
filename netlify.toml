@@ -15,6 +15,8 @@
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://skin-analysis-2.myshopify.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; frame-src 'self' https://maps.google.com https://www.google.com; media-src 'self'; worker-src 'self' blob:"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+# Fix: Ensure this path matches the EXACT directory where your original unoptimized images live 
+# (e.g., change to "/images/*" or keep "/assets/*" if your raw images are built into dist/assets)
 [[headers]]
   for = "/assets/*"
   [headers.values]
