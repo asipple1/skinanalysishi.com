@@ -69,6 +69,12 @@ const navItems = [
       <div class="flex items-center gap-3 shrink-0">
         <CartButton client:idle />
         <a
+          href="tel:+18082138399"
+          class="phone-link text-charcoal text-[14px] font-medium no-underline hover:text-olive transition-colors duration-200 whitespace-nowrap"
+        >
+          808-213-8399
+        </a>
+        <a
           href="/contact/"
           class="book-btn bg-charcoal text-ivory px-[22px] py-3 text-sm font-medium whitespace-nowrap no-underline transition-[background] duration-[250ms] hover:bg-olive"
         >
@@ -110,10 +116,10 @@ const navItems = [
     </a>
   ))}
   <a
-    href="/contact/"
-    class="mobile-nav-link mt-8 bg-charcoal text-ivory px-7.5 py-4.25 rounded-pill text-[15px] font-medium no-underline text-center"
+    href="tel:+18082138399"
+    class="mt-8 text-charcoal text-[17px] font-medium no-underline text-center"
   >
-    Book an Appointment
+    808-213-8399
   </a>
   <div class="mt-8 flex gap-7 items-center justify-center">
     <a
@@ -141,12 +147,26 @@ const navItems = [
   </div>
 </nav>
 
+<!-- Sticky bottom call bar — mobile only -->
+<div id="call-bar" class="call-bar fixed bottom-0 inset-x-0 z-198 bg-charcoal safe-bottom">
+  <a
+    href="tel:+18082138399"
+    class="flex items-center justify-center gap-2.5 text-ivory text-[15px] font-medium no-underline py-4"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </svg>
+    Call to Book — 808-213-8399
+  </a>
+</div>
+
 <script>
   const bar = document.getElementById('announcement-bar') as HTMLElement | null;
   const nav = document.getElementById('site-nav') as HTMLElement | null;
   const wrapper = document.getElementById('site-header-wrapper') as HTMLElement | null;
   const menuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement | null;
   const overlay = document.getElementById('mobile-nav-overlay') as HTMLElement | null;
+  const callBar = document.getElementById('call-bar') as HTMLElement | null;
 
   // Write header height to a CSS variable — read by the overlay's top position.
   const updateHeaderH = () => {
@@ -167,6 +187,7 @@ const navItems = [
     if (bars) bars.style.display = open ? 'none' : 'flex';
     if (close) close.classList.toggle('hidden', !open);
     overlay.style.display = open ? 'flex' : 'none';
+    callBar?.classList.toggle('nav-open', open);
     if (open) {
       const sw = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.paddingRight = sw + 'px';
@@ -221,7 +242,15 @@ const navItems = [
     .desktop-nav { display: none !important; }
     .mobile-menu-btn { display: flex; }
   }
+  @media (max-width: 767px) {
+    .phone-link { display: none; }
+  }
   @media (max-width: 599px) {
     .book-btn { display: none; }
   }
+  .call-bar { display: none; }
+  @media (max-width: 959px) {
+    .call-bar { display: block; padding-bottom: env(safe-area-inset-bottom, 0px); }
+  }
+  .call-bar.nav-open { display: none; }
 </style>
