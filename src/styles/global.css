@@ -5,6 +5,17 @@
 @import "@fontsource/hanken-grotesk/500.css";
 @import "@fontsource/hanken-grotesk/600.css";
 
+/* Metric-adjusted fallback — matches Hanken Grotesk's line metrics so that
+   when the web font swaps in the text block doesn't reflow (eliminates CLS). */
+@font-face {
+  font-family: 'Hanken Grotesk Fallback';
+  src: local('Arial');
+  size-adjust: 99%;
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
 @theme {
   --color-ivory: #F8F5EF;
   --color-sand: #EDE6DA;
@@ -25,7 +36,7 @@
   --color-footer-line: #45423E;
 
   --font-serif: 'Newsreader Variable', Georgia, serif;
-  --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-sans: 'Hanken Grotesk', 'Hanken Grotesk Fallback', system-ui, sans-serif;
 
   --radius-sm: 4px;
   --radius-pill: 999px;
@@ -65,7 +76,7 @@
   --footer-meta: #A39C90;
   --footer-line: #45423E;
   --serif: 'Newsreader Variable', Georgia, serif;
-  --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --sans: 'Hanken Grotesk', 'Hanken Grotesk Fallback', system-ui, sans-serif;
   --r-sm: 4px;
   --r-pill: 999px;
   --arch: 50% 50% 4px 4px / 39.5% 39.5% 4px 4px;

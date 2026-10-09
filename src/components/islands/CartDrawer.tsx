@@ -1,5 +1,4 @@
 import { useStore } from '@nanostores/preact';
-import { createPortal } from 'preact/compat';
 import { useEffect } from 'preact/hooks';
 import { cartItems, isCartOpen, removeFromCart, updateQuantity, cartTotal } from '../../lib/cartStore';
 import { shopifyFetch } from '../../lib/shopify';
@@ -114,6 +113,5 @@ export default function CartDrawer() {
     </>
   );
 
-  if (typeof document === 'undefined') return null;
-  return createPortal(drawer, document.body);
+  return drawer;
 }
