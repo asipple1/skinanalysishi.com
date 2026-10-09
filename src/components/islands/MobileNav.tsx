@@ -25,25 +25,10 @@ const YouTubeIcon = () => (
 export default function MobileNav({ navItems }: Props) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [headerHeight, setHeaderHeight] = useState(0);
 
   useEffect(() => {
     setMounted(true);
-    const measure = () => {
-      const h = document.getElementById('site-header-wrapper');
-      if (h) setHeaderHeight(h.offsetHeight);
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
   }, []);
-
-  useEffect(() => {
-    if (open) {
-      const h = document.getElementById('site-header-wrapper');
-      if (h) setHeaderHeight(h.offsetHeight);
-    }
-  }, [open]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
@@ -69,7 +54,7 @@ export default function MobileNav({ navItems }: Props) {
   const overlay = open && mounted ? (
     <nav
       aria-label="Mobile"
-      style={{ top: `${headerHeight}px` }}
+      style={{ top: 'var(--header-h, 80px)' }}
       class="fixed inset-x-0 bottom-0 bg-ivory z-199 flex flex-col px-gutter pt-6 pb-10 overflow-y-auto"
     >
       {navItems.map(({ label, href }) => (
