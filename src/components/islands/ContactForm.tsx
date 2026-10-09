@@ -102,6 +102,7 @@ export default function ContactForm({ treatments, preselect }: Props) {
   );
   const [message, setMessage] = useState('');
   const [reach, setReach] = useState<ReachMethod>('Email');
+  const [newsletter, setNewsletter] = useState(true);
   const [tried, setTried] = useState(false);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -131,16 +132,25 @@ export default function ContactForm({ treatments, preselect }: Props) {
     params.set('email', email);
     params.set('message', message);
     params.set('reach', reach);
+    params.set('newsletter', String(newsletter));
     interests.forEach((id) => params.append('interests', id));
 
     try {
-      await fetch('/', {
+      const res = await fetch('/.netlify/functions/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+      });
+      if (!res.ok) throw new Error('Function error');
+      // Also capture in Netlify Forms so business email notifications fire
+      fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString(),
       });
       setSent(true);
     } catch {
+      // Fallback: submit natively to Netlify Forms
       (e.target as HTMLFormElement).submit();
     } finally {
       setLoading(false);
@@ -266,6 +276,18 @@ export default function ContactForm({ treatments, preselect }: Props) {
           ))}
         </div>
       </div>
+
+      {/* Newsletter opt-in */}
+      <label class="flex items-start gap-3 cursor-pointer">
+        <input
+          type="checkbox"
+          name="newsletter"
+          checked={newsletter}
+          onChange={(e) => setNewsletter((e.target as HTMLInputElement).checked)}
+          class="w-4 h-4 mt-0.5 accent-charcoal shrink-0"
+        />
+        <span class="text-[14px] leading-normal text-ink-2">Send me skin tips and exclusive offers</span>
+      </label>
 
       <button
         type="submit"
