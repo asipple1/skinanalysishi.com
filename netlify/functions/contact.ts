@@ -1,4 +1,18 @@
-async function flodeskFetch(path: string, body: unknown): Promise<void> {
+const TREATMENT_LABELS: Record<string, string> = {
+  'diamondglow-facial': 'DiamondGlow Facial',
+  'skinpen-microneedling': 'SkinPen Microneedling',
+  'dysport': 'Dysport',
+  'chemical-peels': 'Chemical Peels',
+  'dermaplaning': 'Dermaplaning',
+  'laser-hair-removal': 'Laser Hair Removal',
+  'iv-therapy': 'IV Therapy',
+  'hydrafacial': 'HydraFacial',
+  'diamondglow-body': 'DiamondGlow Body',
+  'red-light-therapy': 'Red Light Therapy',
+  'professional-skincare': 'Professional Skincare',
+};
+
+async function flodeskFetch(path: string, body: unknown): Promise<any> {
   const auth = Buffer.from(`${process.env.FLODESK_API_KEY}:`).toString('base64');
   const res = await fetch(`https://api.flodesk.com/v1${path}`, {
     method: 'POST',
@@ -13,20 +27,43 @@ async function flodeskFetch(path: string, body: unknown): Promise<void> {
     const text = await res.text();
     throw new Error(`Flodesk ${path} error ${res.status}: ${text}`);
   }
+  return res.json();
 }
 
 async function addToFlodesk(
   email: string,
   firstName: string,
   lastName: string,
+  phone: string,
+  interests: string[],
+  reach: string,
+  message: string,
   segmentIds: string[]
 ): Promise<void> {
-  await flodeskFetch('/subscribers', {
+  const interestedServices = interests.length
+    ? interests.map((id) => TREATMENT_LABELS[id] ?? id).join(', ')
+    : 'Consultation';
+
+  const customFields: Record<string, string> = {};
+  if (phone) customFields['phone'] = phone;
+  if (interestedServices) customFields['services'] = interestedServices;
+  if (reach) customFields['contacttype'] = reach;
+  if (message) customFields['notes'] = message;
+
+  // Step 1: create/update subscriber with custom fields
+  const subscriber = await flodeskFetch('/subscribers', {
     email,
     first_name: firstName,
     last_name: lastName,
-    segment_ids: segmentIds,
+    custom_fields: customFields,
   });
+
+  // Step 2: assign segments using the returned subscriber ID
+  if (segmentIds.length > 0 && subscriber?.id) {
+    await flodeskFetch(`/subscribers/${subscriber.id}/segments`, {
+      segment_ids: segmentIds,
+    });
+  }
 }
 
 export default async (req: Request): Promise<Response> => {
@@ -55,6 +92,10 @@ export default async (req: Request): Promise<Response> => {
   const params = new URLSearchParams(text);
   const name = params.get('name')?.trim() ?? '';
   const email = params.get('email')?.trim() ?? '';
+  const phone = params.get('phone')?.trim() ?? '';
+  const message = params.get('message')?.trim() ?? '';
+  const reach = params.get('reach') ?? '';
+  const interests = params.getAll('interests');
   const newsletter = params.get('newsletter') === 'true';
 
   if (name.length < 2 || !/^.+@.+\..+$/.test(email)) {
@@ -77,7 +118,7 @@ export default async (req: Request): Promise<Response> => {
   }
 
   try {
-    await addToFlodesk(email, firstName, lastName, segmentIds);
+    await addToFlodesk(email, firstName, lastName, phone, interests, reach, message, segmentIds);
   } catch (err) {
     console.error('Flodesk error:', err);
     return new Response(JSON.stringify({ error: 'Failed to add subscriber' }), {
