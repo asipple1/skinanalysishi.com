@@ -1,8 +1,8 @@
 ---
 title: "Dysport® Wrinkle Relaxer"
 shortName: "Dysport®"
-seoTitle: "Dysport on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "Dysport® in Ewa Beach + Aiea, Oʻahu. A wrinkle relaxer that softens forehead lines, frown lines, and crow’s feet — natural results, nurse-administered."
+seoTitle: "Dysport on Oʻahu | Skin Analysis Medical Spa, Ewa Beach"
+metaDescription: "Dysport® in Ewa Beach, Oʻahu. A wrinkle relaxer that softens forehead lines, frown lines, and crow’s feet — natural results, nurse-administered."
 category: "Injectables"
 order: 1
 benefit: "Softens expression lines while keeping movement natural."

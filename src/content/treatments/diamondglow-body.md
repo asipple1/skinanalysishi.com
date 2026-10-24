@@ -1,8 +1,8 @@
 ---
 title: "DiamondGlow® Body"
 shortName: "DiamondGlow® Body"
-seoTitle: "DiamondGlow Body Treatment on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "DiamondGlow® Body in Ewa Beach + Aiea, Oʻahu. Diamond-tip exfoliation, pore extraction, and custom serum infusion for the back, arms, legs, and shoulders."
+seoTitle: "DiamondGlow Body Treatment on Oʻahu | Skin Analysis Medical Spa, Ewa Beach"
+metaDescription: "DiamondGlow® Body in Ewa Beach, Oʻahu. Diamond-tip exfoliation, pore extraction, and custom serum infusion for the back, arms, legs, and shoulders."
 category: "Facials + Resurfacing"
 order: 3
 benefit: "Smooths, brightens, and deeply hydrates skin on larger body areas."

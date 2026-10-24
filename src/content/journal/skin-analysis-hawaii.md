@@ -92,4 +92,4 @@ Yes. Both of those concerns require understanding what is driving them before tr
 
 If you live on Oahu and your skin feels like it is working against you, you are not imagining it. The environment here is demanding in ways that most skincare advice does not address. A skin analysis is where we start, and it is where a plan that actually fits your skin and your life gets built.
 
-We see clients at our Ewa Beach and Aiea locations. Book a skin analysis consultation and come in with your questions.
+We see clients at our Ewa Beach location. Book a skin analysis consultation and come in with your questions.

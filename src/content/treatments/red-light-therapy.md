@@ -1,8 +1,8 @@
 ---
 title: "Red Light Therapy"
 shortName: "Red Light Therapy"
-seoTitle: "Red Light Therapy on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "Red light therapy in Ewa Beach + Aiea, Oʻahu. Low-level wavelengths that stimulate collagen, reduce inflammation, and support skin healing — no downtime."
+seoTitle: "Red Light Therapy on Oʻahu | Skin Analysis Medical Spa, Ewa Beach"
+metaDescription: "Red light therapy in Ewa Beach, Oʻahu. Low-level wavelengths that stimulate collagen, reduce inflammation, and support skin healing — no downtime."
 category: "Light Therapy"
 order: 6
 benefit: "Stimulates collagen and reduces inflammation at a cellular level with no downtime."

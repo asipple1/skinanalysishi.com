@@ -74,7 +74,7 @@ What to actually compare: credentials, consultation quality, reviews from verifi
 
 At Skin Analysis, we assess before we recommend. A new patient visit is not a treatment session with paperwork attached. We ask about your goals, your history, your skin, and your life, then we tell you honestly what we think will help and what we think would be a waste of your money or your time.
 
-We are nurse practitioner-led. Sarah Lockwood-Sepulveda, FNP-BC, sees patients at both our Ewa Beach and Aiea locations. We do not have a treatment menu we are trying to fill. We turn patients away from procedures that are not right for them, and we do it regularly.
+We are nurse practitioner-led. Sarah Lockwood-Sepulveda, FNP-BC, sees patients at our Ewa Beach location. We do not have a treatment menu we are trying to fill. We turn patients away from procedures that are not right for them, and we do it regularly.
 
 That is not a sales pitch. It is just how we practice.
 
@@ -102,4 +102,4 @@ Yes, always. A provider who discourages second opinions is a provider worth reco
 
 The best cosmetic outcomes come from the right provider, not the right product. If you are evaluating your options on Oahu, we are happy to talk. No pressure, no agenda - just an honest conversation about your skin and what might help.
 
-Book a consultation at our Ewa Beach or Aiea location, and we will take it from there.
+Book a consultation at our Ewa Beach location, and we will take it from there.

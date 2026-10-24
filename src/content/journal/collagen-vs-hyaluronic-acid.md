@@ -88,4 +88,4 @@ Retinoids are the most well-supported topical option. Vitamin C supports collage
 
 ---
 
-If you're reading ingredient labels and still not sure what your skin actually needs, that's the most common thing we hear. It's genuinely hard to sort through the marketing. A consultation is a good place to start - we'll look at your skin, ask about your routine, and give you a clear direction rather than a list of products to try. Book with us at our Ewa Beach or Aiea location whenever you're ready.
+If you're reading ingredient labels and still not sure what your skin actually needs, that's the most common thing we hear. It's genuinely hard to sort through the marketing. A consultation is a good place to start - we'll look at your skin, ask about your routine, and give you a clear direction rather than a list of products to try. Book with us at our Ewa Beach location whenever you're ready.

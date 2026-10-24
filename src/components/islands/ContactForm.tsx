@@ -109,7 +109,8 @@ export default function ContactForm({ treatments, preselect }: Props) {
 
   const nameOk = name.trim().length >= 2;
   const emailOk = /^.+@.+\..+$/.test(email.trim());
-  const valid = nameOk && emailOk;
+  const phoneOk = phone.trim().length >= 7;
+  const valid = nameOk && emailOk && phoneOk;
 
   const toggleInterest = (id: string) => {
     setInterests((prev) => {
@@ -188,7 +189,7 @@ export default function ContactForm({ treatments, preselect }: Props) {
 
       {tried && !valid && (
         <p role="alert" class="text-sm text-olive m-0 px-4 py-3 border border-olive rounded-sm">
-          Please add your name and a valid email so we can reach you.
+          Please add your name, a valid email, and a phone number so we can reach you.
         </p>
       )}
 
@@ -208,15 +209,16 @@ export default function ContactForm({ treatments, preselect }: Props) {
           />
         </div>
         <div class="flex flex-col gap-2">
-          <label for="contact-phone" class="text-[13px] text-ink-3 font-medium">Phone</label>
+          <label for="contact-phone" class="text-[13px] text-ink-3 font-medium">Phone *</label>
           <input
             id="contact-phone"
             name="phone"
             type="tel"
             value={phone}
             onInput={(e) => setPhone((e.target as HTMLInputElement).value)}
+            required
             autocomplete="tel"
-            class="border border-taupe-line-2 rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none transition-[border-color] duration-250"
+            class={`border rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none transition-[border-color] duration-250 ${tried && !phoneOk ? 'border-olive' : 'border-taupe-line-2'}`}
           />
         </div>
       </div>

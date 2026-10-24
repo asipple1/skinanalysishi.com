@@ -1,8 +1,8 @@
 ---
 title: "DiamondGlow® Facial"
 shortName: "DiamondGlow®"
-seoTitle: "DiamondGlow Facial on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "DiamondGlow® facial in Ewa Beach + Aiea, Oʻahu. Diamond-tip exfoliation, extraction, and serum infusion in one visit, immediate glow, no downtime."
+seoTitle: "DiamondGlow Facial on Oʻahu | Skin Analysis Medical Spa, Ewa Beach"
+metaDescription: "DiamondGlow® facial in Ewa Beach, Oʻahu. Diamond-tip exfoliation, extraction, and serum infusion in one visit, immediate glow, no downtime."
 category: "Facials + Resurfacing"
 order: 2
 benefit: "Exfoliates, clears pores, and infuses serums in one step for smoother, brighter skin."

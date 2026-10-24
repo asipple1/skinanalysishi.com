@@ -11,7 +11,7 @@ const locations = await getCollection('locations');
       <div class="flex flex-col gap-[18px]">
         <span class="eyebrow">Locations</span>
         <h2 id="loc-h" class="font-serif font-light text-h2-xl leading-[1.02] tracking-[-0.02em] m-0">
-          Two studios on Oʻahu.
+          Where to find us.
         </h2>
       </div>
       <p class="text-[15px] leading-[1.6] text-ink-3 max-w-[360px] m-0">
@@ -38,8 +38,7 @@ const locations = await getCollection('locations');
             </dd>
           </dl>
           <div class="flex gap-3 flex-wrap mt-2">
-            <Btn href="/contact/" size="sm">Book in {l.data.name}</Btn>
-            <Btn href={l.data.mapUrl} target="_blank" rel="noopener" variant="outline" size="sm">Get Directions</Btn>
+            <Btn href={l.data.mapUrl} target="_blank" rel="noopener" size="sm">Get Directions</Btn>
           </div>
         </article>
       ))}

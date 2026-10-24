@@ -1,8 +1,8 @@
 ---
 title: "Medical-Grade Chemical Peels"
 shortName: "Chemical Peels"
-seoTitle: "Chemical Peel on Oʻahu | Skin Analysis Medical Spa, Ewa Beach + Aiea"
-metaDescription: "Professional chemical peels in Ewa Beach + Aiea, Oʻahu. SkinMedica® blends customized to your skin and downtime. Free consultation available."
+seoTitle: "Chemical Peel on Oʻahu | Skin Analysis Medical Spa, Ewa Beach"
+metaDescription: "Professional chemical peels in Ewa Beach, Oʻahu. SkinMedica® blends customized to your skin and downtime. Free consultation available."
 category: "Facials + Resurfacing"
 benefit: "Light or medium peels that renew skin and improve tone and signs of aging."
 summary: "Our peels use professional blends from SkinMedica® to remove the outer layer of skin and encourage healthy renewal. We choose the strength based on your skin, your history, and how much downtime works for you."

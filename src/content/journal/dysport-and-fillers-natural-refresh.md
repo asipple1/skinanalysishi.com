@@ -82,4 +82,4 @@ That is exactly what a consultation is for. It is not a sales appointment. We lo
 
 ---
 
-If you are thinking about Dysport — whether it is your first time or you are reassessing your approach — a consultation is the right place to start. Not a list of services, just an honest conversation about what you are seeing and what would actually help. We are at two locations on O'ahu, in Ewa Beach and Aiea, and we are happy to take the time to talk it through.
+If you are thinking about Dysport — whether it is your first time or you are reassessing your approach — a consultation is the right place to start. Not a list of services, just an honest conversation about what you are seeing and what would actually help. We are in Ewa Beach on Oʻahu, and we are happy to take the time to talk it through.

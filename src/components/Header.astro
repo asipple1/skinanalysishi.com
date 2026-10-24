@@ -15,21 +15,11 @@ const navItems = [
   { label: 'About', href: '/about/' },
   { label: 'Skincare Shop', href: '/shop/' },
   { label: 'Journal', href: '/journal/' },
-  { label: 'Locations', href: '/contact/#locations' },
+  { label: 'Contact', href: '/contact/' },
 ];
 ---
 
 <div id="site-header-wrapper" class="sticky top-0 z-50 block">
-  <!-- Announcement bar -->
-  <div
-    id="announcement-bar"
-    class="bg-charcoal text-sand text-[13px] tracking-[0.04em] px-6 py-[10px] flex justify-center gap-7 flex-wrap text-center overflow-hidden transition-[max-height,padding,opacity] duration-300"
-    style="max-height:60px;opacity:1"
-  >
-    <span>Ewa Beach + Aiea, Oʻahu</span>
-    <span class="text-sage-mid">Complimentary consultations available</span>
-  </div>
-
   <!-- Nav -->
   <header
     id="site-nav"
@@ -116,6 +106,12 @@ const navItems = [
     </a>
   ))}
   <a
+    href="/contact/#locations"
+    class="mobile-nav-link font-serif text-[30px] py-3.5 border-b border-sand text-charcoal no-underline"
+  >
+    Locations
+  </a>
+  <a
     href="tel:+18082138383"
     class="mt-8 text-charcoal text-[17px] font-medium no-underline text-center"
   >
@@ -161,7 +157,6 @@ const navItems = [
 </div>
 
 <script>
-  const bar = document.getElementById('announcement-bar') as HTMLElement | null;
   const nav = document.getElementById('site-nav') as HTMLElement | null;
   const wrapper = document.getElementById('site-header-wrapper') as HTMLElement | null;
   const menuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement | null;
@@ -210,28 +205,8 @@ const navItems = [
     if (e.key === 'Escape') setNavOpen(false);
   });
 
-  let collapsed = false;
-
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-
-    if (bar) {
-      if (!collapsed && y > 60) {
-        collapsed = true;
-        bar.style.maxHeight = '0';
-        bar.style.paddingTop = '0';
-        bar.style.paddingBottom = '0';
-        bar.style.opacity = '0';
-      } else if (collapsed && y < 20) {
-        collapsed = false;
-        bar.style.maxHeight = '60px';
-        bar.style.paddingTop = '10px';
-        bar.style.paddingBottom = '10px';
-        bar.style.opacity = '1';
-      }
-    }
-
-    if (nav) nav.style.borderBottomColor = y > 8 ? '#E6DED2' : 'transparent';
+    if (nav) nav.style.borderBottomColor = window.scrollY > 8 ? '#E6DED2' : 'transparent';
   }, { passive: true });
 </script>
 
