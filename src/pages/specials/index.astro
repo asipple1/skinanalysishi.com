@@ -2,17 +2,27 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Btn from '../../components/Btn.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { specials } from '../../data/specials';
 
-const month = 'October 2026';
-const expires = 'October 31, 2026';
+const now = new Date();
+const activeSpecials = specials.filter(
+  (s) => new Date(s.expires + 'T23:59:59') >= now
+);
 
-const specials = [
-];
+const months = [...new Set(activeSpecials.map((s) => s.month))];
+
+function fmtExpiry(iso: string) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
 ---
 
 <BaseLayout
-  title="Monthly Specials"
-  description="Check back later"
+  title="Monthly Specials | Skin Analysis Medical Spa, Ewa Beach"
+  description="Current promotions and limited-time offers on facials, microneedling, Dysport, chemical peels, and skincare at Skin Analysis in Ewa Beach, Oʻahu."
   canonical="https://www.skinanalysishi.com/specials/"
   currentNav=""
   noIndex={true}
@@ -21,65 +31,85 @@ const specials = [
   <div class="max-w-site mx-auto px-gutter pt-[clamp(40px,6vw,80px)] pb-[clamp(28px,3vw,40px)]">
     <Breadcrumb crumbs={[{ label: 'Home', href: '/' }, { label: 'Specials' }]} class="mb-6" />
     <div class="flex flex-col gap-5 max-w-190">
-      <span class="text-xs tracking-[0.22em] uppercase text-sage">{month}</span>
+      <span class="text-xs tracking-[0.22em] uppercase text-sage">Current + Upcoming Offers</span>
       <h1 class="font-serif font-light text-h1-lg leading-[0.98] tracking-tight m-0">
-        This month's <em class="italic">specials.</em>
+        This season's <em class="italic">specials.</em>
       </h1>
       <p class="text-body-lg leading-[1.6] text-ink-2 m-0 max-w-2xl">
-        Check back later to see our specials.
+        Limited-time promotions on treatments, packages, and skincare. All offers are valid at Skin Analysis Ewa Beach — call or book online to redeem.
       </p>
     </div>
   </div>
 
-  <!-- Specials grid -->
-  <div class="max-w-site mx-auto px-gutter py-[clamp(48px,6vw,88px)]">
-    <div class="grid gap-6" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,480px),1fr))">
-      {specials.map((s) => (
-        <article
-          data-reveal
-          class="flex flex-col gap-6 border border-taupe-line-3 bg-white p-[clamp(28px,3vw,40px)]"
-        >
-          <div class="flex flex-col gap-3">
-            <span class="text-xs tracking-[0.22em] uppercase text-sage">{s.category}</span>
-            <h2 class="font-serif font-light text-h2-sm leading-[1.08] tracking-[-0.02em] m-0">
-              {s.title}
-            </h2>
-            <p class="text-[16px] leading-[1.65] text-ink-2 m-0">{s.description}</p>
-          </div>
-
-          <div class="border-t border-taupe-line-3 pt-5 flex flex-col gap-4">
-            <!-- Offer badge -->
-            <div class="inline-flex self-start bg-sand px-4 py-2 text-[13px] tracking-[0.06em] uppercase text-charcoal font-medium">
-              {s.offer}
-            </div>
-
-            {(s.originalPrice || s.salePrice) && (
-              <div class="flex items-baseline gap-3">
-                {s.salePrice && (
-                  <span class="font-serif font-light text-[28px] leading-none text-charcoal">
-                    {s.salePrice}
-                  </span>
-                )}
-                {s.originalPrice && (
-                  <span class="text-[15px] text-ink-3 line-through">{s.originalPrice}</span>
-                )}
-              </div>
-            )}
-
-            <div class="flex gap-3 flex-wrap">
-              <Btn href="/contact/" size="sm">Book This Special</Btn>
-              <Btn href={s.href} variant="outline" size="sm">Learn More</Btn>
-            </div>
-          </div>
-        </article>
-      ))}
+  {activeSpecials.length === 0 ? (
+    <div class="max-w-site mx-auto px-gutter py-[clamp(48px,6vw,88px)]">
+      <p class="text-[17px] text-ink-2">New specials are coming soon — check back shortly or call us at <a href="tel:+18082138383" class="text-charcoal underline underline-offset-2">808-213-8383</a> or <a href="tel:+18089791098" class="text-charcoal underline underline-offset-2">808-979-1098</a> for current offers.</p>
     </div>
-  </div>
+  ) : (
+    <div class="max-w-site mx-auto px-gutter py-[clamp(48px,6vw,88px)] flex flex-col gap-[clamp(56px,7vw,96px)]">
+      {months.map((month) => {
+        const monthSpecials = activeSpecials.filter((s) => s.month === month);
+        return (
+          <div>
+            <h2 class="font-serif font-light text-[clamp(26px,3vw,36px)] tracking-[-0.02em] leading-tight m-0 mb-8 pb-5 border-b border-taupe-line-3">
+              {month}
+            </h2>
+            <div class="grid gap-6" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,480px),1fr))">
+              {monthSpecials.map((s) => (
+                <article
+                  data-reveal
+                  class="flex flex-col gap-6 border border-taupe-line-3 bg-white p-[clamp(28px,3vw,40px)]"
+                >
+                  <div class="flex flex-col gap-3">
+                    <span class="text-xs tracking-[0.22em] uppercase text-sage">{s.category}</span>
+                    <h3 class="font-serif font-light text-h2-sm leading-[1.08] tracking-[-0.02em] m-0">
+                      {s.title}
+                    </h3>
+                    <p class="text-[16px] leading-[1.65] text-ink-2 m-0">{s.description}</p>
+                  </div>
 
-  <!-- Expiry note -->
+                  <div class="border-t border-taupe-line-3 pt-5 flex flex-col gap-4">
+                    <div class="inline-flex self-start bg-sand px-4 py-2 text-[13px] tracking-[0.06em] uppercase text-charcoal font-medium">
+                      {s.offer}
+                    </div>
+
+                    {(s.originalPrice || s.salePrice) && (
+                      <div class="flex items-baseline gap-3">
+                        {s.salePrice && (
+                          <span class="font-serif font-light text-[28px] leading-none text-charcoal">
+                            {s.salePrice}
+                          </span>
+                        )}
+                        {s.originalPrice && (
+                          <span class="text-[15px] text-ink-3 line-through">{s.originalPrice}</span>
+                        )}
+                      </div>
+                    )}
+
+                    <p class="text-[13px] text-ink-3 m-0">
+                      Valid through {fmtExpiry(s.expires)}
+                    </p>
+
+                    <div class="flex gap-3 flex-wrap">
+                      <Btn href={`/contact/${s.treatmentSlugs[0] ? `?t=${s.treatmentSlugs[0]}&` : '?'}msg=${encodeURIComponent(`I'm interested in the ${s.title}.`)}`} size="sm">Book This Special</Btn>
+                      {s.href && s.href !== '/contact/' && (
+                        <Btn href={s.href} variant="outline" size="sm">Learn More</Btn>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  )}
+
+  <!-- Disclaimer -->
   <div class="max-w-site mx-auto px-gutter pb-[clamp(48px,6vw,80px)]">
     <p class="text-[14px] text-ink-3 border-t border-taupe-line-3 pt-6">
-      All offers valid through {expires} at Skin Analysis Ewa Beach. Cannot be combined with other discounts. Subject to provider availability. Call us at <a href="tel:+18082138383" class="text-charcoal underline underline-offset-2">(808) 213-8383</a> or <a href="/contact/" class="text-charcoal underline underline-offset-2">book online</a>.
+      All offers valid at Skin Analysis Ewa Beach through their respective expiration dates. Cannot be combined with other discounts unless noted. Subject to provider availability. Call us at <a href="tel:+18082138383" class="text-charcoal underline underline-offset-2">808-213-8383</a> or <a href="tel:+18089791098" class="text-charcoal underline underline-offset-2">808-979-1098</a> or <a href="/contact/" class="text-charcoal underline underline-offset-2">book online</a>.
     </p>
   </div>
 

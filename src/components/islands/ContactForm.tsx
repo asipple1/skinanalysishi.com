@@ -97,10 +97,18 @@ export default function ContactForm({ treatments, preselect }: Props) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [interests, setInterests] = useState<Set<string>>(
-    preselect ? new Set([preselect]) : new Set()
+  const [interests, setInterests] = useState<Set<string>>(() => {
+    // preselect prop works in SSR; for static builds read ?t= client-side
+    const slug = preselect ?? (typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('t') ?? ''
+      : '');
+    return slug ? new Set([slug]) : new Set();
+  });
+  const [message, setMessage] = useState(() =>
+    typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search).get('msg') ?? ''
+      : ''
   );
-  const [message, setMessage] = useState('');
   const [reach, setReach] = useState<ReachMethod>('Email');
   const [newsletter, setNewsletter] = useState(true);
   const [tried, setTried] = useState(false);

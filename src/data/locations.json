@@ -7,8 +7,10 @@
     "locality": "Ewa Beach",
     "region": "HI",
     "country": "US",
-    "phone": "808.213.8383",
+    "phone": "808-213-8383",
     "tel": "+18082138383",
+    "phone2": "808-979-1098",
+    "tel2": "+18089791098",
     "mapUrl": "https://www.google.com/maps/dir/?api=1&destination=91-3475+Nana+Hope+St,+Ewa+Beach,+HI",
     "appointments": "By appointment only",
     "main": true

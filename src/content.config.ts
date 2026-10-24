@@ -97,6 +97,8 @@ const locations = defineCollection({
     country: z.string(),
     phone: z.string(),
     tel: z.string(),
+    phone2: z.string().optional(),
+    tel2: z.string().optional(),
     mapUrl: z.string(),
     appointments: z.string(),
     main: z.boolean(),

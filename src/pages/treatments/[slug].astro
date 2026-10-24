@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import { getAssetImage } from '../../lib/images';
 import providersTeam from '../../assets/site/providers-team.jpg';
+import { specials } from '../../data/specials';
 
 export async function getStaticPaths() {
   const treatments = await getCollection('treatments');
@@ -22,6 +23,19 @@ const relatedTreatments = d.related
 
 const concerns = await getCollection('concerns');
 const treatmentConcerns = d.concerns.map((slug: string) => concerns.find((c) => c.id === slug)).filter(Boolean);
+
+const now = new Date();
+const treatmentSpecials = specials.filter(
+  (s) => s.treatmentSlugs.includes(t.id) && new Date(s.expires + 'T23:59:59') >= now
+);
+
+function fmtExpiry(iso: string) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
 
 const siteUrl = 'https://www.skinanalysishi.com';
 
@@ -119,6 +133,30 @@ const schema = [
         <Btn href="/contact/">Book {d.shortName}</Btn>
         <Btn href="#faq" variant="outline">Read FAQs</Btn>
       </div>
+
+      {treatmentSpecials.length > 0 && (
+        <div class="flex flex-col gap-4 border border-taupe-line-3 bg-sand p-5">
+          <span class="text-xs tracking-[0.22em] uppercase text-sage">Limited-time special</span>
+          {treatmentSpecials.map((s) => (
+            <div class="flex flex-col gap-2">
+              <p class="font-serif font-light text-[20px] leading-snug text-charcoal m-0">{s.title}</p>
+              <p class="text-[14px] leading-[1.65] text-ink-2 m-0">{s.description}</p>
+              <div class="flex flex-wrap items-center gap-3 mt-1">
+                <span class="inline-flex bg-sage text-[#F3F0E8] px-3 py-1.5 text-[11px] tracking-widest uppercase font-medium">
+                  {s.offer}
+                </span>
+                {(s.salePrice || s.originalPrice) && (
+                  <div class="flex items-baseline gap-2">
+                    {s.salePrice && <span class="font-serif font-light text-[22px] leading-none text-charcoal">{s.salePrice}</span>}
+                    {s.originalPrice && <span class="text-[13px] text-ink-3 line-through">{s.originalPrice}</span>}
+                  </div>
+                )}
+              </div>
+              <p class="text-[12px] text-ink-3 m-0">Valid through {fmtExpiry(s.expires)} · <a href="/specials/" class="text-charcoal underline underline-offset-2">See all specials</a></p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
       {getAssetImage(d.heroImage) && (
         <Picture
@@ -300,15 +338,12 @@ const schema = [
       <p class="text-sm leading-[1.6] text-ink-3 m-0">
         Your plan and exact pricing are confirmed at your consultation. We're a cashless business and accept all major cards.
       </p>
-      <a
-        href="tel:+18082138383"
-        class="inline-flex items-center gap-2.5 text-[15px] font-medium text-charcoal no-underline hover:text-olivee transition-colors duration-200 mt-1"
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+      <div class="inline-flex items-center gap-2.5 text-[15px] font-medium text-charcoal mt-1">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true" class="shrink-0">
           <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
         </svg>
-        Pricing questions? Call us — 808-213-8383
-      </a>
+        <span>Pricing questions? Call us —&nbsp;<a href="tel:+18082138383" class="no-underline hover:text-olivee transition-colors duration-200">808-213-8383</a> or <a href="tel:+18089791098" class="no-underline hover:text-olivee transition-colors duration-200">808-979-1098</a></span>
+      </div>
     </div>
     <figure class="m-0 flex flex-col gap-7 bg-sage text-[#F3F0E8] p-[clamp(32px,4vw,56px)] rounded-sm self-start">
       <span class="text-xs tracking-[0.22em] uppercase text-sage-light">From your provider</span>
