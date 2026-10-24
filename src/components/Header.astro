@@ -163,10 +163,15 @@ const navItems = [
   const overlay = document.getElementById('mobile-nav-overlay') as HTMLElement | null;
   const callBar = document.getElementById('call-bar') as HTMLElement | null;
 
-  // Write header height to a CSS variable — read by the overlay's top position.
+  // Write header bottom position to a CSS variable — read by the overlay's top position.
+  // Uses getBoundingClientRect().bottom so it accounts for anything above the header
+  // (e.g. the announcement bar) rather than just the header's own height.
   const updateHeaderH = () => {
     if (wrapper) {
-      document.documentElement.style.setProperty('--header-h', wrapper.offsetHeight + 'px');
+      document.documentElement.style.setProperty(
+        '--header-h',
+        wrapper.getBoundingClientRect().bottom + 'px'
+      );
     }
   };
   updateHeaderH();
@@ -181,6 +186,7 @@ const navItems = [
     const close = menuBtn.querySelector('.menu-close') as HTMLElement | null;
     if (bars) bars.style.display = open ? 'none' : 'flex';
     if (close) close.classList.toggle('hidden', !open);
+    if (open) updateHeaderH();
     overlay.style.display = open ? 'flex' : 'none';
     callBar?.classList.toggle('nav-open', open);
     if (open) {
