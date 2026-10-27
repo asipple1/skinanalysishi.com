@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     preact({ compat: true }),
-    partytown({ config: { forward: ['dataLayer.push'] } }),
+    partytown({ config: { forward: ['dataLayer.push', 'gtag'] } }),
     sitemap({
       filter: (page) => !page.includes('/shop/cart') && !page.includes('/specials'),
     }),

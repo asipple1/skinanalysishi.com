@@ -7,6 +7,13 @@ interface Props {
 
 type ReachMethod = 'Email' | 'Phone call' | 'Text';
 
+// gtag is defined by the GA4 snippet in BaseHead and forwarded to Partytown
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 function TreatmentDropdown({
   treatments,
   interests,
@@ -157,6 +164,8 @@ export default function ContactForm({ treatments, preselect }: Props) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString(),
       });
+      // Lead conversion for GA4 / Google Ads — never include form fields (may contain health info)
+      window.gtag?.('event', 'generate_lead', { form_name: 'contact' });
       setSent(true);
     } catch {
       // Fallback: submit natively to Netlify Forms
