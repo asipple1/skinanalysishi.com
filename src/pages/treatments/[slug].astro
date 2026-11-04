@@ -130,7 +130,7 @@ const schema = [
         </div>
       </dl>
       <div class="flex gap-3 flex-wrap">
-        <Btn href="/contact/">Book {d.shortName}</Btn>
+        <Btn href={`/contact/?t=${t.id}&msg=${encodeURIComponent(`I'd like to book ${d.title}.`)}`}>Book {d.shortName}</Btn>
         <Btn href="#faq" variant="outline">Read FAQs</Btn>
       </div>
 
@@ -153,6 +153,14 @@ const schema = [
                 )}
               </div>
               <p class="text-[12px] text-ink-3 m-0">Valid through {fmtExpiry(s.expires)} · <a href="/specials/" class="text-charcoal underline underline-offset-2">See all specials</a></p>
+              <div class="mt-2">
+                <Btn
+                  href={`/contact/?t=${t.id}&msg=${encodeURIComponent(`I'm interested in the ${s.title} (${s.offer}).`)}`}
+                  size="sm"
+                >
+                  Book This Special
+                </Btn>
+              </div>
             </div>
           ))}
         </div>
@@ -435,7 +443,7 @@ const schema = [
       Book {d.shortName} directly, or start with a complimentary consultation if you'd like to talk it through first.
     </p>
     <div class="flex gap-3 flex-wrap justify-center">
-      <Btn href="/contact/">Book an Appointment</Btn>
+      <Btn href={`/contact/?t=${t.id}&msg=${encodeURIComponent(`I'd like to book ${d.title}.`)}`}>Book an Appointment</Btn>
       <Btn href="/contact/" variant="outline">Free Consultation</Btn>
     </div>
   </section>

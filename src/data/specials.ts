@@ -56,7 +56,7 @@ export const specials: Special[] = [
   // --- NOVEMBER 2026 ---
   {
     id: 'nov-dysport-new-patients',
-    title: 'Dysport New Patient Event',
+    title: 'Dysport® New Patient Event',
     description:
       'One day only — Saturday, November 21. New patients: buy 40 units of Dysport for $600 and receive one additional area free (up to 8 units — a $120 value). That\'s up to 48 units for just $600. Book your next treatment and receive this same exclusive offer again.',
     offer: '48 units for $600 — new patients only',
@@ -69,11 +69,11 @@ export const specials: Special[] = [
     href: '/treatments/dysport/',
   },
   {
-    id: 'nov-dysport-existing',
-    title: 'Dysport Loyalty Special',
+    id: 'nov-dysport',
+    title: 'Dysport® Offer',
     description:
-      'Existing patients: buy 50 units of Dysport for $750 and receive 10 additional units free. Enjoy 60 units for the price of 50 — a $150 value.',
-    offer: '60 units for $750 — existing patients',
+      'Dysport helps reduce fine lines and wrinkles, smooth expression lines, and create a refreshed, natural-looking appearance. Results typically last 3–4 months. Purchase 50 units of Dysport for $750 and receive 10 additional units free — a $150 value.',
+    offer: '60 units for $750 — $150 value',
     month: 'November 2026',
     expires: '2026-11-30',
     category: 'Injectables',
@@ -84,9 +84,9 @@ export const specials: Special[] = [
   },
   {
     id: 'nov-diamondglow-ultimate',
-    title: 'DiamondGlow® Ultimate Special',
+    title: 'DiamondGlow® Facial Exclusive Offer',
     description:
-      'Purchase a package of two DiamondGlow Ultimate treatments (regularly $700) and receive a Glow & Go Facial absolutely free — a $225 value. Three opportunities to refresh, renew, and reveal your radiant glow.',
+      'DiamondGlow improves skin texture, unclogs pores, boosts hydration, brightens dull skin, and leaves your complexion smoother and more radiant. Purchase a package of two DiamondGlow Ultimate treatments (regularly $700) and receive a Glow & Go Facial free — a $225 value.',
     offer: 'Free Glow & Go Facial ($225 value)',
     month: 'November 2026',
     expires: '2026-11-30',
@@ -98,9 +98,9 @@ export const specials: Special[] = [
   },
   {
     id: 'nov-microneedling',
-    title: 'Microneedling Package',
+    title: 'Microneedling SkinPen® Offer',
     description:
-      'Purchase a package of two facial microneedling treatments for $1,000 and receive a third treatment completely free — three treatments for the price of two, a $500 value in savings.',
+      'Microneedling improves skin texture, softens fine lines and wrinkles, minimizes the appearance of acne scars and pores, and promotes firmer, smoother-looking skin. Buy 2 microneedling treatments, get the 3rd free — invest $1,000 in your skin and enjoy 3 full face treatments for the price of 2. That\'s a $500 treatment, on us.',
     offer: 'Buy 2 Get 1 Free — $500 savings',
     month: 'November 2026',
     expires: '2026-11-30',
@@ -111,53 +111,27 @@ export const specials: Special[] = [
     href: '/treatments/skinpen-microneedling/',
   },
   {
-    id: 'nov-holiday-skincare-gift',
-    title: 'Holiday Skincare Gift',
+    id: 'nov-holiday-glow-collection',
+    title: 'The Holiday Glow Collection',
     description:
-      'Purchase $750 in skincare products throughout November and receive our exclusive Holiday Gift Package free — includes a seasonal beach tote, ZO® travel cleanser, exfoliating polish, SPF primer, and a rejuvenating eye mask.',
-    offer: 'Free Holiday Gift Package with $750+ in products',
+      'Spend $1,000 or more during any visit in November and receive our exclusive Holiday Gift Package free. Includes a seasonal beach tote, ZO® Hydrating Travel Cleanser, ZO® Travel Exfoliating Polish, ZO® Travel SPF Primer, and a Rejuvenating Eye Mask.',
+    offer: 'Free Holiday Gift Package with $1,000+ visit',
     month: 'November 2026',
     expires: '2026-11-30',
-    category: 'Retail',
-    treatmentSlugs: ['professional-skincare'],
-    href: '/treatments/professional-skincare/',
-  },
-
-  // --- DECEMBER 2026 ---
-  {
-    id: 'dec-gift-voucher',
-    title: 'Gift Voucher Bonus',
-    description:
-      'Give the gift of glowing skin. Purchase a $350 gift voucher and receive a $75 bonus — perfect for the holidays.',
-    offer: '$75 bonus with every $350 voucher',
-    month: 'December 2026',
-    expires: '2026-12-31',
-    category: 'Gift Cards',
-    treatmentSlugs: [],
-    href: '/contact/',
-  },
-  {
-    id: 'dec-holiday-basket',
-    title: 'Holiday Gift Basket',
-    description:
-      'Spend $500 or more and receive a curated Holiday Gift Basket — includes a branded shirt, Plated skincare, bags, and a few surprise items.',
-    offer: 'Free gift basket with $500+ purchase',
-    month: 'December 2026',
-    expires: '2026-12-31',
     category: 'Holiday',
     treatmentSlugs: [],
     href: '/contact/',
   },
   {
-    id: 'dec-diamondglow-express',
-    title: 'DiamondGlow® Holiday Package',
+    id: 'nov-gift-voucher',
+    title: 'Gift Voucher',
     description:
-      'Purchase two Ultimate DiamondGlow treatments and receive a complimentary Express Facial free — three treatments to keep your glow going into the new year.',
-    offer: 'Free Express Facial with 2-pack',
-    month: 'December 2026',
-    expires: '2026-12-31',
-    category: 'Packages',
-    treatmentSlugs: ['diamondglow-facial'],
-    href: '/treatments/diamondglow-facial/',
+      'The perfect way to treat a friend or family member to some well-deserved self-care, allowing them to choose their favorite treatments, relax and enjoy a personalized experience. Purchase a $350 gift voucher and receive an additional $50 credit toward your next treatment.',
+    offer: '$50 bonus with every $350 voucher',
+    month: 'November 2026',
+    expires: '2026-11-30',
+    category: 'Gift Cards',
+    treatmentSlugs: [],
+    href: '/contact/',
   },
 ];

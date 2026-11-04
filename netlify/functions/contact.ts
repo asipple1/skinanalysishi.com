@@ -36,7 +36,6 @@ async function addToFlodesk(
   lastName: string,
   phone: string,
   interests: string[],
-  reach: string,
   message: string,
   segmentIds: string[]
 ): Promise<void> {
@@ -47,7 +46,6 @@ async function addToFlodesk(
   const customFields: Record<string, string> = {};
   if (phone) customFields['phone'] = phone;
   if (interestedServices) customFields['services'] = interestedServices;
-  if (reach) customFields['contacttype'] = reach;
   if (message) customFields['notes'] = message;
 
   // Step 1: create/update subscriber with custom fields
@@ -94,7 +92,6 @@ export default async (req: Request): Promise<Response> => {
   const email = params.get('email')?.trim() ?? '';
   const phone = params.get('phone')?.trim() ?? '';
   const message = params.get('message')?.trim() ?? '';
-  const reach = params.get('reach') ?? '';
   const interests = params.getAll('interests');
   const newsletter = params.get('newsletter') === 'true';
 
@@ -118,7 +115,7 @@ export default async (req: Request): Promise<Response> => {
   }
 
   try {
-    await addToFlodesk(email, firstName, lastName, phone, interests, reach, message, segmentIds);
+    await addToFlodesk(email, firstName, lastName, phone, interests, message, segmentIds);
   } catch (err) {
     console.error('Flodesk error:', err);
     return new Response(JSON.stringify({ error: 'Failed to add subscriber' }), {

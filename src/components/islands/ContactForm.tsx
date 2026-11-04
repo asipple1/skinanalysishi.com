@@ -5,8 +5,6 @@ interface Props {
   preselect?: string;
 }
 
-type ReachMethod = 'Email' | 'Phone call' | 'Text';
-
 // gtag is defined by the GA4 snippet in BaseHead and forwarded to Partytown
 declare global {
   interface Window {
@@ -116,7 +114,6 @@ export default function ContactForm({ treatments, preselect }: Props) {
       ? new URLSearchParams(window.location.search).get('msg') ?? ''
       : ''
   );
-  const [reach, setReach] = useState<ReachMethod>('Email');
   const [newsletter, setNewsletter] = useState(true);
   const [tried, setTried] = useState(false);
   const [sent, setSent] = useState(false);
@@ -147,7 +144,6 @@ export default function ContactForm({ treatments, preselect }: Props) {
     params.set('phone', phone);
     params.set('email', email);
     params.set('message', message);
-    params.set('reach', reach);
     params.set('newsletter', String(newsletter));
     interests.forEach((id) => params.append('interests', id));
 
@@ -183,7 +179,7 @@ export default function ContactForm({ treatments, preselect }: Props) {
           Mahalo, {first}.
         </h2>
         <p class="text-base leading-[1.65] text-ink-2 m-0">
-          We received your message and will reach out to you by {reach.toLowerCase()} within one business day.
+          We received your message and will reach out to you within one business day.
         </p>
         <p class="text-[13px] text-ink-3 m-0">
           This form is not a secure messaging system. Please do not submit protected health information.
@@ -276,24 +272,6 @@ export default function ContactForm({ treatments, preselect }: Props) {
           onInput={(e) => setMessage((e.target as HTMLTextAreaElement).value)}
           class="border border-taupe-line-2 rounded-sm px-3.5 py-3 text-[15px] font-sans bg-[#FAFAF8] outline-none resize-y transition-[border-color] duration-250"
         />
-      </div>
-
-      {/* Best way to reach */}
-      <div class="flex flex-col gap-2.5">
-        <label class="text-[13px] text-ink-3 font-medium">Best way to reach you</label>
-        <div class="flex flex-wrap gap-2">
-          {(['Email', 'Phone call', 'Text'] as ReachMethod[]).map((m) => (
-            <button
-              key={m}
-              type="button"
-              onClick={() => setReach(m)}
-              aria-pressed={reach === m}
-              class={reach === m ? 'chip chip-active' : 'chip chip-inactive'}
-            >
-              {m}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Newsletter opt-in */}
